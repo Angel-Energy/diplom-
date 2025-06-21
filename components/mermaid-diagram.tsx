@@ -1,12 +1,17 @@
 "use client"
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Copy, Eye, EyeOff } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
-import MermaidSimple from "./mermaid-simple"
+import { useState, useEffect } from "react"
+import dynamic from "next/dynamic"
+
+// Динамический импорт MermaidSimple для избежания проблем с SSR
+const MermaidSimple = dynamic(() => import("./mermaid-simple"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex justify-center items-center min-h-[200px]">
+      <div className="text-slate-400 text-sm">Загрузка диаграммы...</div>
+    </div>
+  )
+})
 
 interface MermaidDiagramProps {
   title: string
@@ -24,77 +29,66 @@ const MermaidDiagram = ({
   conclusion 
 }: MermaidDiagramProps) => {
   const [showCode, setShowCode] = useState(false)
-  const { toast } = useToast()
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(mermaidCode)
-      toast({
-        title: "Код скопирован",
-        description: "Код диаграммы скопирован в буфер обмена",
-      })
+      console.log("Код скопирован в буфер обмена")
     } catch (err) {
-      toast({
-        title: "Ошибка копирования",
-        description: "Не удалось скопировать код",
-        variant: "destructive",
-      })
+      console.error("Ошибка копирования:", err)
     }
   }
 
   return (
-    <Card className="w-full bg-cyber-card rounded-lg p-4 transition-all duration-300">
-      <CardHeader>
+    <div className="w-full bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 transition-all duration-300">
+      <div className="mb-4">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <CardTitle className="text-lg font-semibold text-cyan-400 mb-2">
+            <h3 className="text-lg font-semibold text-cyan-400 mb-2">
               {title}
-            </CardTitle>
-            <Badge variant="secondary" className="mb-2">
+            </h3>
+            <span className="inline-block px-2 py-1 text-xs bg-slate-700 text-slate-300 rounded mb-2">
               {category}
-            </Badge>
-            <CardDescription className="text-slate-300 text-sm leading-relaxed">
+            </span>
+            <p className="text-slate-300 text-sm leading-relaxed">
               {description}
-            </CardDescription>
+            </p>
           </div>
           <div className="flex gap-2 ml-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowCode(!showCode)}
-              className="text-slate-400 hover:text-slate-200"
-            >
-              {showCode ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={copyToClipboard}
-              className="text-slate-400 hover:text-slate-200"
-            >
-              <Copy className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </CardHeader>
-      
-      <CardContent className="space-y-4">
-        <div className="relative">
-          <div className="mermaid-svg-container w-full min-h-[200px] flex justify-center items-center">
-            <MermaidSimple 
-              id={`mermaid-${title.replace(/[^a-zA-Z0-9-]/g, '').toLowerCase()}`}
-              content={mermaidCode}
-            />
-          </div>
-          
-          <div className="absolute top-2 right-2">
             <button
               onClick={() => setShowCode(!showCode)}
-              className="px-2 py-1 text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 rounded border border-slate-600/50 transition-colors"
-              title="Показать/скрыть код диаграммы"
+              className="p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded"
             >
-              {showCode ? "Скрыть код" : "Показать код"}
+              {showCode ? "Скрыть" : "Показать код"}
             </button>
+            <button
+              onClick={copyToClipboard}
+              className="p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50 rounded"
+            >
+              Копировать
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div className="space-y-4">
+        <div className="relative">
+          <div className="w-full min-h-[200px] flex justify-center items-center">
+            {isClient ? (
+              <MermaidSimple 
+                id={`mermaid-${title.replace(/[^a-zA-Z0-9-]/g, '').toLowerCase()}`}
+                content={mermaidCode}
+              />
+            ) : (
+              <div className="text-slate-400 text-sm">
+                Загрузка диаграммы...
+              </div>
+            )}
           </div>
         </div>
         
@@ -122,8 +116,8 @@ const MermaidDiagram = ({
             <p className="text-blue-200 text-sm leading-relaxed">{conclusion}</p>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }
 

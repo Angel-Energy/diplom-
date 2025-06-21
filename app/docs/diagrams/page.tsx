@@ -37,7 +37,7 @@ export default function DiagramsPage() {
     {
       title: "Игровые механики",
       short_description: "Game Loop, диалоги, мини-игры, прогрессия, концовки",
-      count: 5,
+      count: 6,
       href: "/docs/diagrams/game",
       badgeColor: "bg-green-500/10 text-green-400 border-green-500/20"
     },

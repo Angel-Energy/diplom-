@@ -8,6 +8,13 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Проверяем, что мы в браузере
+    if (typeof window === 'undefined') {
+      setError("Компонент должен выполняться в браузере")
+      setIsLoading(false)
+      return
+    }
+
     const waitForMermaid = () => {
       return new Promise<void>((resolve, reject) => {
         const checkMermaid = () => {
@@ -50,42 +57,55 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
           darkMode: true,
           fontFamily: "'Segoe UI', 'Roboto', 'Arial', sans-serif",
           fontSize: 14,
-          // Настройки для русского языка и кастомной темы
+          // Настройки для темы как на скриншоте
           flowchart: {
             useMaxWidth: true,
             htmlLabels: true,
             curve: 'basis'
           },
           themeVariables: {
-            // Основные цвета
-            background: '#0f172a',
+            // Финальный стиль по референсам
+            background: 'transparent',
+
+            // Основные узлы, участники, заголовки ERD
             primaryColor: '#0f172a',
-            primaryTextColor: '#e2e8f0',
             primaryBorderColor: '#06b6d4',
-            lineColor: '#94a3b8',
-            
-            // Цвета для подграфов
-            secondaryColor: '#334155',
-            tertiaryColor: '#334155',
+            primaryTextColor: '#e2e8f0',
 
-            // Цвета для текста на связях (ребрах)
-            labelBoxBkgColor: 'transparent',
-            labelTextColor: '#94a3b8',
+            // Строки в ERD, фон подграфов
+            secondaryColor: '#1e293b',
+            tertiaryColor: '#1e293b',
+
+            // Линии и стрелки
+            lineColor: '#06b6d4',
+            signalColor: '#e2e8f0',
+            signalTextColor: '#e2e8f0',
+
+            // Стили для группировок (subgraphs/clusters)
+            clusterBkg: 'transparent', // Фон подграфа
+            clusterBorder: '#06b6d4', // Обводка подграфа
+
+            // Остальные элементы для консистентности
+            labelBoxBkgColor: '#0f172a',
+            labelTextColor: '#e2e8f0',
             labelBoxBorderColor: 'transparent',
-
-            // Другие элементы для консистентности
             actorBorder: '#06b6d4',
             actorBkg: '#0f172a',
             actorTextColor: '#e2e8f0',
             loopTextColor: '#e2e8f0',
-            noteBkgColor: '#1e293b',
+            noteBkgColor: '#0f172a',
             noteTextColor: '#e2e8f0',
-            noteBorderColor: '#334155',
-            activationBorderColor: '#334155',
-            activationBkgColor: '#0f172a',
+            noteBorderColor: '#06b6d4',
+            activationBorderColor: '#06b6d4',
+            activationBkgColor: '#1e293b',
             sequenceNumberColor: '#e2e8f0',
+            classText: '#e2e8f0',
+            classBkg: '#0f172a',
+            classBorder: '#06b6d4',
+            errorBkgColor: '#450a0a',
+            errorTextColor: '#ef4444',
+            errorBorderColor: '#ef4444',
             
-            // Шрифты
             fontFamily: "'Segoe UI', 'Roboto', 'Arial', sans-serif",
             fontSize: '14px'
           }
@@ -110,22 +130,11 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
           return
         }
 
-        // Создаем уникальный ID
         const uniqueId = `mermaid-${id}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-
-        console.log("Контент диаграммы:", content.substring(0, 100) + "...")
-
-        // Рендеринг
         const { svg } = await mermaid.render(uniqueId, content)
-        console.log(`Диаграмма ${id} отрендерена успешно`)
         
-        // Добавляем стили для поддержки русского текста
-        const styledSvg = svg.replace(
-          '<svg',
-          '<svg style="font-family: \'Segoe UI\', \'Roboto\', \'Arial\', sans-serif; font-size: 14px;"'
-        )
-        
-        setSvgContent(styledSvg)
+        // Вся лишняя обработка SVG убрана для чистоты
+        setSvgContent(svg)
         setIsLoading(false)
       } catch (e) {
         console.error("Ошибка рендеринга диаграммы:", e)

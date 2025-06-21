@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { MermaidDiagram } from "@/components/mermaid-diagram"
+import MermaidDiagram from "@/components/mermaid-diagram"
 import { Server, Shield, Monitor, HardDrive } from "lucide-react"
 
 export default function InfrastructurePage() {
@@ -9,7 +9,7 @@ export default function InfrastructurePage() {
       title: "Сетевая топология",
       description:
         "Локальная Wi-Fi сеть: ноутбук как точка доступа, Android-устройства подключаются для синхронизации с Ktor-сервером и MySQL.",
-      mermaid: `graph LR
+      mermaidCode: `graph LR
     A[Ноутбук] -->|Wi-Fi| B[Телефон 1]
     A -->|Wi-Fi| C[Телефон 2]
     A -->|MySQL| D[(game.db)]
@@ -20,7 +20,7 @@ export default function InfrastructurePage() {
     {
       title: "Диаграмма безопасности",
       description: "Многоуровневая защита: AES-256 для Room, TLS 1.2+ для API, управление правами доступа к MySQL.",
-      mermaid: `graph TD
+      mermaidCode: `graph TD
     A[Клиент] -->|AES-256| B[Room]
     A -->|TLS 1.2+| C[Ktor Server]
     C -->|MySQL| D[(game.db)]
@@ -30,7 +30,7 @@ export default function InfrastructurePage() {
     {
       title: "Диаграмма мониторинга",
       description: "Мониторинг системы через phpMyAdmin для просмотра данных, логов и состояния базы данных.",
-      mermaid: `sequenceDiagram
+      mermaidCode: `sequenceDiagram
     participant D as Разработчик
     participant P as phpMyAdmin
     participant M as MySQL
@@ -43,7 +43,7 @@ export default function InfrastructurePage() {
     {
       title: "Диаграмма резервного копирования",
       description: "Стратегия бэкапов: ежедневное автоматическое копирование MySQL и ручной экспорт в CSV/JSON.",
-      mermaid: `graph LR
+      mermaidCode: `graph LR
     A[MySQL] --> B[Ежедневная копия]
     A --> C[Ручной экспорт CSV/JSON]`,
       conclusion: "Диаграмма минимизирует риск потери данных и обеспечивает восстановление.",
@@ -162,24 +162,14 @@ export default function InfrastructurePage() {
         <h2 className="text-2xl font-bold text-white">Инфраструктурные диаграммы</h2>
         <div className="space-y-8">
           {infrastructureDiagrams.map((diagram, index) => (
-            <Card key={index} className="bg-slate-800/50 border-slate-700/50">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-white">{diagram.title}</CardTitle>
-                  <Badge variant="outline" className="bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
-                    Инфраструктура
-                  </Badge>
-                </div>
-                <p className="text-slate-400 text-sm">{diagram.description}</p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <MermaidDiagram chart={diagram.mermaid} id={`infra-diagram-${index}`} />
-                <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-700/50">
-                  <h4 className="text-sm font-semibold text-purple-400 mb-2">Вывод:</h4>
-                  <p className="text-sm text-slate-300">{diagram.conclusion}</p>
-                </div>
-              </CardContent>
-            </Card>
+            <MermaidDiagram
+              key={index}
+              title={diagram.title}
+              description={diagram.description}
+              mermaidCode={diagram.mermaidCode}
+              category="Инфраструктура"
+              conclusion={diagram.conclusion}
+            />
           ))}
         </div>
       </div>
@@ -198,34 +188,37 @@ export default function InfrastructurePage() {
                   <br />
                   2. Запустите Apache и MySQL
                   <br />
-                  3. Откройте phpMyAdmin (localhost/phpmyadmin)
+                  3. Откройте phpMyAdmin в браузере
                   <br />
-                  4. Создайте базу данных 'game'
+                  4. Создайте базу данных game.db
                 </code>
               </div>
             </div>
-
             <div>
-              <h4 className="text-purple-400 font-semibold mb-2">2. Запуск Ktor-сервера</h4>
+              <h4 className="text-purple-400 font-semibold mb-2">2. Настройка Ktor-сервера</h4>
               <div className="bg-slate-900/50 p-3 rounded-lg">
                 <code className="text-slate-300 text-sm">
-                  cd server
+                  1. Установите JDK 17
                   <br />
-                  ./gradlew run
-                  <br /># Сервер запустится на порту 8080
+                  2. Скачайте Ktor-сервер
+                  <br />
+                  3. Настройте application.conf
+                  <br />
+                  4. Запустите сервер на порту 8080
                 </code>
               </div>
             </div>
-
             <div>
-              <h4 className="text-cyan-400 font-semibold mb-2">3. Настройка Wi-Fi сети</h4>
+              <h4 className="text-cyan-400 font-semibold mb-2">3. Настройка Wi-Fi</h4>
               <div className="bg-slate-900/50 p-3 rounded-lg">
                 <code className="text-slate-300 text-sm">
                   1. Создайте точку доступа на ноутбуке
                   <br />
                   2. Подключите Android-устройства
                   <br />
-                  3. Проверьте доступ к 192.168.1.100:8080
+                  3. Проверьте доступность сервера
+                  <br />
+                  4. Настройте статический IP
                 </code>
               </div>
             </div>

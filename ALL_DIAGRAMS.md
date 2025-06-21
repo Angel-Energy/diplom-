@@ -11,15 +11,15 @@
 ```mermaid
 C4Context
     title Система "Сообщение 404" - Психологический детектив
-    Person(player, "Игрок", "Пользователь Android-устройства\nAPI 21+, играет в чат-квест")
-    System(androidApp, "Android Приложение", "Kotlin + Jetpack Compose\nMVVM архитектура\nТёмная тема\nОфлайн-режим")
-    System(server, "Ktor Server", "Локальный сервер\nIP: 192.168.137.1:8080\nTLS 1.2+ шифрование")
-    SystemDb(db, "MySQL через XAMPP", "База данных game.db\nТаблицы: users, game_progress\nСоответствие 152-ФЗ")
-    System(phpMyAdmin, "phpMyAdmin", "Веб-интерфейс управления БД\nПорт 80\nМониторинг и администрирование")
-    Rel(player, androidApp, "Взаимодействует через UI\nЧат, выборы, мини-игры")
-    Rel(androidApp, server, "HTTP-запросы по Wi-Fi\nСинхронизация прогресса")
-    Rel(server, db, "Хранение данных\nExposed ORM")
-    Rel(phpMyAdmin, db, "Управление БД\nSQL-запросы")
+    Person(игрок, "Игрок", "Пользователь Android-устройства\nAPI 21+, играет в чат-квест")
+    System(androidПриложение, "Android Приложение", "Kotlin + Jetpack Compose\nMVVM архитектура\nТёмная тема\nОфлайн-режим")
+    System(сервер, "Ktor Сервер", "Локальный сервер\nIP: 192.168.137.1:8080\nTLS 1.2+ шифрование")
+    SystemDb(базаДанных, "MySQL через XAMPP", "База данных game.db\nТаблицы: users, game_progress\nСоответствие 152-ФЗ")
+    System(админПанель, "phpMyAdmin", "Веб-интерфейс управления БД\nПорт 80\nМониторинг и администрирование")
+    Rel(игрок, androidПриложение, "Взаимодействует через UI\nЧат, выборы, мини-игры")
+    Rel(androidПриложение, сервер, "HTTP-запросы по Wi-Fi\nСинхронизация прогресса")
+    Rel(сервер, базаДанных, "Хранение данных\nExposed ORM")
+    Rel(админПанель, базаДанных, "Управление БД\nSQL-запросы")
 ```
 
 **Вывод:** Диаграмма предоставляет целостный обзор системы, понятный разработчикам, геймдизайнерам и менеджерам. Она помогает настроить локальную сеть (Wi-Fi, XAMPP), спланировать интеграцию (Room ↔ Ktor ↔ MySQL) и тестирование офлайн-режима. Для администраторов она упрощает установку сервера, а для заказчиков — демонстрирует автономность и безопасность.
@@ -31,22 +31,22 @@ C4Context
 ```mermaid
 C4Container
     title Компоненты системы "Сообщение 404"
-    Enterprise_Boundary(message404) {
-        Container(androidApp, "Android App", "Kotlin + Jetpack Compose\nAPI 21+\nMVVM архитектура")
-        Container(ktorServer, "Ktor API Server", "Kotlin сервер\nHTTP/JSON API\nTLS 1.2+")
-        Container(mysqlDb, "MySQL Database", "XAMPP окружение\nБаза game.db\nТаблицы: users, progress")
-        Container(phpMyAdmin, "phpMyAdmin", "Веб-интерфейс\nУправление БД\nМониторинг")
-        Container(chatUi, "Chat UI Component", "Jetpack Compose\nПузырьки сообщений\nТёмная тема")
-        Container(miniGameEngine, "Mini-Game Engine", "Python/JS интерпретатор\nЗадачи по программированию\n6 игр в день")
-        Container(dataStore, "DataStore Component", "Настройки приложения\nТёмная тема\nПользовательские предпочтения")
-        Container(roomDb, "Room Database", "Локальное хранение\nSQLite\nОфлайн-режим")
+    Enterprise_Boundary(система404) {
+        Container(androidПриложение, "Android Приложение", "Kotlin + Jetpack Compose\nAPI 21+\nMVVM архитектура")
+        Container(ktorСервер, "Ktor API Сервер", "Kotlin сервер\nHTTP/JSON API\nTLS 1.2+")
+        Container(mysqlБаза, "MySQL База данных", "XAMPP окружение\nБаза game.db\nТаблицы: users, progress")
+        Container(админПанель, "phpMyAdmin", "Веб-интерфейс\nУправление БД\nМониторинг")
+        Container(чатИнтерфейс, "Чат UI Компонент", "Jetpack Compose\nПузырьки сообщений\nТёмная тема")
+        Container(движокИгр, "Движок Мини-игр", "Python/JS интерпретатор\nЗадачи по программированию\n6 игр в день")
+        Container(хранилищеДанных, "DataStore Компонент", "Настройки приложения\nТёмная тема\nПользовательские предпочтения")
+        Container(локальнаяБаза, "Room База данных", "Локальное хранение\nSQLite\nОфлайн-режим")
     }
-    Rel(chatUi, dataStore, "Сохраняет настройки\nТёмная тема")
-    Rel(chatUi, miniGameEngine, "Вызов мини-игры\nПередача параметров")
-    Rel(miniGameEngine, roomDb, "Сохраняет результат\nПрогресс игрока")
-    Rel(androidApp, ktorServer, "Синхронизация по Wi-Fi\nRetrofit клиент")
-    Rel(ktorServer, mysqlDb, "Хранение прогресса\nExposed ORM")
-    Rel(phpMyAdmin, mysqlDb, "Управление БД\nSQL-запросы")
+    Rel(чатИнтерфейс, хранилищеДанных, "Сохраняет настройки\nТёмная тема")
+    Rel(чатИнтерфейс, движокИгр, "Вызов мини-игры\nПередача параметров")
+    Rel(движокИгр, локальнаяБаза, "Сохраняет результат\nПрогресс игрока")
+    Rel(androidПриложение, ktorСервер, "Синхронизация по Wi-Fi\nRetrofit клиент")
+    Rel(ktorСервер, mysqlБаза, "Хранение прогресса\nExposed ORM")
+    Rel(админПанель, mysqlБаза, "Управление БД\nSQL-запросы")
 ```
 
 **Вывод:** Диаграмма помогает разработчикам реализовать модули, поддерживая MVVM и Clean Architecture. Она упрощает модульное тестирование (JUnit для репозиториев, Espresso для UI) и добавление функций (например, аналитика). QA используют её для тестирования интеграции, а геймдизайнеры — для понимания связи чата и мини-игр.
@@ -59,25 +59,25 @@ C4Container
 graph TD
     subgraph "Локальная Wi-Fi сеть"
         subgraph "Сервер (Ноутбук)"
-            Laptop[Ноутбук<br/>Windows/Linux<br/>IP: 192.168.137.1]
-            Ktor[Ktor Server<br/>Порт 8080<br/>TLS 1.2+]
-            XAMPP[XAMPP<br/>MySQL + phpMyAdmin<br/>База game.db]
+            ноутбук[Ноутбук<br/>Windows/Linux<br/>IP: 192.168.137.1]
+            ktorСервер[Ktor Сервер<br/>Порт 8080<br/>TLS 1.2+]
+            xampp[XAMPP<br/>MySQL + phpMyAdmin<br/>База game.db]
         end
         subgraph "Клиенты"
-            Android1[Android 1<br/>API 21+<br/>Room DB]
-            Android2[Android 2<br/>API 21+<br/>Room DB]
+            телефон1[Android 1<br/>API 21+<br/>Room БД]
+            телефон2[Android 2<br/>API 21+<br/>Room БД]
         end
     end
-    Laptop -->|Wi-Fi точка доступа| Android1
-    Laptop -->|Wi-Fi точка доступа| Android2
-    Laptop -->|MySQL| XAMPP
-    Ktor -->|HTTP/JSON| Android1
-    Ktor -->|HTTP/JSON| Android2
-    style Laptop fill:#e1f5fe
-    style Ktor fill:#f3e5f5
-    style XAMPP fill:#e8f5e8
-    style Android1 fill:#fff3e0
-    style Android2 fill:#fff3e0
+    ноутбук -->|Wi-Fi точка доступа| телефон1
+    ноутбук -->|Wi-Fi точка доступа| телефон2
+    ноутбук -->|MySQL| xampp
+    ktorСервер -->|HTTP/JSON| телефон1
+    ktorСервер -->|HTTP/JSON| телефон2
+    style ноутбук fill:#e1f5fe
+    style ktorСервер fill:#f3e5f5
+    style xampp fill:#e8f5e8
+    style телефон1 fill:#fff3e0
+    style телефон2 fill:#fff3e0
 ```
 
 **Вывод:** Диаграмма — руководство для администраторов по настройке Wi-Fi, XAMPP и Ktor. Она минимизирует ошибки конфигурации, обеспечивая стабильную синхронизацию. Разработчики используют её для реализации TLS, а QA — для тестирования офлайн-режима. Менеджеры могут презентовать автономность заказчикам.
@@ -88,28 +88,28 @@ graph TD
 
 ```mermaid
 graph LR
-    subgraph "Android Client"
-        A[Android App<br/>Kotlin + Compose<br/>MVVM]
+    subgraph "Android Клиент"
+        приложение[Android Приложение<br/>Kotlin + Compose<br/>MVVM]
     end
     subgraph "Микросервисы (Планируемые)"
-        B[Auth Service<br/>POST /auth<br/>JWT токены]
-        C[Progress Service<br/>GET/POST /progress<br/>Сохранение состояния]
-        D[Content Service<br/>GET /scenes<br/>GET /mini-game]
+        сервисАвторизации[Сервис Авторизации<br/>POST /auth<br/>JWT токены]
+        сервисПрогресса[Сервис Прогресса<br/>GET/POST /progress<br/>Сохранение состояния]
+        сервисКонтента[Сервис Контента<br/>GET /scenes<br/>GET /mini-game]
     end
     subgraph "База данных"
-        E[MySQL через XAMPP<br/>game.db<br/>Exposed ORM]
+        базаДанных[MySQL через XAMPP<br/>game.db<br/>Exposed ORM]
     end
-    A -->|Анонимная авторизация| B
-    A -->|Синхронизация прогресса| C
-    A -->|Загрузка контента| D
-    B -->|Пользователи| E
-    C -->|Прогресс игроков| E
-    D -->|Сцены и игры| E
-    style A fill:#e3f2fd
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#fce4ec
+    приложение -->|Анонимная авторизация| сервисАвторизации
+    приложение -->|Синхронизация прогресса| сервисПрогресса
+    приложение -->|Загрузка контента| сервисКонтента
+    сервисАвторизации -->|Пользователи| базаДанных
+    сервисПрогресса -->|Прогресс игроков| базаДанных
+    сервисКонтента -->|Сцены и игры| базаДанных
+    style приложение fill:#e3f2fd
+    style сервисАвторизации fill:#f3e5f5
+    style сервисПрогресса fill:#e8f5e8
+    style сервисКонтента fill:#fff3e0
+    style базаДанных fill:#fce4ec
 ```
 
 **Вывод:** Диаграмма помогает архитекторам спланировать масштабирование, сохраняя простоту MVP. Она полезна для менеджеров при обсуждении с инвесторами, демонстрируя гибкость. Разработчики используют её для оценки монолитной архитектуры, минимизируя сложность.
@@ -121,41 +121,41 @@ graph LR
 ```mermaid
 classDiagram
     class com.example.message404 {
-        +core/
-        +data/
-        +domain/
-        +presentation/
+        +ядро/
+        +данные/
+        +домен/
+        +презентация/
     }
-    class core {
-        +utils/
-        +di/
-        +extensions/
-        +constants/
+    class ядро {
+        +утилиты/
+        +внедрениеЗависимостей/
+        +расширения/
+        +константы/
     }
-    class data {
-        +repository/
-        +local/
-        +remote/
-        +models/
+    class данные {
+        +репозиторий/
+        +локальное/
+        +удаленное/
+        +модели/
     }
-    class domain {
-        +usecase/
-        +models/
-        +repository/
+    class домен {
+        +сценарииИспользования/
+        +модели/
+        +репозиторий/
     }
-    class presentation {
-        +ui/
-        +viewmodel/
-        +navigation/
-        +theme/
+    class презентация {
+        +интерфейс/
+        +модельПредставления/
+        +навигация/
+        +тема/
     }
-    com.example.message404 --> core
-    com.example.message404 --> data
-    com.example.message404 --> domain
-    com.example.message404 --> presentation
-    data --> core
-    domain --> data
-    presentation --> domain
+    com.example.message404 --> ядро
+    com.example.message404 --> данные
+    com.example.message404 --> домен
+    com.example.message404 --> презентация
+    данные --> ядро
+    домен --> данные
+    презентация --> домен
 ```
 
 **Вывод:** Диаграмма упрощает онбординг разработчиков, обеспечивая навигацию по коду. Она поддерживает модульное тестирование (Mockito) и расширение (например, аналитика). QA используют её для проверки зависимостей, минимизируя регрессии.
@@ -166,32 +166,32 @@ classDiagram
 
 ```mermaid
 graph TB
-    subgraph "Presentation Layer"
-        A[Compose UI<br/>Chat Screen<br/>Mini-Game Screen<br/>Settings Screen]
-        B[ViewModel<br/>ChatViewModel<br/>GameViewModel<br/>SettingsViewModel]
+    subgraph "Слой Презентации"
+        интерфейс[Compose UI<br/>Экран Чата<br/>Экран Мини-игры<br/>Экран Настроек]
+        модельПредставления[ViewModel<br/>ChatViewModel<br/>GameViewModel<br/>SettingsViewModel]
     end
-    subgraph "Domain Layer"
-        C[UseCase<br/>GetProgressUseCase<br/>SaveProgressUseCase<br/>LoadSceneUseCase]
-        D[Models<br/>User<br/>Progress<br/>Scene]
+    subgraph "Слой Домена"
+        сценарииИспользования[UseCase<br/>GetProgressUseCase<br/>SaveProgressUseCase<br/>LoadSceneUseCase]
+        модели[Модели<br/>Пользователь<br/>Прогресс<br/>Сцена]
     end
-    subgraph "Data Layer"
-        E[Repository<br/>GameRepository<br/>UserRepository]
-        F[Local Storage<br/>Room Database<br/>DataStore]
-        G[Remote API<br/>Retrofit Client<br/>Ktor Server]
+    subgraph "Слой Данных"
+        репозиторий[Репозиторий<br/>GameRepository<br/>UserRepository]
+        локальноеХранение[Локальное Хранение<br/>Room База данных<br/>DataStore]
+        удаленноеAPI[Удаленное API<br/>Retrofit Клиент<br/>Ktor Сервер]
     end
-    A --> B
-    B --> C
-    C --> D
-    C --> E
-    E --> F
-    E --> G
-    style A fill:#e3f2fd
-    style B fill:#bbdefb
-    style C fill:#e8f5e8
-    style D fill:#c8e6c9
-    style E fill:#fff3e0
-    style F fill:#ffe0b2
-    style G fill:#fce4ec
+    интерфейс --> модельПредставления
+    модельПредставления --> сценарииИспользования
+    сценарииИспользования --> модели
+    сценарииИспользования --> репозиторий
+    репозиторий --> локальноеХранение
+    репозиторий --> удаленноеAPI
+    style интерфейс fill:#e3f2fd
+    style модельПредставления fill:#bbdefb
+    style сценарииИспользования fill:#e8f5e8
+    style модели fill:#c8e6c9
+    style репозиторий fill:#fff3e0
+    style локальноеХранение fill:#ffe0b2
+    style удаленноеAPI fill:#fce4ec
 ```
 
 **Вывод:** Диаграмма помогает разработчикам соблюдать Clean Architecture, упрощая тестирование и поддержку. Она полезна для QA при проверке слоёв и для менеджеров при оценке архитектурных рисков. Также облегчает добавление функций (например, новые мини-игры).
@@ -203,40 +203,40 @@ graph TB
 ```mermaid
 graph LR
     subgraph "Язык и платформа"
-        A[Kotlin 1.9.x<br/>JVM 8+]
+        kotlin[Kotlin 1.9.x<br/>JVM 8+]
     end
-    subgraph "UI Framework"
-        B[Jetpack Compose 1.6.x<br/>Material 3<br/>Тёмная тема]
+    subgraph "UI Фреймворк"
+        compose[Jetpack Compose 1.6.x<br/>Material 3<br/>Тёмная тема]
     end
     subgraph "Асинхронность"
-        C[Coroutines + Flow<br/>Structured Concurrency<br/>StateFlow]
+        корутины[Корутины + Flow<br/>Структурированная конкурентность<br/>StateFlow]
     end
-    subgraph "Dependency Injection"
-        D[Koin 3.x<br/>Lightweight DI<br/>ViewModel Injection]
+    subgraph "Внедрение зависимостей"
+        koin[Koin 3.x<br/>Легковесное DI<br/>ViewModel Injection]
     end
     subgraph "Архитектура"
-        E[MVVM Pattern<br/>Clean Architecture<br/>Repository Pattern]
+        mvvm[MVVM Паттерн<br/>Clean Architecture<br/>Repository Pattern]
     end
-    subgraph "Data Layer"
-        F[Room Database<br/>SQLite<br/>Офлайн-режим]
-        G[Retrofit 2.x<br/>HTTP Client<br/>JSON Serialization]
-        H[Exposed ORM<br/>Ktor Database<br/>MySQL Support]
+    subgraph "Слой данных"
+        room[Room База данных<br/>SQLite<br/>Офлайн-режим]
+        retrofit[Retrofit 2.x<br/>HTTP Клиент<br/>JSON Сериализация]
+        exposed[Exposed ORM<br/>Ktor База данных<br/>MySQL Поддержка]
     end
-    A --> B
-    A --> C
-    A --> D
-    B --> E
-    E --> F
-    E --> G
-    G --> H
-    style A fill:#e3f2fd
-    style B fill:#bbdefb
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#f3e5f5
-    style F fill:#fce4ec
-    style G fill:#ffe0b2
-    style H fill:#c8e6c9
+    kotlin --> compose
+    kotlin --> корутины
+    kotlin --> koin
+    compose --> mvvm
+    mvvm --> room
+    mvvm --> retrofit
+    retrofit --> exposed
+    style kotlin fill:#e3f2fd
+    style compose fill:#bbdefb
+    style корутины fill:#e8f5e8
+    style koin fill:#fff3e0
+    style mvvm fill:#f3e5f5
+    style room fill:#fce4ec
+    style retrofit fill:#ffe0b2
+    style exposed fill:#c8e6c9
 ```
 
 **Вывод:** Диаграмма предотвращает конфликты библиотек, упрощая настройку Gradle. Разработчики используют её для обновления зависимостей, а QA — для тестирования совместимости. Менеджеры оценивают технические риски, планируя обновления.
@@ -368,17 +368,17 @@ erDiagram
 ```mermaid
 graph LR
     subgraph "Локальное хранение"
-        A[Room Database<br/>SQLite<br/>Прогресс игрока<br/>История сцен]
+        A[Room База данных<br/>SQLite<br/>Прогресс игрока<br/>История сцен]
         E[DataStore<br/>Preferences<br/>Тёмная тема<br/>Настройки UI]
     end
     subgraph "Серверное хранение"
-        C[MySQL Database<br/>XAMPP<br/>Централизованные данные<br/>Резервные копии]
+        C[MySQL База данных<br/>XAMPP<br/>Централизованные данные<br/>Резервные копии]
     end
     subgraph "Пользователь"
         F[Игрок<br/>Android устройство<br/>API 21+<br/>Офлайн-режим]
     end
     subgraph "Синхронизация"
-        G[Retrofit Client<br/>HTTP/JSON<br/>TLS 1.2+<br/>Автосинхронизация]
+        G[Retrofit Клиент<br/>HTTP/JSON<br/>TLS 1.2+<br/>Автосинхронизация]
     end
     F -->|Читает/Записывает| A
     F -->|Настройки| E
@@ -403,13 +403,13 @@ graph LR
         A[JSON файлы<br/>Сцены и диалоги<br/>Мини-игры<br/>Конфигурация]
     end
     subgraph "Локальная обработка"
-        B[Room Database<br/>SQLite<br/>При установке<br/>Офлайн доступ]
+        B[Room База данных<br/>SQLite<br/>При установке<br/>Офлайн доступ]
     end
     subgraph "Серверная синхронизация"
         C[MySQL через XAMPP<br/>Централизованное хранение<br/>Резервные копии<br/>Мониторинг]
     end
     subgraph "Процесс миграции"
-        D[Ktor Server<br/>HTTP API<br/>JSON обмен<br/>Версионирование]
+        D[Ktor Сервер<br/>HTTP API<br/>JSON обмен<br/>Версионирование]
     end
     A -->|Импорт при установке| B
     B -->|Синхронизация| D
@@ -508,10 +508,10 @@ graph LR
 ```mermaid
 graph TD
     subgraph "Клиент"
-        A[Android App<br/>Retrofit Client<br/>TLS 1.2+<br/>JSON]
+        A[Android Приложение<br/>Retrofit Клиент<br/>TLS 1.2+<br/>JSON]
     end
     subgraph "Сервер"
-        B[Ktor Server<br/>Rate Limiting<br/>10 connections max<br/>Authentication]
+        B[Ktor Сервер<br/>Rate Limiting<br/>10 connections max<br/>Authentication]
     end
     subgraph "База данных"
         C[MySQL через XAMPP<br/>Connection Pool<br/>Query Optimization<br/>Backup]
@@ -539,7 +539,7 @@ graph TD
 ```mermaid
 sequenceDiagram
     participant A as Android
-    participant S as Ktor Server
+    participant S as Ktor Сервер
     participant D as MySQL
     A->>S: POST /auth
     S->>D: INSERT INTO users
@@ -588,7 +588,7 @@ graph TD
 ```mermaid
 sequenceDiagram
     participant A as Android
-    participant S as Ktor Server
+    participant S as Ktor Сервер
     Note over A: 0ms: Запуск
     A->>S: 100ms: Загрузка дня
     S-->>A: 150ms: Сцена загружена
@@ -607,10 +607,10 @@ sequenceDiagram
 
 ```mermaid
 graph TD
-    A[Загрузка] --> B[Рендеринг UI]
-    B --> C[Обработка ввода]
-    C --> D[Обновление состояния]
-    D --> A
+    загрузка[Загрузка] --> рендеринг[Рендеринг UI]
+    рендеринг --> обработкаВвода[Обработка ввода]
+    обработкаВвода --> обновлениеСостояния[Обновление состояния]
+    обновлениеСостояния --> загрузка
 ```
 
 **Вывод:** Диаграмма помогает разработчикам организовать движок, а QA — тестировать плавность. Геймдизайнеры используют её для интеграции механик, а менеджеры — для оценки производительности.
@@ -621,12 +621,12 @@ graph TD
 
 ```mermaid
 graph LR
-    A[День 1] --> B[Сцена 1A]
-    A --> C[Сцена 1B]
-    B --> D[Выбор 1]
-    B --> E[Выбор 2]
-    D --> F[День 2A]
-    E --> G[День 2B]
+    день1[День 1] --> сцена1A[Сцена 1A]
+    день1 --> сцена1B[Сцена 1B]
+    сцена1A --> выбор1[Выбор 1]
+    сцена1A --> выбор2[Выбор 2]
+    выбор1 --> день2A[День 2A]
+    выбор2 --> день2B[День 2B]
 ```
 
 **Вывод:** Диаграмма помогает геймдизайнерам проектировать сюжет, а QA — тестировать пути. Разработчики реализуют ветвление (Room, Ktor), а менеджеры оценивают реиграбельность.
@@ -667,9 +667,9 @@ pie
 
 ```mermaid
 graph LR
-    A[День 1] --> B[День 2]
-    B --> C[День 3]
-    C --> D[Финал]
+    день1[День 1] --> день2[День 2]
+    день2 --> день3[День 3]
+    день3 --> финал[Финал]
 ```
 
 **Вывод:** Диаграмма помогает геймдизайнерам структурировать дни, а QA — проверять концовки. Разработчики реализуют прогрессию в Room, а менеджеры оценивают длительность игры.
@@ -682,12 +682,12 @@ graph LR
 
 ```mermaid
 graph TD
-    A[Запуск] --> B[Вход]
-    B --> C[Чат]
-    C --> D[Выбор]
-    D --> E[Мини-игра]
-    E --> F[Сохранение]
-    F --> G[Выход]
+    запуск[Запуск] --> вход[Вход]
+    вход --> чат[Чат]
+    чат --> выбор[Выбор]
+    выбор --> миниИгра[Мини-игра]
+    миниИгра --> сохранение[Сохранение]
+    сохранение --> выход[Выход]
 ```
 
 **Вывод:** Диаграмма помогает UX-дизайнерам создать интуитивный интерфейс, а QA — тестировать сценарии. Разработчики реализуют NavController, а менеджеры презентуют UX заказчикам.
@@ -698,10 +698,10 @@ graph TD
 
 ```mermaid
 graph LR
-    A[nav_start] --> B[nav_chat]
-    B --> C[nav_minigame]
-    B --> D[nav_settings]
-    C --> E[nav_endings]
+    старт[nav_start] --> чат[nav_chat]
+    чат --> миниИгра[nav_minigame]
+    чат --> настройки[nav_settings]
+    миниИгра --> концовки[nav_endings]
 ```
 
 **Вывод:** Диаграмма упрощает настройку NavController, минимизируя баги. QA тестируют маршруты, а разработчики обеспечивают плавность переходов, улучшая UX.
@@ -727,11 +727,11 @@ stateDiagram-v2
 
 ```mermaid
 graph TD
-    A[Чат] -->|Mockup| B[Пузырьки сообщений]
-    A --> C[Кнопки выбора]
-    D[Мини-игра] --> E[Редактор кода]
-    D --> F[Кнопка "Выполнить"]
-    G[Настройки] --> H[Переключатель темы]
+    экранЧата[Чат] -->|Макет| пузырьки[Пузырьки сообщений]
+    экранЧата --> кнопкиВыбора[Кнопки выбора]
+    экранМиниИгры[Мини-игра] --> редакторКода[Редактор кода]
+    экранМиниИгры --> кнопкаВыполнить[Кнопка "Выполнить"]
+    экранНастроек[Настройки] --> переключательТемы[Переключатель темы]
 ```
 
 **Вывод:** Диаграмма ускоряет создание UI, согласовывая дизайн и разработку. QA тестируют доступность (TalkBack), а разработчики реализуют тёмную тему, соответствующую WCAG 2.1.
@@ -744,13 +744,13 @@ graph TD
 
 ```mermaid
 sequenceDiagram
-    participant D as Разработчик
-    participant P as phpMyAdmin
-    participant M as MySQL
-    D->>P: Вход через браузер
-    P->>M: SQL-запрос
-    M-->>P: Данные
-    P-->>D: Визуализация
+    participant разработчик as Разработчик
+    participant админПанель as phpMyAdmin
+    participant базаДанных as MySQL
+    разработчик->>админПанель: Вход через браузер
+    админПанель->>базаДанных: SQL-запрос
+    базаДанных-->>админПанель: Данные
+    админПанель-->>разработчик: Визуализация
 ```
 
 **Вывод:** Диаграмма упрощает администрирование, помогая выявлять проблемы с данными. Разработчики используют её для отладки, а QA — для анализа багов, повышая надёжность.
@@ -761,8 +761,88 @@ sequenceDiagram
 
 ```mermaid
 graph LR
-    A[MySQL] --> B[Ежедневная копия]
-    A --> C[Ручной экспорт CSV/JSON]
+    базаДанных[MySQL] --> ежедневнаяКопия[Ежедневная копия]
+    базаДанных --> ручнойЭкспорт[Ручной экспорт CSV/JSON]
 ```
 
 **Вывод:** Диаграмма помогает администраторам настроить резервное копирование, минимизируя потери данных. Разработчики используют её для восстановления базы, а QA — для тестирования бэкапов.
+
+### 7.3. Диаграмма безопасности
+
+**Описание:** Диаграмма показывает защиту: TLS 1.2+ для HTTP, AES-256 для Room, соответствие 152-ФЗ и ГОСТ Р 34.12-2015. Это обеспечивает безопасность данных.
+
+```mermaid
+graph TD
+    subgraph "Шифрование"
+        tls[TLS 1.2+<br/>HTTP трафик<br/>Сервер-клиент]
+        aes[AES-256<br/>Room база<br/>Локальное хранение]
+    end
+    subgraph "Соответствие"
+        закон152[152-ФЗ<br/>Защита данных<br/>Российское законодательство]
+        гост[ГОСТ Р 34.12-2015<br/>Криптографическая защита<br/>Стандарт РФ]
+    end
+    tls --> закон152
+    aes --> гост
+    style tls fill:#e3f2fd
+    style aes fill:#e8f5e8
+    style закон152 fill:#fff3e0
+    style гост fill:#f3e5f5
+```
+
+**Вывод:** Диаграмма обеспечивает соответствие законодательству, помогая администраторам настроить безопасность. Разработчики реализуют шифрование, а QA тестируют защиту, минимизируя риски.
+
+### 7.4. Диаграмма масштабирования
+
+**Описание:** Диаграмма показывает потенциальное масштабирование: добавление Redis для кэширования, балансировщик нагрузки, репликация MySQL. Это планирует рост пользователей.
+
+```mermaid
+graph LR
+    subgraph "Текущая архитектура"
+        ktor[Ktor Сервер<br/>Монолитный<br/>10 подключений]
+        mysql[MySQL<br/>XAMPP<br/>Локальная база]
+    end
+    subgraph "Планируемое масштабирование"
+        балансировщик[Балансировщик нагрузки<br/>Nginx<br/>Распределение запросов]
+        redis[Redis Кэш<br/>Сессии<br/>Временные данные]
+        репликация[Репликация MySQL<br/>Master-Slave<br/>Высокая доступность]
+    end
+    ktor --> балансировщик
+    mysql --> репликация
+    балансировщик --> redis
+    style ktor fill:#e3f2fd
+    style mysql fill:#e8f5e8
+    style балансировщик fill:#fff3e0
+    style redis fill:#f3e5f5
+    style репликация fill:#fce4ec
+```
+
+**Вывод:** Диаграмма помогает архитекторам планировать рост, а менеджеры используют её для обсуждения с инвесторами. Разработчики оценивают сложность, а администраторы готовят инфраструктуру.
+
+### 7.5. Диаграмма развертывания
+
+**Описание:** Диаграмма описывает процесс развертывания: разработка → тестирование → staging → продакшн. Это обеспечивает стабильные обновления.
+
+```mermaid
+graph LR
+    разработка[Разработка<br/>Локальная среда<br/>Kotlin + Compose] --> тестирование[Тестирование<br/>JUnit + Espresso<br/>QA проверки]
+    тестирование --> staging[Staging<br/>Тестовая среда<br/>XAMPP + Ktor]
+    staging --> продакшн[Продакшн<br/>Финальная версия<br/>APK + Сервер]
+```
+
+**Вывод:** Диаграмма упрощает CI/CD, помогая разработчикам автоматизировать развертывание. QA тестируют в staging, а менеджеры контролируют релизы, минимизируя риски.
+
+---
+
+## Заключение
+
+Данный документ содержит 30 детальных диаграмм, охватывающих все аспекты проекта «Сообщение 404» — от архитектуры и данных до UI/UX и инфраструктуры. Каждая диаграмма предоставляет практическую ценность для различных ролей в команде:
+
+- **Разработчики** используют диаграммы для понимания архитектуры, API и интеграций
+- **Геймдизайнеры** применяют их для проектирования сюжета и игровых механик
+- **QA-инженеры** создают тест-кейсы на основе диаграмм состояний и последовательностей
+- **Менеджеры** презентуют технические решения заказчикам и инвесторам
+- **Администраторы** настраивают инфраструктуру и мониторинг
+
+Все диаграммы созданы с учетом специфики проекта: офлайн-режим, локальный сервер, соответствие российскому законодательству и тёмная тема. Они обеспечивают полное понимание системы и упрощают разработку, тестирование и поддержку приложения.
+
+Диаграммы регулярно обновляются по мере развития проекта, отражая текущее состояние архитектуры и помогая команде принимать обоснованные технические решения.

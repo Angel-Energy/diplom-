@@ -8,7 +8,7 @@ import { useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 export default function UiUxPage() {
-  const [expandedDiagram, setExpandedDiagram] = useState<{ chart: string; title: string } | null>(null)
+  const [expandedDiagram, setExpandedDiagram] = useState<{ mermaidCode: string; title: string } | null>(null)
 
   const diagrams = [
     {
@@ -293,7 +293,7 @@ export default function UiUxPage() {
               <MermaidDiagram
                 title={expandedDiagram.title}
                 description="Развернутая диаграмма"
-                mermaidCode={expandedDiagram.chart}
+                mermaidCode={expandedDiagram.mermaidCode}
                 category="UI/UX"
               />
             )}
