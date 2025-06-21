@@ -1,0 +1,271 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 180 100% 50%;
+    --chart-2: 280 100% 70%;
+    --chart-3: 120 100% 50%;
+    --chart-4: 60 100% 50%;
+    --chart-5: 340 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    min-height: 100vh;
+  }
+}
+
+/* Улучшенный скроллбар */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #06b6d4, #8b5cf6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0891b2, #7c3aed);
+}
+
+/* Читаемые неоновые эффекты */
+.neon-cyan {
+  color: #06b6d4;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}
+
+.neon-purple {
+  color: #8b5cf6;
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+}
+
+.neon-border-cyan {
+  border: 1px solid #06b6d4;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+}
+
+.neon-border-purple {
+  border: 1px solid #8b5cf6;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+}
+
+/* Убираем глитч эффект - заменяем на простое свечение */
+.cyber-title {
+  color: #06b6d4;
+  text-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+/* Убираем текстуру с квадратиками - она создает визуальный шум */
+/* .cyber-grid {
+  background-image: linear-gradient(rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+} */
+
+/* Мягкое пульсирование только для акцентов */
+.pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Улучшенные кнопки */
+.cyber-button {
+  position: relative;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid #06b6d4;
+  color: #06b6d4;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.cyber-button:hover {
+  background: rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  color: #ffffff;
+}
+
+/* Улучшенные карточки */
+.cyber-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.cyber-card:hover {
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+}
+
+/* Читаемые акценты */
+.accent-cyan {
+  color: #06b6d4 !important;
+}
+
+.accent-purple {
+  color: #8b5cf6 !important;
+}
+
+.text-cyber-primary {
+  color: #e2e8f0;
+}
+
+.text-cyber-secondary {
+  color: #94a3b8;
+}
+
+.bg-cyber-dark {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.bg-cyber-card {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* Анимация появления */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Тонкие декоративные линии */
+.cyber-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent);
+}
+
+/* Улучшенная типографика */
+.cyber-heading {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #e2e8f0;
+}
+
+.cyber-text {
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+/* Статус индикаторы */
+.status-online {
+  background: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.status-offline {
+  background: #6b7280;
+}
+
+/* Hover эффекты для интерактивных элементов */
+.interactive-hover {
+  transition: all 0.2s ease;
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.15);
+}
+
+.mermaid-svg-container svg {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* Стили для поддержки русского текста в Mermaid диаграммах */
+.mermaid-svg-container svg text {
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+/* Специальные стили для узлов с русским текстом */
+.mermaid-svg-container svg .node rect,
+.mermaid-svg-container svg .node circle,
+.mermaid-svg-container svg .node polygon {
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif !important;
+}
+
+/* Стили для текста в узлах */
+.mermaid-svg-container svg .label {
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+/* Стили для заголовков диаграмм */
+.mermaid-svg-container svg .title {
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+/* Стили для подписей */
+.mermaid-svg-container svg .caption {
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+/* Улучшенная читаемость русского текста */
+.mermaid-svg-container svg tspan {
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
