@@ -83,6 +83,7 @@ const MermaidDiagram = ({
               <MermaidSimple 
                 id={`mermaid-${title.replace(/[^a-zA-Z0-9-]/g, '').toLowerCase()}`}
                 content={mermaidCode}
+                title={title}
               />
             ) : (
               <div className="text-slate-400 text-sm">

@@ -1,8 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react"
+import { DiagramModal } from "./diagram-modal"
+import { Expand } from "lucide-react"
 
-const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
+const MermaidSimple = ({
+  id,
+  content,
+  title,
+}: {
+  id: string
+  content: string
+  title: string
+}) => {
   const [svgContent, setSvgContent] = useState<string>("")
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -14,6 +24,8 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
       setIsLoading(false)
       return
     }
+
+    let isMounted = true
 
     const waitForMermaid = () => {
       return new Promise<void>((resolve, reject) => {
@@ -112,11 +124,15 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
         })
 
         console.log("Mermaid инициализирован, начинаем рендеринг...")
-        renderDiagram(mermaid)
+        if (isMounted) {
+          renderDiagram(mermaid)
+        }
       } catch (e) {
         console.error("Ошибка инициализации Mermaid:", e)
-        setError("Ошибка инициализации Mermaid")
-        setIsLoading(false)
+        if (isMounted) {
+          setError("Ошибка инициализации Mermaid")
+          setIsLoading(false)
+        }
       }
     }
 
@@ -125,8 +141,10 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
         console.log(`Рендеринг диаграммы ${id}...`)
         
         if (!content || content.trim() === '') {
-          setError("Контент диаграммы пустой")
-          setIsLoading(false)
+          if (isMounted) {
+            setError("Контент диаграммы пустой")
+            setIsLoading(false)
+          }
           return
         }
 
@@ -134,12 +152,16 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
         const { svg } = await mermaid.render(uniqueId, content)
         
         // Вся лишняя обработка SVG убрана для чистоты
-        setSvgContent(svg)
-        setIsLoading(false)
+        if (isMounted) {
+          setSvgContent(svg)
+          setIsLoading(false)
+        }
       } catch (e) {
         console.error("Ошибка рендеринга диаграммы:", e)
-        setError(`Ошибка рендеринга: ${e instanceof Error ? e.message : 'Неизвестная ошибка'}`)
-        setIsLoading(false)
+        if (isMounted) {
+          setError(`Ошибка рендеринга: ${e instanceof Error ? e.message : 'Неизвестная ошибка'}`)
+          setIsLoading(false)
+        }
       }
     }
 
@@ -150,12 +172,19 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
         initializeMermaid()
       } catch (e) {
         console.error("Ошибка загрузки Mermaid:", e)
-        setError("Mermaid не загрузился")
-        setIsLoading(false)
+        if (isMounted) {
+          setError("Mermaid не загрузился")
+          setIsLoading(false)
+        }
       }
     }
 
     loadDiagram()
+
+    // Add isMounted cleanup
+    return () => {
+      isMounted = false
+    }
   }, [id, content])
 
   if (isLoading) {
@@ -185,14 +214,17 @@ const MermaidSimple = ({ id, content }: { id: string; content: string }) => {
   }
 
   return (
-    <div className="w-full h-full flex justify-center items-center min-h-[200px]">
-      {svgContent && (
-        <div 
+    <DiagramModal svgContent={svgContent} title={title}>
+      <div className="relative w-full h-full group cursor-pointer">
+        <div
           className="w-full h-full flex justify-center items-center"
           dangerouslySetInnerHTML={{ __html: svgContent }}
         />
-      )}
-    </div>
+        <div className="absolute inset-0 bg-slate-900/50 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center">
+          <Expand className="h-8 w-8 text-white" />
+        </div>
+      </div>
+    </DiagramModal>
   )
 }
 
