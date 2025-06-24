@@ -1,0 +1,44 @@
+graph TD
+    A[Developer Completes Feature] --> B[Create Pull Request]
+    B --> C[Automated Checks]
+    
+    C --> D{All Checks Pass?}
+    D -->|No| E[Fix Issues]
+    E --> C
+    D -->|Yes| F[Assign Reviewers]
+    
+    F --> G[Code Review Process]
+    G --> H{Review Comments}
+    
+    H -->|No Comments| I[Approve]
+    H -->|Has Comments| J[Address Feedback]
+    
+    J --> K[Update Code]
+    K --> L[Re-request Review]
+    L --> G
+    
+    I --> M{All Reviewers Approve?}
+    M -->|No| N[Wait for More Reviews]
+    N --> G
+    M -->|Yes| O[Merge to Target Branch]
+    
+    O --> P[Delete Feature Branch]
+    P --> Q[Deploy to Environment]
+    Q --> R[Integration Tests]
+    
+    R --> S{Tests Pass?}
+    S -->|No| T[Hotfix Required]
+    T --> U[Create Hotfix PR]
+    U --> G
+    S -->|Yes| V[Feature Complete]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#7C3AED,stroke:#000000
+    style C fill:#F59E0B,stroke:#000000
+    style F fill:#2563EB,stroke:#000000
+    style G fill:#2563EB,stroke:#000000
+    style I fill:#10B981,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style Q fill:#DC2626,stroke:#000000
+    style R fill:#F59E0B,stroke:#000000
+    style V fill:#10B981,stroke:#000000 

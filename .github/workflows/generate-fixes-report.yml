@@ -1,0 +1,29 @@
+name: Generate Fixes Report
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  generate-fixes-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Generate FIXES_REPORT.md
+        run: npm run generate:fixes
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add FIXES_REPORT.md
+          git diff --cached --quiet || (git commit -m "chore: update FIXES_REPORT.md [auto]" && git push) 

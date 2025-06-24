@@ -1,0 +1,70 @@
+﻿graph TD
+    A[Message 404 System Context] --> B{System Boundaries}
+    
+    B -->|Core System| C[Android App]
+    B -->|Backend System| D[Ktor Server]
+    B -->|External Systems| E[External Dependencies]
+    B -->|Users| F[End Users]
+    
+    C --> G[Game Logic]
+    G --> H[UI Components]
+    H --> I[Local Storage]
+    I --> J[Python Integration]
+    
+    D --> K[API Services]
+    K --> L[Database]
+    L --> M[Authentication]
+    M --> N[Data Sync]
+    
+    E --> O[Chaquopy Python]
+    E --> P[Google Play Store]
+    E --> Q[Cloud Services]
+    E --> R[Security Services]
+    
+    F --> S[Players]
+    S --> T[Game Interactions]
+    T --> U[Data Input]
+    U --> V[Feedback]
+    
+    subgraph "Data Flow"
+        W[User Input] --> X[App Processing]
+        X --> Y[Local Storage]
+        Y --> Z[Server Sync]
+        Z --> AA[Database Storage]
+    end
+    
+    subgraph "Security Context"
+        BB[Data Encryption] --> CC[Network Security]
+        CC --> DD[Access Control]
+        DD --> EE[Privacy Protection]
+    end
+    
+    V --> W
+    J --> O
+    N --> Q
+    M --> R
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style D fill:#2563EB,stroke:#000000
+    style E fill:#DC2626,stroke:#000000
+    style F fill:#10B981,stroke:#000000
+    style G fill:#7C3AED,stroke:#000000
+    style H fill:#7C3AED,stroke:#000000
+    style I fill:#059669,stroke:#000000
+    style J fill:#DC2626,stroke:#000000
+    style K fill:#2563EB,stroke:#000000
+    style L fill:#059669,stroke:#000000
+    style M fill:#DC2626,stroke:#000000
+    style N fill:#2563EB,stroke:#000000
+    style O fill:#DC2626,stroke:#000000
+    style P fill:#10B981,stroke:#000000
+    style Q fill:#7C3AED,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style S fill:#10B981,stroke:#000000
+    style T fill:#10B981,stroke:#000000
+    style U fill:#10B981,stroke:#000000
+    style V fill:#10B981,stroke:#000000
+    style W fill:#2563EB,stroke:#000000
+    style BB fill:#DC2626,stroke:#000000 

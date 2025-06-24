@@ -1,0 +1,61 @@
+﻿classDiagram
+  class Player {
+    +String name
+    +int score
+    +void play()
+  }
+  class Game {
+    +void start()
+    +void end()
+  }
+  Player --> Game
+  class ChatViewModel {
+    -repository: DialogRepository
+    -_dialog: StateFlow<Dialog?>
+    +dialog: StateFlow<Dialog?>
+    +loadDialog(dialogId: String)
+    +onChoiceSelected(choiceId: String)
+    +startMiniGame(gameType: String)
+  }
+  class DialogRepository {
+    -dialogDao: DialogDao
+    -ktorService: KtorService
+    +getDialog(dialogId: String): Dialog
+    +saveChoice(choiceId: String)
+    +saveGameResult(result: GameResult)
+  }
+  class Message {
+    +id: String
+    +text: String
+    +timestamp: Long
+    +isUser: Boolean
+    +choices: List<Choice>
+  }
+  class Choice {
+    +id: String
+    +text: String
+    +nextSceneId: String
+    +flags: Map<String, Boolean>
+  }
+  class GameResult {
+    +gameType: String
+    +score: Int
+    +success: Boolean
+    +timestamp: Long
+  }
+  class DialogDao {
+    +getDialog(dialogId: String): Dialog
+    +insertChoice(choice: Choice)
+    +insertGameResult(result: GameResult)
+  }
+  class KtorService {
+    +syncChoice(choiceId: String)
+    +getRemoteDialog(dialogId: String): Dialog
+  }
+  ChatViewModel --> DialogRepository
+  DialogRepository --> DialogDao
+  DialogRepository --> KtorService
+  DialogRepository --> Message
+  Message --> Choice
+  DialogRepository --> GameResult
+

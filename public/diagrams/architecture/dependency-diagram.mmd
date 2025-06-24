@@ -1,0 +1,61 @@
+﻿graph TD
+    subgraph "View Layer"
+        A[ChatScreen] --> B[GameScreen]
+        B --> C[SettingsScreen]
+    end
+    
+    subgraph "ViewModel Layer"
+        D[ChatViewModel] --> E[GameViewModel]
+        E --> F[SettingsViewModel]
+    end
+    
+    subgraph "Repository Layer"
+        G[DialogRepository] --> H[GameRepository]
+        H --> I[SettingsRepository]
+    end
+    
+    subgraph "Data Layer"
+        J[Room Database] --> K[Ktor Server]
+        K --> L[Local Storage]
+    end
+    
+    subgraph "External Dependencies"
+        M[Chaquopy] --> N[Python Scripts]
+        O[Encryption] --> P[AES-256]
+        Q[Network] --> R[TLS 1.2+]
+    end
+    
+    A --> D
+    B --> E
+    C --> F
+    
+    D --> G
+    E --> H
+    F --> I
+    
+    G --> J
+    H --> K
+    I --> L
+    
+    E --> M
+    G --> O
+    K --> Q
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#1E3A8A,stroke:#000000
+    style C fill:#1E3A8A,stroke:#000000
+    style D fill:#7C3AED,stroke:#000000
+    style E fill:#7C3AED,stroke:#000000
+    style F fill:#7C3AED,stroke:#000000
+    style G fill:#9333EA,stroke:#000000
+    style H fill:#9333EA,stroke:#000000
+    style I fill:#9333EA,stroke:#000000
+    style J fill:#1E3A8A,stroke:#000000
+    style K fill:#2563EB,stroke:#000000
+    style L fill:#1E3A8A,stroke:#000000
+    style M fill:#DC2626,stroke:#000000
+    style N fill:#DC2626,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#2563EB,stroke:#000000
+    style R fill:#2563EB,stroke:#000000 

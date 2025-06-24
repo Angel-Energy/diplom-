@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from 'react';
-import MermaidDiagram from "@/components/mermaid-diagram"
+import { Suspense } from 'react';
+
+import MermaidDiagram from '@/components/mermaid-diagram';
 
 export default function TestMermaidPage() {
   const testDiagram = {
-    title: "Тестовая диаграмма с группировками",
-    description: "Диаграмма для тестирования настроек группировок (subgraphs)",
+    title: 'Тестовая диаграмма с группировками',
+    description: 'Диаграмма для тестирования настроек группировок (subgraphs)',
     mermaidCode: `graph TD
     subgraph "Группа 1"
         A[Элемент A] --> B[Элемент B]
@@ -19,13 +20,14 @@ export default function TestMermaidPage() {
     end
     
     C --> D`,
-    category: "Тест",
-    conclusion: "Эта диаграмма показывает, как должны отображаться группировки с обводкой и без фона."
-  }
+    category: 'Тест',
+    conclusion:
+      'Эта диаграмма показывает, как должны отображаться группировки с обводкой и без фона.',
+  };
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold text-white mb-8">Тест диаграмм с группировками</h1>
+    <div className='container mx-auto p-8'>
+      <h1 className='text-3xl font-bold text-white mb-8'>Тест диаграмм с группировками</h1>
       <MermaidDiagram
         title={testDiagram.title}
         description={testDiagram.description}
@@ -34,5 +36,5 @@ export default function TestMermaidPage() {
         conclusion={testDiagram.conclusion}
       />
     </div>
-  )
-} 
+  );
+}

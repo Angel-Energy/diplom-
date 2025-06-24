@@ -1,0 +1,69 @@
+graph TD
+    A[Error Handling System] --> B{Error Type}
+    
+    B -->|Network Error| C[Network Error Handler]
+    B -->|Database Error| D[Database Error Handler]
+    B -->|Validation Error| E[Validation Error Handler]
+    B -->|Python Error| F[Python Error Handler]
+    B -->|Security Error| G[Security Error Handler]
+    
+    C --> H{Network Issue}
+    H -->|No Connection| I[Show Offline Mode]
+    H -->|Timeout| J[Retry Request]
+    H -->|Server Error| K[Show Error Message]
+    
+    D --> L{Database Issue}
+    L -->|Corruption| M[Reset Database]
+    L -->|Full Storage| N[Clear Cache]
+    L -->|Permission| O[Request Permissions]
+    
+    E --> P{Validation Issue}
+    P -->|Invalid Input| Q[Show Input Error]
+    P -->|Missing Data| R[Request Missing Data]
+    P -->|Format Error| S[Show Format Guide]
+    
+    F --> T{Python Issue}
+    T -->|Script Error| U[Show Game Error]
+    T -->|Execution Timeout| V[Skip MiniGame]
+    T -->|Memory Error| W[Restart Game]
+    
+    G --> X{Security Issue}
+    X -->|Certificate Error| Y[Show Security Alert]
+    X -->|Encryption Error| Z[Re-encrypt Data]
+    X -->|Tampering Detected| AA[Block Access]
+    
+    I --> BB[Error Recovery]
+    J --> BB
+    K --> BB
+    M --> BB
+    N --> BB
+    O --> BB
+    Q --> BB
+    R --> BB
+    S --> BB
+    U --> BB
+    V --> BB
+    W --> BB
+    Y --> BB
+    Z --> BB
+    AA --> BB
+    
+    BB --> CC{Recovery Success?}
+    CC -->|Yes| DD[Continue Normal Operation]
+    CC -->|No| EE[Show Critical Error]
+    
+    EE --> FF[App Restart Required]
+    DD --> GG[Error Logged]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#DC2626,stroke:#000000
+    style D fill:#DC2626,stroke:#000000
+    style E fill:#F59E0B,stroke:#000000
+    style F fill:#DC2626,stroke:#000000
+    style G fill:#DC2626,stroke:#000000
+    style I fill:#10B981,stroke:#000000
+    style J fill:#F59E0B,stroke:#000000
+    style K fill:#DC2626,stroke:#000000
+    style DD fill:#10B981,stroke:#000000
+    style FF fill:#DC2626,stroke:#000000 

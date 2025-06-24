@@ -1,0 +1,69 @@
+﻿graph TD
+    A[Security Architecture] --> B{Security Layers}
+    
+    B -->|Application Security| C[App Layer Security]
+    B -->|Network Security| D[Network Layer Security]
+    B -->|Data Security| E[Data Layer Security]
+    B -->|Infrastructure Security| F[Infrastructure Security]
+    
+    C --> G[Input Validation]
+    G --> H[Authentication]
+    H --> I[Authorization]
+    I --> J[Session Management]
+    
+    D --> K[TLS 1.2+]
+    K --> L[Certificate Pinning]
+    L --> M[Firewall]
+    M --> N[VPN Access]
+    
+    E --> O[AES-256 Encryption]
+    O --> P[Data Masking]
+    P --> Q[Backup Encryption]
+    Q --> R[Key Management]
+    
+    F --> S[Server Hardening]
+    S --> T[Intrusion Detection]
+    T --> U[Security Monitoring]
+    U --> V[Incident Response]
+    
+    subgraph "Compliance"
+        W[ФЗ-152 Compliance] --> X[GDPR Compliance]
+        X --> Y[ISO 27001]
+        Y --> Z[OWASP Top 10]
+    end
+    
+    subgraph "Threat Protection"
+        AA[SQL Injection] --> BB[XSS Protection]
+        BB --> CC[CSRF Protection]
+        CC --> DD[Man-in-the-Middle]
+    end
+    
+    J --> W
+    N --> W
+    R --> W
+    V --> W
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#DC2626,stroke:#000000
+    style D fill:#2563EB,stroke:#000000
+    style E fill:#059669,stroke:#000000
+    style F fill:#DC2626,stroke:#000000
+    style G fill:#10B981,stroke:#000000
+    style H fill:#DC2626,stroke:#000000
+    style I fill:#DC2626,stroke:#000000
+    style J fill:#DC2626,stroke:#000000
+    style K fill:#2563EB,stroke:#000000
+    style L fill:#059669,stroke:#000000
+    style M fill:#DC2626,stroke:#000000
+    style N fill:#DC2626,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#059669,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style S fill:#DC2626,stroke:#000000
+    style T fill:#DC2626,stroke:#000000
+    style U fill:#DC2626,stroke:#000000
+    style V fill:#DC2626,stroke:#000000
+    style W fill:#059669,stroke:#000000
+    style AA fill:#DC2626,stroke:#000000 

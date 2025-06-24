@@ -1,0 +1,55 @@
+graph TD
+    A[APK Protection Process] --> B[Source Code]
+    B --> C[Kotlin Compilation]
+    C --> D[Java Bytecode]
+    
+    D --> E[DexGuard Processing]
+    E --> F[Code Obfuscation]
+    F --> G[String Encryption]
+    G --> H[Control Flow Obfuscation]
+    
+    H --> I[APK Assembly]
+    I --> J[Digital Signing]
+    J --> K[Certificate Verification]
+    
+    K --> L{Signing Valid?}
+    L -->|Yes| M[APK Ready]
+    L -->|No| N[Signing Failed]
+    
+    M --> O[Upload to Google Play]
+    O --> P[Google Play Verification]
+    P --> Q{Verification Pass?}
+    Q -->|Yes| R[Published APK]
+    Q -->|No| S[Rejection - Fix Required]
+    
+    subgraph "Protection Features"
+        T[Name Obfuscation] --> U[Dead Code Injection]
+        U --> V[Anti-Debugging]
+        V --> W[Root Detection]
+        W --> X[Emulator Detection]
+    end
+    
+    subgraph "Security Measures"
+        Y[Certificate Pinning] --> Z[API Key Protection]
+        Z --> AA[Encryption Keys]
+        AA --> BB[Python Script Protection]
+    end
+    
+    F --> T
+    G --> Y
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#7C3AED,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style D fill:#7C3AED,stroke:#000000
+    style E fill:#DC2626,stroke:#000000
+    style F fill:#DC2626,stroke:#000000
+    style G fill:#DC2626,stroke:#000000
+    style H fill:#DC2626,stroke:#000000
+    style I fill:#F59E0B,stroke:#000000
+    style J fill:#059669,stroke:#000000
+    style K fill:#059669,stroke:#000000
+    style M fill:#10B981,stroke:#000000
+    style R fill:#10B981,stroke:#000000
+    style N fill:#DC2626,stroke:#000000
+    style S fill:#DC2626,stroke:#000000 

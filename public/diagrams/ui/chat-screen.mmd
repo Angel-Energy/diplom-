@@ -1,0 +1,107 @@
+graph TD
+    A[Chat Screen Layout] --> B{UI Components}
+    
+    B -->|Header| C[Header Section]
+    B -->|Messages| D[Message List]
+    B -->|Input| E[Input Section]
+    B -->|Choices| F[Choice Buttons]
+    B -->|Progress| G[Progress Indicator]
+    
+    C --> H[Scene Title]
+    H --> I[Character Name]
+    I --> J[Character Avatar]
+    J --> K[Progress Bar]
+    
+    D --> L[Message Container]
+    L --> M[NPC Messages]
+    M --> N[User Messages]
+    N --> O[System Messages]
+    
+    E --> P[Text Input Field]
+    P --> Q[Send Button]
+    Q --> R[Attachment Button]
+    
+    F --> S[Choice Container]
+    S --> T[Choice Button 1]
+    S --> U[Choice Button 2]
+    S --> V[Choice Button 3]
+    S --> W[Choice Button N]
+    
+    G --> X[Progress Bar]
+    X --> Y[Scene Counter]
+    Y --> Z[Time Indicator]
+    
+    subgraph "Message Types"
+        AA[NPC Text] --> BB[User Response]
+        BB --> CC[System Notification]
+        CC --> DD[Error Message]
+    end
+    
+    subgraph "Choice Types"
+        EE[Dialog Choice] --> FF[Action Choice]
+        FF --> GG[Romance Choice]
+        GG --> HH[Game Choice]
+    end
+    
+    subgraph "Animations"
+        II[Typewriter Effect] --> JJ[Fade In/Out]
+        JJ --> KK[Slide Transitions]
+        KK --> LL[Button Animations]
+    end
+    
+    M --> AA
+    N --> BB
+    O --> CC
+    DD --> O
+    
+    T --> EE
+    U --> FF
+    V --> GG
+    W --> HH
+    
+    H --> II
+    L --> JJ
+    S --> KK
+    T --> LL
+    U --> LL
+    V --> LL
+    W --> LL
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style D fill:#2563EB,stroke:#000000
+    style E fill:#059669,stroke:#000000
+    style F fill:#F59E0B,stroke:#000000
+    style G fill:#F59E0B,stroke:#000000
+    style H fill:#7C3AED,stroke:#000000
+    style I fill:#7C3AED,stroke:#000000
+    style J fill:#7C3AED,stroke:#000000
+    style K fill:#F59E0B,stroke:#000000
+    style L fill:#2563EB,stroke:#000000
+    style M fill:#2563EB,stroke:#000000
+    style N fill:#2563EB,stroke:#000000
+    style O fill:#2563EB,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#059669,stroke:#000000
+    style R fill:#059669,stroke:#000000
+    style S fill:#F59E0B,stroke:#000000
+    style T fill:#F59E0B,stroke:#000000
+    style U fill:#F59E0B,stroke:#000000
+    style V fill:#F59E0B,stroke:#000000
+    style W fill:#F59E0B,stroke:#000000
+    style X fill:#F59E0B,stroke:#000000
+    style Y fill:#F59E0B,stroke:#000000
+    style Z fill:#F59E0B,stroke:#000000
+    style AA fill:#2563EB,stroke:#000000
+    style BB fill:#10B981,stroke:#000000
+    style CC fill:#F59E0B,stroke:#000000
+    style DD fill:#DC2626,stroke:#000000
+    style EE fill:#7C3AED,stroke:#000000
+    style FF fill:#2563EB,stroke:#000000
+    style GG fill:#EC4899,stroke:#000000
+    style HH fill:#DC2626,stroke:#000000
+    style II fill:#DC2626,stroke:#000000
+    style JJ fill:#DC2626,stroke:#000000
+    style KK fill:#DC2626,stroke:#000000
+    style LL fill:#DC2626,stroke:#000000 

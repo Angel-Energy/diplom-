@@ -1,0 +1,15 @@
+﻿flowchart TD
+  presentation --> domain
+  domain --> data
+  subgraph "Android App"
+    A["ui"]
+    B["data"]
+    C["domain"]
+  end
+  subgraph "Server"
+    D["ktor"]
+    E["db"]
+  end
+  A --> B
+  B --> C
+  D --> E 

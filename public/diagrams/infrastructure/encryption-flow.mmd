@@ -1,0 +1,30 @@
+graph LR
+    A[Исходные данные] -->|AES-256| B[Room Database]
+    B -->|TLS 1.2+| C[Ktor Server]
+    C -->|MySQL Encryption| D[MySQL Database]
+    
+    subgraph "Локальное шифрование"
+        E[SharedPreferences] -->|AES-256| F[Encrypted Prefs]
+    end
+    
+    subgraph "Сетевое шифрование"
+        G[HTTP Request] -->|TLS 1.2+| H[HTTPS Response]
+    end
+    
+    subgraph "APK Защита"
+        I[Source Code] -->|DexGuard| J[Obfuscated APK]
+    end
+    
+    A --> E
+    B --> G
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#059669,stroke:#000000
+    style C fill:#059669,stroke:#000000
+    style D fill:#059669,stroke:#000000
+    style E fill:#1E3A8A,stroke:#000000
+    style F fill:#059669,stroke:#000000
+    style G fill:#2563EB,stroke:#000000
+    style H fill:#059669,stroke:#000000
+    style I fill:#DC2626,stroke:#000000
+    style J fill:#059669,stroke:#000000 

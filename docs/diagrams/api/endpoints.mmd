@@ -1,0 +1,8 @@
+﻿flowchart TD
+  Client -->|POST /login| Auth
+  Client -->|GET /profile| Profile
+  Client -->|POST /message| Message
+  Auth --> DB
+  Profile --> DB
+  Message --> DB
+

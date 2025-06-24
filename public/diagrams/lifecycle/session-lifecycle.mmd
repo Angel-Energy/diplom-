@@ -1,0 +1,35 @@
+stateDiagram-v2
+    [*] --> AppLaunch
+    AppLaunch --> Loading
+    Loading --> MainMenu : App ready
+    Loading --> Error : Initialization failed
+    
+    MainMenu --> GameSession : Start new game
+    MainMenu --> LoadSession : Load saved game
+    MainMenu --> Settings : Open settings
+    
+    GameSession --> ActiveSession : Game started
+    LoadSession --> ActiveSession : Game loaded
+    
+    ActiveSession --> PausedSession : App paused
+    ActiveSession --> BackgroundSession : App backgrounded
+    ActiveSession --> SaveSession : Auto save
+    ActiveSession --> GameComplete : Game finished
+    
+    PausedSession --> ActiveSession : Resume game
+    PausedSession --> BackgroundSession : App backgrounded
+    
+    BackgroundSession --> ActiveSession : App foregrounded
+    BackgroundSession --> TerminatedSession : App killed
+    
+    SaveSession --> ActiveSession : Save complete
+    
+    GameComplete --> MainMenu : Return to menu
+    GameComplete --> [*] : Exit app
+    
+    TerminatedSession --> [*] : App closed
+    
+    Error --> MainMenu : Retry
+    Error --> [*] : Exit app
+    
+    Settings --> MainMenu : Back to menu 

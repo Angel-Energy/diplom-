@@ -1,0 +1,51 @@
+graph TD
+    A[Game Day Start] --> B[Morning Scene]
+    B --> C[Player Arrives at Office]
+    C --> D[First Dialog Choices]
+    
+    D --> E{Morning Choices}
+    E -->|Check Email| F[Email Investigation]
+    E -->|Talk to Colleagues| G[Colleague Interactions]
+    E -->|Start Work| H[Work Tasks]
+    
+    F --> I[Lunch Break]
+    G --> I
+    H --> I
+    
+    I --> J{Lunch Choices}
+    J -->|Eat Alone| K[Solitary Lunch]
+    J -->|Join Colleagues| L[Social Lunch]
+    J -->|Skip Lunch| M[Work Through Lunch]
+    
+    K --> N[Afternoon Scene]
+    L --> N
+    M --> N
+    
+    N --> O{Afternoon Choices}
+    O -->|Continue Investigation| P[Investigation Progress]
+    O -->|Attend Meeting| Q[Meeting Scene]
+    O -->|Work on Project| R[Project Work]
+    
+    P --> S[Evening Scene]
+    Q --> S
+    R --> S
+    
+    S --> T{Evening Choices}
+    T -->|Stay Late| U[Overtime Work]
+    T -->|Go Home| V[Home Scene]
+    T -->|Meet Someone| W[Evening Meeting]
+    
+    U --> X[Day End]
+    V --> X
+    W --> X
+    
+    X --> Y[Save Progress]
+    Y --> Z[Next Day or Game End]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style I fill:#F59E0B,stroke:#000000
+    style N fill:#F59E0B,stroke:#000000
+    style S fill:#F59E0B,stroke:#000000
+    style X fill:#6B7280,stroke:#000000
+    style Z fill:#7C3AED,stroke:#000000 

@@ -1,0 +1,48 @@
+graph TD
+    A[User Makes Choice] --> B[Choice Selected Event]
+    B --> C[ViewModel Process Choice]
+    C --> D[Extract Choice Data]
+    
+    D --> E[Update Game Flags]
+    E --> F{Flag Changes}
+    
+    F -->|Trust +1| G[Increase Trust Level]
+    F -->|Threat +1| H[Increase Threat Level]
+    F -->|Suspicion +1| I[Increase Suspicion Level]
+    F -->|Romance +1| J[Increase Romance Level]
+    
+    G --> K[Save to Local Database]
+    H --> K
+    I --> K
+    J --> K
+    
+    K --> L[Queue for Sync]
+    L --> M{Network Available?}
+    
+    M -->|Yes| N[Sync to Ktor Server]
+    M -->|No| O[Store in Local Queue]
+    
+    N --> P[Server Confirmation]
+    P --> Q[Clear Local Queue]
+    O --> R[Background Sync Service]
+    R --> S[Retry Later]
+    
+    Q --> T[Update UI State]
+    S --> T
+    T --> U[Show Next Scene]
+    
+    U --> V{Game Complete?}
+    V -->|Yes| W[Show Ending]
+    V -->|No| X[Continue Game]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#7C3AED,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style G fill:#10B981,stroke:#000000
+    style H fill:#DC2626,stroke:#000000
+    style I fill:#F59E0B,stroke:#000000
+    style J fill:#EC4899,stroke:#000000
+    style K fill:#059669,stroke:#000000
+    style N fill:#2563EB,stroke:#000000
+    style W fill:#9333EA,stroke:#000000
+    style X fill:#1E3A8A,stroke:#000000 

@@ -1,0 +1,44 @@
+graph TD
+    A[Sync Request] --> B[Check Local Data]
+    B --> C[Check Remote Data]
+    C --> D{Data Different?}
+    
+    D -->|No| E[No Conflict - Direct Sync]
+    D -->|Yes| F[Conflict Detected]
+    
+    F --> G[Compare Timestamps]
+    G --> H{Local Newer?}
+    
+    H -->|Yes| I[Keep Local Version]
+    H -->|No| J{Remote Newer?}
+    
+    J -->|Yes| K[Use Remote Version]
+    J -->|No| L[Manual Resolution Required]
+    
+    L --> M[Show Conflict Dialog]
+    M --> N{User Choice}
+    
+    N -->|Keep Local| I
+    N -->|Use Remote| K
+    N -->|Merge| O[Merge Data]
+    N -->|Cancel| P[Cancel Sync]
+    
+    I --> Q[Upload Local to Server]
+    K --> R[Download Remote to Local]
+    O --> S[Create Merged Version]
+    S --> T[Upload Merged Version]
+    
+    E --> U[Sync Complete]
+    Q --> U
+    R --> U
+    T --> U
+    P --> V[Sync Cancelled]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style F fill:#F59E0B,stroke:#000000
+    style I fill:#10B981,stroke:#000000
+    style K fill:#2563EB,stroke:#000000
+    style L fill:#DC2626,stroke:#000000
+    style O fill:#7C3AED,stroke:#000000
+    style U fill:#059669,stroke:#000000
+    style V fill:#6B7280,stroke:#000000 

@@ -1,0 +1,8 @@
+﻿flowchart TD
+  Start((Start)) --> CheckFlag{Flag set?}
+  CheckFlag -- Yes --> ActionA["Action A"]
+  CheckFlag -- No --> ActionB["Action B"]
+  ActionA --> End((End))
+  ActionB --> End
+  Flag -- Yes --> Trust
+  Flag -- No --> Threat 

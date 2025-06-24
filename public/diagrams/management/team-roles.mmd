@@ -1,0 +1,50 @@
+graph TD
+    subgraph "Команда разработки"
+        A[Team Lead] --> B[Android Developer]
+        A --> C[Backend Developer]
+        A --> D[Python Developer]
+        A --> E[Security Engineer]
+    end
+    
+    subgraph "Дизайн и UX"
+        F[UI/UX Designer] --> G[Graphic Designer]
+        G --> H[Accessibility Specialist]
+    end
+    
+    subgraph "Тестирование"
+        I[QA Engineer] --> J[Test Automation Engineer]
+        J --> K[Security Tester]
+    end
+    
+    subgraph "Управление"
+        L[Project Manager] --> M[Product Owner]
+        M --> N[Scrum Master]
+    end
+    
+    subgraph "Инфраструктура"
+        O[DevOps Engineer] --> P[System Administrator]
+        P --> Q[Database Administrator]
+    end
+    
+    A --> L
+    F --> L
+    I --> L
+    O --> L
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#7C3AED,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style D fill:#DC2626,stroke:#000000
+    style E fill:#059669,stroke:#000000
+    style F fill:#F59E0B,stroke:#000000
+    style G fill:#F59E0B,stroke:#000000
+    style H fill:#059669,stroke:#000000
+    style I fill:#2563EB,stroke:#000000
+    style J fill:#2563EB,stroke:#000000
+    style K fill:#DC2626,stroke:#000000
+    style L fill:#9333EA,stroke:#000000
+    style M fill:#9333EA,stroke:#000000
+    style N fill:#9333EA,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#059669,stroke:#000000 

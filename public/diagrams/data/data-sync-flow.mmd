@@ -1,0 +1,50 @@
+graph TD
+    A[Локальные изменения] --> B{Тип данных}
+    
+    B -->|Выбор игрока| C[Choice Data]
+    B -->|Результат мини-игры| D[Game Result]
+    B -->|Настройки| E[Settings]
+    B -->|Прогресс| F[Progress]
+    
+    C --> G[Queue for Sync]
+    D --> G
+    E --> G
+    F --> G
+    
+    G --> H{Сетевое подключение}
+    H -->|Доступно| I[Upload to Ktor]
+    H -->|Недоступно| J[Store Locally]
+    
+    I --> K[Ktor Server]
+    K --> L[MySQL Database]
+    L --> M[Success Response]
+    M --> N[Clear Local Queue]
+    
+    J --> O[Local Queue]
+    O --> P[Background Sync Service]
+    P --> Q{Проверка сети}
+    Q -->|Доступна| I
+    Q -->|Недоступна| R[Wait and Retry]
+    R --> Q
+    
+    K --> S[Conflict Detection]
+    S --> T{Конфликт?}
+    T -->|Да| U[Conflict Resolution]
+    T -->|Нет| V[Direct Sync]
+    
+    U --> W[User Choice]
+    W --> X[Keep Local]
+    W --> Y[Use Remote]
+    W --> Z[Merge Data]
+    
+    X --> N
+    Y --> N
+    Z --> N
+    V --> N
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style I fill:#2563EB,stroke:#000000
+    style K fill:#2563EB,stroke:#000000
+    style L fill:#059669,stroke:#000000
+    style N fill:#10B981,stroke:#000000
+    style U fill:#F59E0B,stroke:#000000 

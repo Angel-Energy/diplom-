@@ -1,0 +1,74 @@
+graph TD
+    A[User Journey] --> B[App Launch]
+    B --> C[Splash Screen]
+    C --> D[Main Menu]
+    
+    D --> E{User Choice}
+    E -->|New Game| F[Start New Game]
+    E -->|Load Game| G[Load Saved Game]
+    E -->|Settings| H[Open Settings]
+    E -->|Help| I[View Help]
+    E -->|About| J[About App]
+    
+    F --> K[Game Introduction]
+    G --> L[Select Save Slot]
+    H --> M[Configure Settings]
+    I --> N[Help Documentation]
+    J --> O[App Information]
+    
+    K --> P[First Scene]
+    L --> Q[Load Game State]
+    M --> R[Save Settings]
+    N --> S[Return to Menu]
+    O --> T[Return to Menu]
+    
+    P --> U[Game Session]
+    Q --> U
+    R --> D
+    S --> D
+    T --> D
+    
+    U --> V{Game Events}
+    V -->|Dialog Choice| W[Make Choice]
+    V -->|MiniGame| X[Play MiniGame]
+    V -->|Settings| H
+    V -->|Pause| Y[Pause Game]
+    
+    W --> Z[Update Game State]
+    X --> AA{MiniGame Result}
+    Y --> BB{Pause Action}
+    
+    Z --> U
+    AA -->|Success| U
+    AA -->|Fail| X
+    AA -->|Skip| U
+    
+    BB -->|Resume| U
+    BB -->|Settings| H
+    BB -->|Main Menu| D
+    BB -->|Exit| CC[Exit App]
+    
+    U --> DD{Game Complete?}
+    DD -->|No| U
+    DD -->|Yes| EE[Show Ending]
+    
+    EE --> FF[Credits]
+    FF --> GG[Return to Menu]
+    GG --> D
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#F59E0B,stroke:#000000
+    style D fill:#7C3AED,stroke:#000000
+    style F fill:#10B981,stroke:#000000
+    style G fill:#2563EB,stroke:#000000
+    style H fill:#059669,stroke:#000000
+    style I fill:#F59E0B,stroke:#000000
+    style J fill:#F59E0B,stroke:#000000
+    style U fill:#2563EB,stroke:#000000
+    style W fill:#7C3AED,stroke:#000000
+    style X fill:#DC2626,stroke:#000000
+    style Y fill:#F59E0B,stroke:#000000
+    style EE fill:#9333EA,stroke:#000000
+    style FF fill:#9333EA,stroke:#000000
+    style CC fill:#DC2626,stroke:#000000 

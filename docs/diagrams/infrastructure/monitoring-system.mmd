@@ -1,0 +1,13 @@
+﻿flowchart TD
+  App --> Metrics
+  Metrics --> Dashboard
+
+  A["Р›РѕРіРё Р·Р°РїСЂРѕСЃРѕРІ\nHTTP API calls"]
+  B["Р›РѕРіРё РѕС€РёР±РѕРє\nException handling"]
+  C["РњРѕРЅРёС‚РѕСЂРёРЅРі Р‘Р”\nMySQL slow queries"]
+  D["РњРµС‚СЂРёРєРё РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚Рё\nResponse time, throughput"]
+  E["РђР»РµСЂС‚С‹\nEmail/SMS СѓРІРµРґРѕРјР»РµРЅРёСЏ"]
+  A --> D
+  B --> E
+  C --> D
+  D --> E 

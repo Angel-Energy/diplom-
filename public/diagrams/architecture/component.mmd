@@ -1,0 +1,74 @@
+﻿graph TD
+    A[System Components] --> B{Component Types}
+    
+    B -->|UI Components| C[Presentation Layer]
+    B -->|Business Components| D[Domain Layer]
+    B -->|Data Components| E[Data Layer]
+    B -->|Infrastructure Components| F[Infrastructure Layer]
+    
+    C --> G[ChatScreen Component]
+    G --> H[GameScreen Component]
+    H --> I[SettingsScreen Component]
+    I --> J[Navigation Component]
+    
+    D --> K[ChatViewModel Component]
+    K --> L[GameViewModel Component]
+    L --> M[SettingsViewModel Component]
+    M --> N[UseCase Components]
+    
+    E --> O[DialogRepository Component]
+    O --> P[GameRepository Component]
+    P --> Q[SettingsRepository Component]
+    Q --> R[DataSource Components]
+    
+    F --> S[Network Component]
+    S --> T[Security Component]
+    T --> U[Database Component]
+    U --> V[FileSystem Component]
+    
+    subgraph "Component Interactions"
+        W[UI → ViewModel] --> X[ViewModel → Repository]
+        X --> Y[Repository → DataSource]
+        Y --> Z[DataSource → Infrastructure]
+    end
+    
+    subgraph "External Components"
+        AA[Chaquopy Component] --> BB[Ktor Client Component]
+        BB --> CC[Encryption Component]
+        CC --> DD[Monitoring Component]
+    end
+    
+    J --> W
+    N --> X
+    R --> Y
+    V --> Z
+    
+    G --> AA
+    O --> BB
+    T --> CC
+    U --> DD
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#1E3A8A,stroke:#000000
+    style D fill:#7C3AED,stroke:#000000
+    style E fill:#9333EA,stroke:#000000
+    style F fill:#2563EB,stroke:#000000
+    style G fill:#1E3A8A,stroke:#000000
+    style H fill:#1E3A8A,stroke:#000000
+    style I fill:#1E3A8A,stroke:#000000
+    style J fill:#1E3A8A,stroke:#000000
+    style K fill:#7C3AED,stroke:#000000
+    style L fill:#7C3AED,stroke:#000000
+    style M fill:#7C3AED,stroke:#000000
+    style N fill:#7C3AED,stroke:#000000
+    style O fill:#9333EA,stroke:#000000
+    style P fill:#9333EA,stroke:#000000
+    style Q fill:#9333EA,stroke:#000000
+    style R fill:#9333EA,stroke:#000000
+    style S fill:#2563EB,stroke:#000000
+    style T fill:#DC2626,stroke:#000000
+    style U fill:#059669,stroke:#000000
+    style V fill:#F59E0B,stroke:#000000
+    style W fill:#2563EB,stroke:#000000
+    style AA fill:#DC2626,stroke:#000000 

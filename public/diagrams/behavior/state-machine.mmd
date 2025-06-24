@@ -1,0 +1,29 @@
+﻿stateDiagram-v2
+    [*] --> Loading
+    Loading --> MainMenu : App initialized
+    Loading --> Error : Initialization failed
+    
+    MainMenu --> ChatScreen : Start game
+    MainMenu --> SettingsScreen : Open settings
+    MainMenu --> HelpScreen : Open help
+    
+    ChatScreen --> MiniGame : Trigger minigame
+    ChatScreen --> ChoiceScreen : Show choices
+    ChatScreen --> ChatScreen : Continue dialog
+    
+    MiniGame --> ChatScreen : Game completed
+    MiniGame --> MiniGame : Game in progress
+    MiniGame --> Error : Game failed
+    
+    ChoiceScreen --> ChatScreen : Choice selected
+    ChoiceScreen --> ChatScreen : Continue dialog
+    
+    SettingsScreen --> MainMenu : Back to menu
+    HelpScreen --> MainMenu : Back to menu
+    
+    Error --> MainMenu : Retry
+    Error --> [*] : Exit app
+    
+    ChatScreen --> EndingScreen : Game completed
+    EndingScreen --> MainMenu : Restart game
+    EndingScreen --> [*] : Exit app 

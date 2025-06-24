@@ -1,0 +1,47 @@
+﻿graph TD
+    subgraph "com.message404"
+        subgraph "presentation"
+            A[ui.screens] --> B[ui.components]
+            B --> C[ui.theme]
+            C --> D[ui.navigation]
+        end
+        
+        subgraph "domain"
+            E[models] --> F[repositories]
+            F --> G[usecases]
+            G --> H[utils]
+        end
+        
+        subgraph "data"
+            I[local] --> J[remote]
+            J --> K[datasources]
+            K --> L[entities]
+        end
+        
+        subgraph "core"
+            M[di] --> N[network]
+            N --> O[security]
+            O --> P[python]
+        end
+    end
+    
+    A --> E
+    E --> I
+    I --> M
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#1E3A8A,stroke:#000000
+    style C fill:#1E3A8A,stroke:#000000
+    style D fill:#1E3A8A,stroke:#000000
+    style E fill:#7C3AED,stroke:#000000
+    style F fill:#7C3AED,stroke:#000000
+    style G fill:#7C3AED,stroke:#000000
+    style H fill:#7C3AED,stroke:#000000
+    style I fill:#9333EA,stroke:#000000
+    style J fill:#9333EA,stroke:#000000
+    style K fill:#9333EA,stroke:#000000
+    style L fill:#9333EA,stroke:#000000
+    style M fill:#2563EB,stroke:#000000
+    style N fill:#2563EB,stroke:#000000
+    style O fill:#2563EB,stroke:#000000
+    style P fill:#2563EB,stroke:#000000 

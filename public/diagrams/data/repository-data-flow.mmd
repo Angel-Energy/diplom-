@@ -1,0 +1,42 @@
+﻿graph TD
+    subgraph "Repository Layer"
+        A[DialogRepository] --> B[GameRepository]
+        B --> C[SettingsRepository]
+    end
+    
+    subgraph "Local Data Sources"
+        D[Room Database] --> E[SharedPreferences]
+        E --> F[Local Files]
+    end
+    
+    subgraph "Remote Data Sources"
+        G[Ktor Server] --> H[MySQL Database]
+        H --> I[File Storage]
+    end
+    
+    subgraph "Data Processing"
+        J[Encryption] --> K[Compression]
+        K --> L[Validation]
+    end
+    
+    A --> D
+    A --> G
+    B --> D
+    B --> G
+    C --> E
+    
+    G --> J
+    D --> L
+    
+    style A fill:#9333EA,stroke:#000000
+    style B fill:#9333EA,stroke:#000000
+    style C fill:#9333EA,stroke:#000000
+    style D fill:#1E3A8A,stroke:#000000
+    style E fill:#1E3A8A,stroke:#000000
+    style F fill:#1E3A8A,stroke:#000000
+    style G fill:#2563EB,stroke:#000000
+    style H fill:#2563EB,stroke:#000000
+    style I fill:#2563EB,stroke:#000000
+    style J fill:#059669,stroke:#000000
+    style K fill:#059669,stroke:#000000
+    style L fill:#059669,stroke:#000000 

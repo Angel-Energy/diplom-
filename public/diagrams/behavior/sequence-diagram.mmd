@@ -1,0 +1,43 @@
+﻿sequenceDiagram
+    participant U as User
+    participant V as View (Compose)
+    participant VM as ViewModel
+    participant R as Repository
+    participant DB as Room Database
+    participant K as Ktor Server
+    participant P as Python (Chaquopy)
+    
+    U->>V: Открывает приложение
+    V->>VM: initialize()
+    VM->>R: loadGameState()
+    R->>DB: getCurrentState()
+    DB-->>R: GameState
+    R-->>VM: GameState
+    VM-->>V: Update UI
+    
+    U->>V: Выбирает диалог
+    V->>VM: onDialogSelected(dialogId)
+    VM->>R: getDialog(dialogId)
+    R->>DB: queryDialog(dialogId)
+    DB-->>R: Dialog data
+    R-->>VM: Dialog result
+    VM-->>V: Show dialog
+    
+    U->>V: Нажимает кнопку выбора
+    V->>VM: onChoiceSelected(choiceId)
+    VM->>R: saveChoice(choiceId)
+    R->>DB: insertChoice(choiceId)
+    R->>K: syncChoice(choiceId)
+    K-->>R: Success
+    R-->>VM: Choice saved
+    VM-->>V: Update flags
+    
+    U->>V: Запускает мини-игру
+    V->>VM: startMiniGame(gameType)
+    VM->>P: executeGame(gameType)
+    P-->>VM: Game result
+    VM->>R: saveGameResult(result)
+    R->>DB: insertGameResult(result)
+    VM-->>V: Show game result
+    
+    Note over V,VM: MVVM Pattern обеспечивает<br/>разделение ответственности<br/>и реактивность UI 

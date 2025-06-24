@@ -1,0 +1,9 @@
+﻿flowchart TD
+  subgraph "Android-СѓСЃС‚СЂРѕР№СЃС‚РІРѕ"
+    A(Android App) -->|Р›РѕРєР°Р»СЊРЅРѕ| B(Room + DataStore)
+  end
+  subgraph "Р›РѕРєР°Р»СЊРЅС‹Р№ СЃРµСЂРІРµСЂ"
+    C(Ktor Server) -->|РҐСЂР°РЅРёС‚| D(MySQL)
+    E(phpMyAdmin) -->|РЈРїСЂР°РІР»СЏРµС‚| D
+  end
+  A -->|HTTP РїРѕ Wi-Fi| C 

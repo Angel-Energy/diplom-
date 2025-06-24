@@ -1,0 +1,8 @@
+﻿stateDiagram-v2
+  [*] --> Idle
+  Idle --> Loading : fetch()
+  Loading --> Success : 200 OK
+  Loading --> Error : 4xx/5xx
+  Error --> Idle : retry()
+  Success --> Idle : reset()
+

@@ -1,0 +1,48 @@
+graph TD
+    A[Certificate Pinning Setup] --> B[Server Certificate]
+    B --> C[Extract Public Key]
+    C --> D[Generate Hash]
+    D --> E[Embed in App]
+    
+    subgraph "Certificate Validation"
+        F[Client Request] --> G[Server Response]
+        G --> H[Extract Certificate]
+        H --> I[Calculate Hash]
+        I --> J{Hash Match?}
+        J -->|Yes| K[Connection Allowed]
+        J -->|No| L[Connection Blocked]
+    end
+    
+    subgraph "Security Benefits"
+        M[Prevent MITM Attacks] --> N[Block Fake Certificates]
+        N --> O[Ensure Server Identity]
+        O --> P[Protect Data Integrity]
+    end
+    
+    subgraph "Implementation"
+        Q[Network Security Config] --> R[Certificate Hash]
+        R --> S[Backup Certificates]
+        S --> T[Fallback Strategy]
+    end
+    
+    E --> F
+    K --> M
+    L --> U[Security Alert]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#059669,stroke:#000000
+    style C fill:#059669,stroke:#000000
+    style D fill:#059669,stroke:#000000
+    style E fill:#059669,stroke:#000000
+    style F fill:#2563EB,stroke:#000000
+    style G fill:#2563EB,stroke:#000000
+    style H fill:#2563EB,stroke:#000000
+    style I fill:#2563EB,stroke:#000000
+    style J fill:#F59E0B,stroke:#000000
+    style K fill:#10B981,stroke:#000000
+    style L fill:#DC2626,stroke:#000000
+    style M fill:#059669,stroke:#000000
+    style N fill:#059669,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style U fill:#DC2626,stroke:#000000 

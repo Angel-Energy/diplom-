@@ -1,0 +1,27 @@
+﻿flowchart TD
+  User --> Login
+  Login --> App
+  App --> DB
+
+  subgraph "РЈСЂРѕРІРµРЅСЊ РїСЂРёР»РѕР¶РµРЅРёСЏ"
+    A["Android App\nAES-256 С€Ршифрования\nRoom Database"]
+    B["РАнонимная авторизация\nuserId без персональных данных"]
+  end
+  subgraph "РСетвой уровень"
+    C["TLS 1.2+\nHTTPS для API"]
+    D["WPA2 зашита\nWi-Fi сети"]
+  end
+  subgraph "РСерверный уровень"
+    E["Ktor Server\nВалидация запросов\nRate limiting"]
+    F["MySQL Database\nЛокальное хранение\nXAMPP"]
+  end
+  subgraph "Соответствие"
+    G["152-ФЗ\nЗашита персональных данных"]
+    H["ГОСТ  34.12-2015\nКриптографическая защита"]
+  end
+  A --> C
+  B --> E
+  C --> D
+  E --> F
+  A --> G
+  C --> H 

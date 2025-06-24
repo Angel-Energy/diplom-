@@ -1,0 +1,69 @@
+﻿graph TD
+    A[Backup Strategy] --> B{Backup Types}
+    
+    B -->|Database Backup| C[MySQL Backup]
+    B -->|File Backup| D[File System Backup]
+    B -->|Configuration Backup| E[Config Backup]
+    B -->|Code Backup| F[Source Code Backup]
+    
+    C --> G[Daily Full Backup]
+    G --> H[Incremental Backups]
+    H --> I[Point-in-Time Recovery]
+    I --> J[Backup Verification]
+    
+    D --> K[Application Files]
+    K --> L[Log Files]
+    L --> M[Configuration Files]
+    M --> N[Encrypted Storage]
+    
+    E --> O[Server Configs]
+    O --> P[SSL Certificates]
+    P --> Q[Environment Variables]
+    Q --> R[Security Keys]
+    
+    F --> S[Version Control]
+    S --> T[Git Repository]
+    T --> U[Tagged Releases]
+    U --> V[Rollback Capability]
+    
+    subgraph "Backup Schedule"
+        W[Daily: 2:00 AM] --> X[Weekly: Sunday 3:00 AM]
+        X --> Y[Monthly: 1st 4:00 AM]
+        Y --> Z[Yearly: January 1st 5:00 AM]
+    end
+    
+    subgraph "Storage Locations"
+        AA[Primary Storage] --> BB[Secondary Storage]
+        BB --> CC[Offsite Backup]
+        CC --> DD[Cloud Backup]
+    end
+    
+    J --> W
+    N --> W
+    R --> W
+    V --> W
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#059669,stroke:#000000
+    style D fill:#2563EB,stroke:#000000
+    style E fill:#7C3AED,stroke:#000000
+    style F fill:#DC2626,stroke:#000000
+    style G fill:#10B981,stroke:#000000
+    style H fill:#10B981,stroke:#000000
+    style I fill:#10B981,stroke:#000000
+    style J fill:#10B981,stroke:#000000
+    style K fill:#2563EB,stroke:#000000
+    style L fill:#2563EB,stroke:#000000
+    style M fill:#2563EB,stroke:#000000
+    style N fill:#059669,stroke:#000000
+    style O fill:#7C3AED,stroke:#000000
+    style P fill:#DC2626,stroke:#000000
+    style Q fill:#7C3AED,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style S fill:#DC2626,stroke:#000000
+    style T fill:#DC2626,stroke:#000000
+    style U fill:#DC2626,stroke:#000000
+    style V fill:#DC2626,stroke:#000000
+    style W fill:#F59E0B,stroke:#000000
+    style AA fill:#059669,stroke:#000000 

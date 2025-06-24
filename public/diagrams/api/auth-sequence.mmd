@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant C as Client App
+    participant VM as ViewModel
+    participant R as Repository
+    participant K as Ktor Server
+    participant DB as Database
+    
+    C->>VM: App Launch
+    VM->>R: checkAuthStatus()
+    R->>DB: getStoredToken()
+    
+    alt Token exists
+        DB-->>R: Valid token
+        R-->>VM: Authenticated
+        VM-->>C: Proceed to main app
+    else No token
+        DB-->>R: No token found
+        R->>VM: Not authenticated
+        VM->>R: requestAnonymousAuth()
+        R->>K: POST /auth/anonymous
+        K->>DB: Generate ANON_<UUID>
+        DB-->>K: User ID and token
+        K-->>R: JWT token + user data
+        R->>DB: storeToken(token)
+        R-->>VM: Authentication complete
+        VM-->>C: Proceed to main app
+    end
+    
+    Note over C,DB: Анонимная авторизация<br/>без сбора персональных данных<br/>в соответствии с ФЗ-152 

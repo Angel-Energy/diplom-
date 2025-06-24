@@ -1,0 +1,59 @@
+graph TD
+    subgraph "Core Module"
+        A[Core] --> B[DI Container]
+        B --> C[Utils]
+        C --> D[Constants]
+    end
+    
+    subgraph "Data Module"
+        E[Data] --> F[Repositories]
+        F --> G[Data Sources]
+        G --> H[Entities]
+    end
+    
+    subgraph "Domain Module"
+        I[Domain] --> J[Use Cases]
+        J --> K[Models]
+        K --> L[Interfaces]
+    end
+    
+    subgraph "Presentation Module"
+        M[Presentation] --> N[ViewModels]
+        N --> O[UI Components]
+        O --> P[Navigation]
+    end
+    
+    subgraph "External Dependencies"
+        Q[Chaquopy] --> R[Python Scripts]
+        S[Ktor] --> T[Network Layer]
+        U[Room] --> V[Local Database]
+    end
+    
+    %% Core dependencies
+    A --> E
+    A --> I
+    A --> M
+    
+    %% Data dependencies
+    E --> U
+    E --> S
+    
+    %% Domain dependencies
+    I --> E
+    
+    %% Presentation dependencies
+    M --> I
+    M --> Q
+    
+    %% External integrations
+    Q --> R
+    S --> T
+    U --> V
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style E fill:#7C3AED,stroke:#000000
+    style I fill:#9333EA,stroke:#000000
+    style M fill:#2563EB,stroke:#000000
+    style Q fill:#DC2626,stroke:#000000
+    style S fill:#059669,stroke:#000000
+    style U fill:#F59E0B,stroke:#000000 

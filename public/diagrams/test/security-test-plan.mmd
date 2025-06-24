@@ -1,0 +1,68 @@
+graph TD
+    A[Security Testing Plan] --> B{Test Category}
+    
+    B -->|Encryption Tests| C[AES-256 Testing]
+    B -->|Network Security| D[TLS 1.2+ Testing]
+    B -->|Data Privacy| E[PII Detection]
+    B -->|APK Security| F[DexGuard Testing]
+    B -->|Certificate Security| G[Certificate Pinning]
+    
+    C --> H[Test Encryption/Decryption]
+    H --> I{Encryption Works?}
+    I -->|Yes| J[Encryption: PASS]
+    I -->|No| K[Encryption: FAIL]
+    
+    D --> L[Test HTTPS Connections]
+    L --> M{TLS Handshake Success?}
+    M -->|Yes| N[TLS: PASS]
+    M -->|No| O[TLS: FAIL]
+    
+    E --> P[Scan for PII in Code]
+    P --> Q{PII Found?}
+    Q -->|No| R[Privacy: PASS]
+    Q -->|Yes| S[Privacy: FAIL]
+    
+    F --> T[Test APK Obfuscation]
+    T --> U{Code Obfuscated?}
+    U -->|Yes| V[APK Security: PASS]
+    U -->|No| W[APK Security: FAIL]
+    
+    G --> X[Test Certificate Validation]
+    X --> Y{Certificate Pinning Works?}
+    Y -->|Yes| Z[Certificate: PASS]
+    Y -->|No| AA[Certificate: FAIL]
+    
+    J --> BB[Security Report]
+    N --> BB
+    R --> BB
+    V --> BB
+    Z --> BB
+    
+    K --> CC[Fix Encryption]
+    O --> DD[Fix TLS Configuration]
+    S --> EE[Remove PII]
+    W --> FF[Improve Obfuscation]
+    AA --> GG[Fix Certificate Pinning]
+    
+    CC --> HH[Re-run Security Tests]
+    DD --> HH
+    EE --> HH
+    FF --> HH
+    GG --> HH
+    
+    BB --> II[Security Clearance]
+    HH --> A
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style J fill:#10B981,stroke:#000000
+    style N fill:#10B981,stroke:#000000
+    style R fill:#10B981,stroke:#000000
+    style V fill:#10B981,stroke:#000000
+    style Z fill:#10B981,stroke:#000000
+    style K fill:#DC2626,stroke:#000000
+    style O fill:#DC2626,stroke:#000000
+    style S fill:#DC2626,stroke:#000000
+    style W fill:#DC2626,stroke:#000000
+    style AA fill:#DC2626,stroke:#000000
+    style II fill:#059669,stroke:#000000 

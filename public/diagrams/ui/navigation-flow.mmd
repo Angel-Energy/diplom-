@@ -1,0 +1,64 @@
+graph TD
+    A[App Launch] --> B[Splash Screen]
+    B --> C[Main Menu]
+    
+    C --> D{User Choice}
+    D -->|New Game| E[Game Screen]
+    D -->|Load Game| F[Load Screen]
+    D -->|Settings| G[Settings Screen]
+    D -->|Help| H[Help Screen]
+    D -->|About| I[About Screen]
+    
+    E --> J[Chat Screen]
+    J --> K{Game Events}
+    K -->|Dialog Choice| L[Choice Screen]
+    K -->|MiniGame| M[MiniGame Screen]
+    K -->|Settings| G
+    K -->|Pause| N[Pause Screen]
+    
+    F --> O{Save Slots}
+    O -->|Slot 1| P[Load Slot 1]
+    O -->|Slot 2| Q[Load Slot 2]
+    O -->|Slot 3| R[Load Slot 3]
+    O -->|Back| C
+    
+    P --> E
+    Q --> E
+    R --> E
+    
+    L --> S{Choice Made}
+    S -->|Continue| J
+    S -->|Back| J
+    
+    M --> T{MiniGame Complete}
+    T -->|Success| J
+    T -->|Fail| M
+    T -->|Skip| J
+    
+    N --> U{Pause Action}
+    U -->|Resume| J
+    U -->|Settings| G
+    U -->|Main Menu| C
+    U -->|Exit| V[Exit App]
+    
+    G --> W{Settings Action}
+    W -->|Save| X[Save Settings]
+    W -->|Reset| Y[Reset Settings]
+    W -->|Back| Z[Return to Previous]
+    
+    X --> Z
+    Y --> Z
+    Z --> J
+    Z --> C
+    
+    H --> C
+    I --> C
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style E fill:#2563EB,stroke:#000000
+    style J fill:#2563EB,stroke:#000000
+    style M fill:#DC2626,stroke:#000000
+    style G fill:#059669,stroke:#000000
+    style V fill:#DC2626,stroke:#000000 

@@ -1,0 +1,49 @@
+graph TD
+    A[Feature Development] --> B[feature/feature-name]
+    B --> C[Local Development]
+    C --> D[Unit Tests]
+    D --> E{Tests Pass?}
+    
+    E -->|No| F[Fix Issues]
+    F --> D
+    E -->|Yes| G[Commit Changes]
+    
+    G --> H[Push to Feature Branch]
+    H --> I[Create Pull Request]
+    I --> J[Code Review]
+    
+    J --> K{Review Approved?}
+    K -->|No| L[Address Feedback]
+    L --> G
+    K -->|Yes| M[Merge to dev]
+    
+    M --> N[Integration Tests]
+    N --> O{Tests Pass?}
+    O -->|No| P[Hotfix on dev]
+    P --> N
+    O -->|Yes| Q[Deploy to Staging]
+    
+    Q --> R[Staging Tests]
+    R --> S{Tests Pass?}
+    S -->|No| T[Fix on dev]
+    T --> Q
+    S -->|Yes| U[Merge to main]
+    
+    U --> V[Production Deploy]
+    V --> W[Production Tests]
+    W --> X{Tests Pass?}
+    X -->|No| Y[Rollback]
+    Y --> Z[Hotfix on main]
+    Z --> V
+    X -->|Yes| AA[Release Complete]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#7C3AED,stroke:#000000
+    style M fill:#2563EB,stroke:#000000
+    style U fill:#059669,stroke:#000000
+    style AA fill:#10B981,stroke:#000000
+    style E fill:#F59E0B,stroke:#000000
+    style K fill:#F59E0B,stroke:#000000
+    style O fill:#F59E0B,stroke:#000000
+    style S fill:#F59E0B,stroke:#000000
+    style X fill:#F59E0B,stroke:#000000 

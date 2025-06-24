@@ -1,0 +1,28 @@
+﻿stateDiagram-v2
+  [*] --> Idle
+  Idle --> Loading : API Request
+  Loading --> Success : Response Received
+  Loading --> Error : Request Failed
+  Loading --> Timeout : Request Timeout
+  
+  Success --> Idle : Reset State
+  Error --> Retry : User Retry
+  Error --> Idle : Reset State
+  Timeout --> Retry : Auto Retry
+  Timeout --> Idle : Reset State
+  
+  Retry --> Loading : Retry Request
+  Retry --> MaxRetries : Retry Limit Reached
+  MaxRetries --> Idle : Reset State
+  
+  Success --> Processing : Data Processing
+  Processing --> Idle : Processing Complete
+  Processing --> Error : Processing Failed
+  
+  Note right of Loading : Network Request<br/>in Progress
+  Note right of Success : 200 OK Response<br/>Data Received
+  Note right of Error : 4xx/5xx Error<br/>or Network Error
+  Note right of Timeout : Request Timeout<br/>after 30 seconds
+  Note right of Retry : Exponential<br/>Backoff Strategy
+  Note right of Processing : Data Validation<br/>and Transformation
+

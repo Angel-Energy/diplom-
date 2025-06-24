@@ -1,0 +1,17 @@
+﻿classDiagram
+  class Player {
+    +String name
+    +int score
+    +void play()
+  }
+  class Game {
+    +void start()
+    +void end()
+  }
+  Player --> Game
+  class ChatViewModel
+  class DialogRepository
+  class Message
+  ChatViewModel --> DialogRepository
+  DialogRepository --> Message
+

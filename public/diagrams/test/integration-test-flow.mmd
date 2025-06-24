@@ -1,0 +1,61 @@
+graph TD
+    A[Integration Testing] --> B{Component Integration}
+    
+    B -->|Room Database| C[Database Integration]
+    B -->|Ktor Server| D[API Integration]
+    B -->|Chaquopy| E[Python Integration]
+    B -->|Encryption| F[Security Integration]
+    
+    C --> G[Test Database Operations]
+    G --> H[Insert/Update/Delete]
+    H --> I{Database Works?}
+    I -->|Yes| J[Database: PASS]
+    I -->|No| K[Database: FAIL]
+    
+    D --> L[Test API Endpoints]
+    L --> M[GET/POST Requests]
+    M --> N{API Responds?}
+    N -->|Yes| O[API: PASS]
+    N -->|No| P[API: FAIL]
+    
+    E --> Q[Test Python Execution]
+    Q --> R[Run MiniGames]
+    R --> S{Python Works?}
+    S -->|Yes| T[Python: PASS]
+    S -->|No| U[Python: FAIL]
+    
+    F --> V[Test Encryption/Decryption]
+    V --> W[AES-256 Operations]
+    W --> X{Encryption Works?}
+    X -->|Yes| Y[Security: PASS]
+    X -->|No| Z[Security: FAIL]
+    
+    J --> AA[Integration Report]
+    O --> AA
+    T --> AA
+    Y --> AA
+    
+    K --> BB[Fix Database Issues]
+    P --> CC[Fix API Issues]
+    U --> DD[Fix Python Issues]
+    Z --> EE[Fix Security Issues]
+    
+    BB --> FF[Re-run Integration Tests]
+    CC --> FF
+    DD --> FF
+    EE --> FF
+    
+    AA --> GG[Integration Complete]
+    FF --> A
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style J fill:#10B981,stroke:#000000
+    style O fill:#10B981,stroke:#000000
+    style T fill:#10B981,stroke:#000000
+    style Y fill:#10B981,stroke:#000000
+    style K fill:#DC2626,stroke:#000000
+    style P fill:#DC2626,stroke:#000000
+    style U fill:#DC2626,stroke:#000000
+    style Z fill:#DC2626,stroke:#000000
+    style GG fill:#059669,stroke:#000000 

@@ -1,0 +1,38 @@
+sequenceDiagram
+    participant P as Player
+    participant UI as UI (Compose)
+    participant VM as ViewModel
+    participant R as Repository
+    participant NPC as NPC System
+    participant DB as Database
+    
+    P->>UI: Выбирает диалог
+    UI->>VM: onDialogSelected(dialogId)
+    VM->>R: getDialog(dialogId)
+    R->>DB: queryDialog(dialogId)
+    DB-->>R: Dialog data
+    R-->>VM: Dialog result
+    VM-->>UI: Update dialog display
+    
+    P->>UI: Читает текст NPC
+    UI->>VM: onTextDisplayed()
+    VM->>NPC: getNPCResponse()
+    NPC-->>VM: NPC text and emotions
+    VM-->>UI: Show NPC response
+    
+    P->>UI: Выбирает ответ
+    UI->>VM: onChoiceSelected(choiceId)
+    VM->>R: saveChoice(choiceId)
+    R->>DB: insertChoice(choiceId)
+    
+    VM->>NPC: processPlayerChoice(choiceId)
+    NPC->>NPC: calculateNPCReaction()
+    NPC-->>VM: NPC reaction and next dialog
+    
+    VM->>R: updateGameState()
+    R->>DB: updateFlags()
+    DB-->>R: Updated state
+    R-->>VM: Confirmation
+    VM-->>UI: Show next dialog
+    
+    Note over P,UI: Интерактивный диалог<br/>с эмоциональными реакциями<br/>и ветвлением сюжета 

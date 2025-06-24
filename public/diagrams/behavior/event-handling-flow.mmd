@@ -1,0 +1,54 @@
+graph TD
+    A[User Event] --> B{Event Type}
+    
+    B -->|UI Click| C[UI Event Handler]
+    B -->|System Event| D[System Event Handler]
+    B -->|Network Event| E[Network Event Handler]
+    B -->|Timer Event| F[Timer Event Handler]
+    
+    C --> G[ViewModel Event Processing]
+    D --> G
+    E --> G
+    F --> G
+    
+    G --> H{Event Priority}
+    
+    H -->|High| I[Immediate Processing]
+    H -->|Normal| J[Queue Processing]
+    H -->|Low| K[Background Processing]
+    
+    I --> L[Execute Action]
+    J --> M[Add to Event Queue]
+    K --> N[Schedule Background Task]
+    
+    M --> O[Process Queue]
+    O --> L
+    N --> P[Background Execution]
+    P --> L
+    
+    L --> Q{Action Type}
+    
+    Q -->|Data Update| R[Update Repository]
+    Q -->|UI Update| S[Update UI State]
+    Q -->|Navigation| T[Navigate to Screen]
+    Q -->|System Call| U[Call System API]
+    
+    R --> V[Save to Database]
+    S --> W[Refresh UI]
+    T --> X[Update Navigation]
+    U --> Y[System Response]
+    
+    V --> Z[Event Complete]
+    W --> Z
+    X --> Z
+    Y --> Z
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style G fill:#7C3AED,stroke:#000000
+    style H fill:#F59E0B,stroke:#000000
+    style I fill:#DC2626,stroke:#000000
+    style J fill:#F59E0B,stroke:#000000
+    style K fill:#6B7280,stroke:#000000
+    style L fill:#2563EB,stroke:#000000
+    style Z fill:#10B981,stroke:#000000 

@@ -1,169 +1,319 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import MermaidDiagram from "@/components/mermaid-diagram"
+import { Activity, Clock } from 'lucide-react';
+import React, { Suspense } from 'react';
 
-export default function DynamicDiagramsPage() {
-  const dynamicDiagrams = [
-    {
-      title: "Последовательность игрового процесса",
-      description: "Диаграмма показывает последовательность игрового процесса: Запуск → Авторизация → Загрузка дня → Получение сообщений → Диалог → Выбор → Мини-игра → Сохранение → Синхронизация. Мессенджер-интерфейс обеспечивает погружение.",
-      conclusion: "Диаграмма помогает разработчикам реализовать основной игровой цикл, а QA — тестировать последовательность действий. Геймдизайнеры используют для планирования пользовательского опыта.",
-      mermaid: `sequenceDiagram
-    participant P as Игрок
-    participant A as Android App
-    participant R as Room DB
-    participant K as Ktor Server
-    participant M as MySQL
-    
-    P->>A: Запуск приложения
-    A->>A: Генерировать анонимный userId
-    A->>K: POST /auth {userId}
-    K->>M: Создать запись пользователя
-    K->>A: Возвратить токен
-    
-    A->>R: Загрузить прогресс дня
-    A->>K: GET /messages {day}
-    K->>M: Получить сообщения
-    K->>A: Возвратить чаты
-    
-    P->>A: Выбор ответа в диалоге
-    A->>R: Сохранить выбор локально
-    A->>A: Запустить мини-игру
-    
-    P->>A: Решение мини-игры
-    A->>R: Сохранить результат
-    A->>K: POST /sync {progress}
-    K->>M: Обновить прогресс
-    K->>A: Подтверждение синхронизации`,
-    },
-    {
-      title: "Состояния игрового процесса",
-      description: "Показывает состояния игрового процесса: Загрузка → Главное меню → Мессенджер → Диалог → Выбор → Мини-игра → Сохранение → Синхронизация → Офлайн. Обеспечивает плавные переходы между сценами.",
-      conclusion: "Диаграмма улучшает UX, помогая разработчикам реализовать навигацию между состояниями. QA тестируют переходы, а геймдизайнеры планируют пользовательский опыт.",
-      mermaid: `stateDiagram-v2
-    [*] --> Загрузка : Запуск приложения
-    Загрузка --> Главное_меню : Данные загружены
-    Загрузка --> Ошибка_загрузки : Ошибка
-    
-    Главное_меню --> Мессенджер : Выбор дня
-    Мессенджер --> Диалог : Получение сообщения
-    Диалог --> Выбор : Появление вариантов ответа
-    
-    Выбор --> Мини_игра : Выбор сделан
-    Выбор --> Диалог : Продолжение диалога
-    
-    Мини_игра --> Сохранение : Игра завершена
-    Сохранение --> Синхронизация : Wi-Fi доступен
-    Сохранение --> Офлайн : Нет Wi-Fi
-    
-    Синхронизация --> Мессенджер : Успешная синхронизация
-    Синхронизация --> Ошибка_синхронизации : Ошибка
-    Офлайн --> Мессенджер : Восстановление Wi-Fi
-    
-    Ошибка_загрузки --> [*] : Закрытие приложения
-    Ошибка_синхронизации --> Офлайн : Переход в офлайн`,
-    },
-    {
-      title: "Активность мини-игры",
-      description: "Описывает активность мини-игры: Запуск → Загрузка контента → Отображение задачи → Ввод решения → Валидация → Результат → Сохранение прогресса. Поддерживает Python, JavaScript и логические задачи.",
-      conclusion: "Диаграмма помогает разработчикам реализовать интерактивные мини-игры, а QA — тестировать игровой процесс. Геймдизайнеры используют для планирования сложности и образовательной ценности.",
-      mermaid: `graph TD
-    A[Запуск мини-игры] --> B[Загрузка контента<br/>Python/JS код]
-    B --> C[Отображение задачи<br/>Интерфейс игры]
-    C --> D[Ввод решения<br/>Код/Логика]
-    D --> E{Валидация решения}
-    
-    E -->|Правильно| F[Успешный результат<br/>+1 к прогрессу]
-    E -->|Неправильно| G[Ошибка<br/>Подсказка]
-    
-    F --> H[Сохранение прогресса<br/>Room + DataStore]
-    G --> D
-    
-    H --> I[Синхронизация<br/>Ktor API]
-    I --> J[Возврат в мессенджер<br/>Следующая сцена]`,
-    },
-    {
-      title: "Временная диаграмма синхронизации",
-      description: "Показывает временные характеристики синхронизации: Локальное сохранение (мгновенно) → Проверка Wi-Fi (100мс) → Отправка данных (500мс) → Обработка сервером (200мс) → Ответ (300мс). Обеспечивает отзывчивость.",
-      conclusion: "Диаграмма помогает разработчикам оптимизировать производительность синхронизации, а QA — тестировать временные характеристики. Администраторы используют для настройки сервера.",
-      mermaid: `sequenceDiagram
-    participant A as Android
-    participant R as Room
-    participant W as Wi-Fi
-    participant K as Ktor
-    participant M as MySQL
-    
-    Note over A,R: Локальное сохранение
-    A->>R: Сохранить прогресс
-    R-->>A: Подтверждение (0мс)
-    
-    Note over A,W: Проверка соединения
-    A->>W: Проверить Wi-Fi
-    W-->>A: Статус (100мс)
-    
-    Note over A,K: Отправка данных
-    A->>K: POST /sync {data}
-    K->>M: Обновить БД
-    M-->>K: Подтверждение (200мс)
-    K-->>A: JSON ответ (300мс)
-    
-    Note over A: Общее время: 1100мс
-    Note over A: Цель: < 2000мс`,
-    },
-  ]
+import { HeaderSkeleton } from '@/components/loading';
+import MermaidDiagram from '@/components/mermaid-diagram';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+function DynamicDiagramsContent() {
   return (
-    <div className="space-y-8">
-      <div className="space-y-4">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-          Динамические
+    <div className='w-full max-w-none'>
+      <div className='space-y-4 mb-12'>
+        <h1 className='text-4xl font-bold bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent'>
+          Динамические диаграммы
         </h1>
-        <p className="text-xl text-slate-300">4 диаграммы, описывающие Sequence, State, Activity и Timing для проекта «Сообщение 404».</p>
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="outline" className="bg-red-500/10 text-red-400 border-red-500/20">
-            Sequence
+        <p className='text-slate-300 text-lg'>
+          Диаграммы поведения системы во времени: взаимодействие компонентов, процессы и изменения
+          состояний для чатов, ветвящихся выборов, мини-игр и синхронизации данных.
+        </p>
+        <div className='flex flex-wrap gap-2'>
+          <Badge
+            variant='outline'
+            className='bg-orange-500/10 text-orange-400 border-orange-500/20'
+          >
+            Sequence Diagrams
           </Badge>
-          <Badge variant="outline" className="bg-orange-500/10 text-orange-400 border-orange-500/20">
-            State
+          <Badge variant='outline' className='bg-red-500/10 text-red-400 border-red-500/20'>
+            Activity Diagrams
           </Badge>
-          <Badge variant="outline" className="bg-amber-500/10 text-amber-400 border-amber-500/20">
-            Activity
+          <Badge
+            variant='outline'
+            className='bg-orange-500/10 text-orange-400 border-orange-500/20'
+          >
+            State Diagrams
           </Badge>
-          <Badge variant="outline" className="bg-lime-500/10 text-lime-400 border-lime-500/20">
-            Timing
+          <Badge variant='outline' className='bg-red-500/10 text-red-400 border-red-500/20'>
+            Offline Mode
           </Badge>
         </div>
       </div>
 
-      <div className="space-y-8">
-        {dynamicDiagrams.map((diagram, index) => (
-          <Card key={index} className="bg-slate-800/50 border-slate-700/50">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-white">{diagram.title}</CardTitle>
-                <Badge variant="outline" className="bg-lime-500/10 text-lime-400 border-lime-500/20">
-                  Динамические
-                </Badge>
-              </div>
-              <p className="text-slate-400 text-sm">{diagram.description}</p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <MermaidDiagram
-                title={diagram.title}
-                mermaidCode={diagram.mermaid}
-                description=""
-                category="Динамические"
-              />
-              <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-700/50">
-                <h4 className="text-sm font-semibold text-purple-400 mb-2">Вывод:</h4>
-                <p className="text-sm text-slate-300">{diagram.conclusion}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      {/* 1. Диаграмма последовательности: Синхронизация прогресса */}
+      <Card className='bg-slate-800/50 border-slate-700/50 mb-8'>
+        <CardHeader>
+          <CardTitle className='text-white flex items-center'>
+            <Clock className='h-6 w-6 mr-3 text-orange-400' />
+            Диаграмма последовательности: Синхронизация прогресса
+          </CardTitle>
+        </CardHeader>
+        <CardContent className='space-y-6'>
+          <div className='text-slate-300'>
+            Диаграмма последовательности описывает процесс синхронизации игрового прогресса (текущий
+            день, сцена, флаги) между Android-приложением, локальным Ktor-сервером и MySQL. Процесс
+            включает проверку Wi-Fi, сохранение в Room (офлайн-режим) и синхронизацию через HTTPS с
+            TLS 1.2+.
+          </div>
+          <MermaidDiagram
+            title='Диаграмма последовательности: Синхронизация прогресса'
+            src='/diagrams/behavior/sequence-diagram.mmd'
+            description='Последовательность: игрок → UI → ViewModel → Repository → Room/Ktor → MySQL.'
+            category='Динамика'
+          />
+          <div>
+            <h5 className='text-orange-400 font-semibold mb-2'>
+              Пример кода (Kotlin, ViewModel и Ktor)
+            </h5>
+            <pre className='text-xs text-slate-300 bg-slate-800/50 p-3 rounded overflow-auto'>{`// ViewModel
+class MainViewModel @Inject constructor(
+    private val repository: GameRepository
+) : ViewModel() {
+    private val _state = MutableStateFlow<GameState?>(null)
+    val state: StateFlow<GameState?> = _state.asStateFlow()
+
+    fun syncProgress(context: Context) {
+        viewModelScope.launch {
+            repository.saveProgress(_state.value ?: return@launch) // Room
+            if (isNetworkAvailable(context)) {
+                try {
+                    repository.syncProgress(_state.value ?: return@launch) // Ktor
+                    Toast.makeText(context, "Синхронизация завершена", Toast.LENGTH_SHORT).show()
+                } catch (e: IOException) {
+                    Toast.makeText(context, "Ошибка сети", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(context, "Оффлайн-режим", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        return connectivityManager.getNetworkCapabilities(network)
+            ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+    }
+}
+
+// Ktor: Эндпоинт
+fun Application.progressModule() {
+    install(ContentNegotiation) { json() }
+    routing {
+        authenticate("auth-jwt") {
+            post("/save-progress") {
+                val state = call.receive<GameState>()
+                transaction {
+                    GameStates.insertOrUpdate {
+                        it[userId] = state.userId
+                        it[currentDay] = state.currentDay
+                        it[sceneId] = state.sceneId
+                        it[trustFlags] = state.trustFlags.toJson()
+                    }
+                }
+                call.respond(HttpStatusCode.OK)
+            }
+        }
+    }
+}
+`}</pre>
+          </div>
+          <div>
+            <h5 className='text-orange-400 font-semibold mb-2'>Рекомендации по реализации</h5>
+            <ul className='text-slate-300 text-sm space-y-1 list-disc pl-5'>
+              <li>
+                UI: Реализуйте кнопку «Синхронизировать» в ChatScreen с анимацией загрузки
+                (CircularProgressIndicator)
+              </li>
+              <li>
+                ViewModel: Используйте Coroutines (viewModelScope) для асинхронных операций,
+                StateFlow для состояния
+              </li>
+              <li>
+                Repository: Офлайн-первый подход (сначала Room, затем Ktor), дельта-обновления
+              </li>
+              <li>Room: SQLCipher (AES-256), индексы (INDEX ON game_states(userId))</li>
+              <li>
+                Retrofit: TLS 1.2+, ретраи (3 попытки, задержка 1 сек), OkHttpClient с таймаутами
+                (10 сек)
+              </li>
+              <li>Ktor: Exposed ORM для транзакций, RateLimiting (10 подключений)</li>
+              <li>Безопасность: Анонимный userId (ANON_123456, 152-ФЗ), TLS, ГОСТ Р 34.12-2015</li>
+              <li>
+                Тестирование: Эмуляция сбоев сети, проверка HTTP-кодов (200, 503, 429) в Postman
+              </li>
+            </ul>
+          </div>
+          <div className='text-slate-400 text-xs mt-2'>
+            <strong>Вывод:</strong> Диаграмма помогает разработчикам реализовать синхронизацию, а QA
+            тестировать офлайн-режим и сбои сети. Геймдизайнеры используют её для проверки
+            сохранения прогресса, менеджеры демонстрируют автономность и безопасность.
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 2. Диаграмма активности: Прохождение мини-игры */}
+      <Card className='bg-slate-800/50 border-slate-700/50 mb-8'>
+        <CardHeader>
+          <CardTitle className='text-white flex items-center'>
+            <Activity className='h-6 w-6 mr-3 text-red-400' />
+            Диаграмма активности: Прохождение мини-игры
+          </CardTitle>
+        </CardHeader>
+        <CardContent className='space-y-6'>
+          <div className='text-slate-300'>
+            Диаграмма активности описывает процесс прохождения мини-игры (например, поиск ошибки в
+            Python-коде). Процесс включает загрузку задачи из Room или Ktor, отображение в WebView
+            (JS) или JNI (Python), проверку решения и сохранение результата с поддержкой
+            офлайн-режима.
+          </div>
+          <MermaidDiagram
+            title='Диаграмма активности: Прохождение мини-игры'
+            src='/diagrams/behavior/activity-diagram.mmd'
+            description='Активность: выбор игры → загрузка → решение → проверка → сохранение.'
+            category='Динамика'
+          />
+          <div>
+            <h5 className='text-red-400 font-semibold mb-2'>
+              Пример кода (Kotlin, Compose и WebView)
+            </h5>
+            <pre className='text-xs text-slate-300 bg-slate-800/50 p-3 rounded overflow-auto'>{`// Compose: MiniGameScreen
+@Composable
+fun MiniGameScreen(viewModel: MiniGameViewModel = viewModel()) {
+    val task by viewModel.task.collectAsState()
+    val context = LocalContext.current
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(16.dp)
+    ) {
+        WebView(
+            modifier = Modifier.weight(1f),
+            url = "file:///android_asset/minigame.html",
+            jsInterface = MiniGameJsInterface(viewModel),
+            content = task?.code ?: ""
+        )
+        Button(onClick: { viewModel.submitSolution(context, task?.solution ?: "") }) {
+            Text("Проверить")
+        }
+    }
+}
+
+// ViewModel
+class MiniGameViewModel @Inject constructor(
+    private val repository: GameRepository
+) : ViewModel() {
+    private val _task = MutableStateFlow<MiniGame?>(null)
+    val task: StateFlow<MiniGame?> = _task.asStateFlow()
+
+    fun loadTask(gameId: String) {
+        viewModelScope.launch {
+            _task.value = repository.getMiniGame(gameId)
+        }
+    }
+
+    fun submitSolution(context: Context, solution: String) {
+        viewModelScope.launch {
+            val result = repository.checkSolution(_task.value?.id ?: return@launch, solution)
+            repository.saveResult(_task.value?.id ?: return@launch, result)
+            Toast.makeText(context, if (result) "Успех!" else "Ошибка", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
+// WebView JS Interface
+class MiniGameJsInterface(private val viewModel: MiniGameViewModel) {
+    @JavascriptInterface
+    fun onSolutionSubmitted(solution: String) {
+        viewModel.submitSolution(solution)
+    }
+}
+`}</pre>
+          </div>
+          <div className='text-slate-400 text-xs mt-2'>
+            <strong>Вывод:</strong> Диаграмма помогает разработчикам реализовать синхронизацию, а QA
+            тестировать офлайн-режим и сбои сети. Геймдизайнеры используют её для проверки
+            сохранения прогресса, менеджеры демонстрируют автономность и безопасность.
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 3. Диаграмма состояний: ViewModel */}
+      <Card className='bg-slate-800/50 border-slate-700/50 mb-8'>
+        <CardHeader>
+          <CardTitle className='text-white flex items-center'>
+            <Activity className='h-6 w-6 mr-3 text-orange-400' />
+            Диаграмма состояний: ViewModel
+          </CardTitle>
+        </CardHeader>
+        <CardContent className='space-y-6'>
+          <div className='text-slate-300'>
+            Диаграмма состояний описывает состояния ViewModel, включая загрузку, активность и
+            завершение.
+          </div>
+          <MermaidDiagram
+            title='Диаграмма состояний: ViewModel'
+            src='/diagrams/behavior/state-machine.mmd'
+            description='Состояния ViewModel: загрузка, активен, завершение.'
+            category='Динамика'
+          />
+          <div>
+            <h5 className='text-orange-400 font-semibold mb-2'>Пример кода (Kotlin, ViewModel)</h5>
+            <pre className='text-xs text-slate-300 bg-slate-800/50 p-3 rounded overflow-auto'>{`// ViewModel
+class MainViewModel @Inject constructor(
+    private val repository: GameRepository
+) : ViewModel() {
+    private val _state = MutableStateFlow<GameState?>(null)
+    val state: StateFlow<GameState?> = _state.asStateFlow()
+
+    fun syncProgress(context: Context) {
+        viewModelScope.launch {
+            repository.saveProgress(_state.value ?: return@launch) // Room
+            if (isNetworkAvailable(context)) {
+                try {
+                    repository.syncProgress(_state.value ?: return@launch) // Ktor
+                    Toast.makeText(context, "Синхронизация завершена", Toast.LENGTH_SHORT).show()
+                } catch (e: IOException) {
+                    Toast.makeText(context, "Ошибка сети", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(context, "Оффлайн-режим", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork ?: return false
+        return connectivityManager.getNetworkCapabilities(network)
+            ?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+    }
+}
+`}</pre>
+          </div>
+          <div className='text-slate-400 text-xs mt-2'>
+            <strong>Вывод:</strong> Диаграмма помогает разработчикам реализовать синхронизацию, а QA
+            тестировать офлайн-режим и сбои сети. Геймдизайнеры используют её для проверки
+            сохранения прогресса, менеджеры демонстрируют автономность и безопасность.
+          </div>
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
+}
+
+export default function DynamicDiagramsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className='space-y-8'>
+          <HeaderSkeleton />
+        </div>
+      }
+    >
+      <DynamicDiagramsContent />
+    </Suspense>
+  );
 }

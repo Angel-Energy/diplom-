@@ -1,0 +1,74 @@
+﻿graph TD
+    A[Monitoring System] --> B{Monitoring Areas}
+    
+    B -->|Performance Monitoring| C[Performance Metrics]
+    B -->|Error Monitoring| D[Error Tracking]
+    B -->|Security Monitoring| E[Security Alerts]
+    B -->|User Monitoring| F[User Analytics]
+    
+    C --> G[Response Time]
+    G --> H[Throughput]
+    H --> I[Resource Usage]
+    I --> J[Database Performance]
+    
+    D --> K[Error Logs]
+    K --> L[Crash Reports]
+    L --> M[Exception Handling]
+    M --> N[Error Trends]
+    
+    E --> O[Security Events]
+    O --> P[Intrusion Detection]
+    P --> Q[Certificate Expiry]
+    Q --> R[Access Logs]
+    
+    F --> S[User Behavior]
+    S --> T[Feature Usage]
+    T --> U[Session Data]
+    U --> V[Conversion Metrics]
+    
+    subgraph "Alerting"
+        W[Critical Alerts] --> X[Warning Alerts]
+        X --> Y[Info Notifications]
+        Y --> Z[Email Notifications]
+    end
+    
+    subgraph "Dashboards"
+        AA[Performance Dashboard] --> BB[Error Dashboard]
+        BB --> CC[Security Dashboard]
+        CC --> DD[User Dashboard]
+    end
+    
+    J --> W
+    N --> X
+    R --> W
+    V --> Y
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#F59E0B,stroke:#000000
+    style D fill:#DC2626,stroke:#000000
+    style E fill:#DC2626,stroke:#000000
+    style F fill:#2563EB,stroke:#000000
+    style G fill:#F59E0B,stroke:#000000
+    style H fill:#F59E0B,stroke:#000000
+    style I fill:#F59E0B,stroke:#000000
+    style J fill:#059669,stroke:#000000
+    style K fill:#DC2626,stroke:#000000
+    style L fill:#DC2626,stroke:#000000
+    style M fill:#DC2626,stroke:#000000
+    style N fill:#DC2626,stroke:#000000
+    style O fill:#DC2626,stroke:#000000
+    style P fill:#DC2626,stroke:#000000
+    style Q fill:#DC2626,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style S fill:#2563EB,stroke:#000000
+    style T fill:#2563EB,stroke:#000000
+    style U fill:#2563EB,stroke:#000000
+    style V fill:#2563EB,stroke:#000000
+    style W fill:#DC2626,stroke:#000000
+    style X fill:#F59E0B,stroke:#000000
+    style Y fill:#10B981,stroke:#000000
+    style AA fill:#F59E0B,stroke:#000000
+    style BB fill:#DC2626,stroke:#000000
+    style CC fill:#DC2626,stroke:#000000
+    style DD fill:#2563EB,stroke:#000000 

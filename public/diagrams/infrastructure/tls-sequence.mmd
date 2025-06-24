@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant C as Client App
+    participant VM as ViewModel
+    participant R as Repository
+    participant K as Ktor Server
+    participant CA as Certificate Authority
+    
+    C->>VM: Make API Request
+    VM->>R: executeRequest()
+    R->>K: HTTPS Request (TLS 1.2+)
+    
+    K->>CA: Certificate Validation
+    CA-->>K: Certificate Valid
+    K->>K: Generate Session Key
+    K-->>R: Encrypted Response (AES-256)
+    
+    R->>R: Decrypt Response
+    R->>R: Validate Certificate Pinning
+    R-->>VM: Processed Data
+    VM-->>C: Update UI
+    
+    Note over C,CA: TLS 1.2+ обеспечивает<br/>защищенную передачу данных<br/>с сертификатом от CA<br/>и шифрованием AES-256 

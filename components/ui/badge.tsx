@@ -1,40 +1,40 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva } from 'class-variance-authority';
+import * as React from 'react';
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
   {
     variants: {
       variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+        default: 'border-transparent bg-primary text-primary-foreground hover:bg-primary/80',
         secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
         destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
+          'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
+        outline: 'text-foreground',
       },
     },
-    defaultVariants: {
-      variant: "default",
-    },
+    defaultVariants: { variant: 'default' },
   }
-)
+);
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
-
-function Badge({ className, variant, ...props }: BadgeProps) {
-  // If a className with background or text color is provided, don't apply default variant styles
-  const hasColorOverride = className?.includes('bg-') || className?.includes('text-');
-  const finalVariant = hasColorOverride ? null : variant;
-
-  return (
-    <div className={cn(badgeVariants({ variant: finalVariant }), className)} {...props} />
-  )
+export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline' | string;
+  className?: string;
+  children?: React.ReactNode;
 }
 
-export { Badge, badgeVariants }
+function Badge({ className, variant = 'default', children, ...props }: BadgeProps) {
+  const hasColorOverride = className?.includes('bg-') || className?.includes('text-');
+  const finalVariant = hasColorOverride ? undefined : variant;
+
+  return (
+    <div className={cn(badgeVariants({ variant: finalVariant }), className)} {...props}>
+      {children}
+    </div>
+  );
+}
+
+export { Badge, badgeVariants };

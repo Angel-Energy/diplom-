@@ -1,0 +1,96 @@
+﻿graph TD
+    A[Start Game] --> B[Initialize App]
+    B --> C[Load Saved State]
+    C --> D{Previous Save?}
+    
+    D -->|Yes| E[Restore Progress]
+    D -->|No| F[Start New Game]
+    
+    E --> G[Continue from Scene]
+    F --> H[Begin Tutorial]
+    
+    G --> I[Display Current Scene]
+    H --> I
+    
+    I --> J[Show Dialog Text]
+    J --> K[Display Choice Buttons]
+    
+    K --> L{User Action}
+    L -->|Select Choice| M[Process Choice]
+    L -->|Trigger MiniGame| N[Start MiniGame]
+    L -->|Open Settings| O[Show Settings]
+    L -->|Pause Game| P[Pause Game]
+    
+    M --> Q[Update Game Flags]
+    Q --> R[Save Progress]
+    R --> S{Scene Complete?}
+    
+    N --> T[Execute Python Script]
+    T --> U{Game Success?}
+    U -->|Yes| V[Update Flags]
+    U -->|No| W[Show Error]
+    U -->|Skip| X[Skip MiniGame]
+    
+    V --> R
+    W --> N
+    X --> R
+    
+    O --> Y{Settings Action}
+    Y -->|Save| Z[Save Settings]
+    Y -->|Reset| AA[Reset Settings]
+    Y -->|Back| BB[Return to Game]
+    
+    Z --> BB
+    AA --> BB
+    BB --> I
+    
+    P --> CC{Pause Action}
+    CC -->|Resume| I
+    CC -->|Settings| O
+    CC -->|Main Menu| DD[Return to Menu]
+    CC -->|Exit| EE[Exit Game]
+    
+    S -->|No| FF[Load Next Scene]
+    S -->|Yes| GG{Game Complete?}
+    
+    FF --> I
+    
+    GG -->|No| HH[Continue Game]
+    GG -->|Yes| II[Calculate Ending]
+    
+    HH --> I
+    
+    II --> JJ{Ending Type}
+    JJ -->|Romance| KK[Romance Ending]
+    JJ -->|Friendship| LL[Friendship Ending]
+    JJ -->|Career| MM[Career Ending]
+    JJ -->|Tragedy| NN[Tragedy Ending]
+    JJ -->|Mystery| OO[Mystery Ending]
+    JJ -->|Neutral| PP[Neutral Ending]
+    
+    KK --> QQ[Show Credits]
+    LL --> QQ
+    MM --> QQ
+    NN --> QQ
+    OO --> QQ
+    PP --> QQ
+    
+    QQ --> RR[Return to Main Menu]
+    DD --> RR
+    EE --> SS[Game End]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style I fill:#2563EB,stroke:#000000
+    style M fill:#7C3AED,stroke:#000000
+    style N fill:#DC2626,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#F59E0B,stroke:#000000
+    style KK fill:#EC4899,stroke:#000000
+    style LL fill:#10B981,stroke:#000000
+    style MM fill:#F59E0B,stroke:#000000
+    style NN fill:#DC2626,stroke:#000000
+    style OO fill:#7C3AED,stroke:#000000
+    style PP fill:#6B7280,stroke:#000000
+    style QQ fill:#9333EA,stroke:#000000
+    style RR fill:#7C3AED,stroke:#000000
+    style SS fill:#DC2626,stroke:#000000 

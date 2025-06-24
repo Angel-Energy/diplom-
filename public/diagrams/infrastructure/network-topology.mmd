@@ -1,0 +1,61 @@
+﻿graph TD
+    A[Network Topology] --> B{Network Components}
+    
+    B -->|Client Devices| C[Android Devices]
+    B -->|Server Infrastructure| D[Ktor Server Cluster]
+    B -->|Database Layer| E[MySQL Database Cluster]
+    B -->|Security Layer| F[Security Infrastructure]
+    
+    C --> G[Internet Connection]
+    G --> H[Load Balancer]
+    H --> I[Firewall]
+    I --> J[Ktor Server 1]
+    I --> K[Ktor Server 2]
+    I --> L[Ktor Server N]
+    
+    J --> M[Database Master]
+    K --> M
+    L --> M
+    
+    M --> N[Database Slave 1]
+    M --> O[Database Slave 2]
+    M --> P[Database Slave N]
+    
+    F --> Q[SSL/TLS Termination]
+    Q --> R[Certificate Management]
+    R --> S[Intrusion Detection]
+    S --> T[Security Monitoring]
+    
+    subgraph "Network Security"
+        U[VPN Access] --> V[Secure Admin Access]
+        V --> W[Encrypted Communication]
+        W --> X[Certificate Pinning]
+    end
+    
+    subgraph "Monitoring"
+        Y[Performance Monitoring] --> Z[Error Tracking]
+        Z --> AA[Security Alerts]
+        AA --> BB[Backup Monitoring]
+    end
+    
+    H --> U
+    I --> Y
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style D fill:#2563EB,stroke:#000000
+    style E fill:#059669,stroke:#000000
+    style F fill:#DC2626,stroke:#000000
+    style G fill:#2563EB,stroke:#000000
+    style H fill:#F59E0B,stroke:#000000
+    style I fill:#DC2626,stroke:#000000
+    style J fill:#2563EB,stroke:#000000
+    style K fill:#2563EB,stroke:#000000
+    style L fill:#2563EB,stroke:#000000
+    style M fill:#059669,stroke:#000000
+    style N fill:#059669,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style U fill:#DC2626,stroke:#000000
+    style Y fill:#F59E0B,stroke:#000000 

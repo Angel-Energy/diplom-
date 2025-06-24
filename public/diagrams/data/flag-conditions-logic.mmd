@@ -1,0 +1,71 @@
+﻿graph TD
+    A[Flag System Logic] --> B{Flag Types}
+    
+    B -->|Trust Flag| C[Trust Level]
+    B -->|Threat Flag| D[Threat Level]
+    B -->|Suspicion Flag| E[Suspicion Level]
+    B -->|Romance Flags| F[Romance Levels]
+    
+    C --> G[Trust Range: 0-10]
+    G --> H{Trust Level}
+    H -->|0-3| I[Low Trust: Suspicious]
+    H -->|4-7| J[Medium Trust: Neutral]
+    H -->|8-10| K[High Trust: Friendly]
+    
+    D --> L[Threat Range: 0-10]
+    L --> M{Threat Level}
+    M -->|0-3| N[Low Threat: Safe]
+    M -->|4-7| O[Medium Threat: Cautious]
+    M -->|8-10| P[High Threat: Dangerous]
+    
+    E --> Q[Suspicion Range: 0-10]
+    Q --> R{Suspicion Level}
+    R -->|0-3| S[Low Suspicion: Trusting]
+    R -->|4-7| T[Medium Suspicion: Wary]
+    R -->|8-10| U[High Suspicion: Paranoid]
+    
+    F --> V[Romance Objects]
+    V --> W[elena: 0-5]
+    V --> X[maxim: 0-5]
+    
+    W --> Y{Elena Romance}
+    Y -->|0-2| Z[Friendship]
+    Y -->|3-4| AA[Romance]
+    Y -->|5| BB[True Love]
+    
+    X --> CC{Maxim Romance}
+    CC -->|0-2| DD[Friendship]
+    CC -->|3-4| EE[Romance]
+    CC -->|5| FF[True Love]
+    
+    subgraph "Flag Interactions"
+        GG[Trust + Threat] --> HH[Paranoia Effect]
+        II[Trust + Suspicion] --> JJ[Confidence Level]
+        KK[Romance + Trust] --> LL[Relationship Depth]
+    end
+    
+    subgraph "Ending Conditions"
+        MM[Trust > 7 AND Threat < 3] --> NN[Happy Ending]
+        OO[Threat > 7] --> PP[Tragic Ending]
+        QQ[Suspicion > 7] --> RR[Paranoid Ending]
+        SS[Romance > 3] --> TT[Romance Ending]
+    end
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style C fill:#10B981,stroke:#000000
+    style D fill:#DC2626,stroke:#000000
+    style E fill:#F59E0B,stroke:#000000
+    style F fill:#EC4899,stroke:#000000
+    style I fill:#DC2626,stroke:#000000
+    style J fill:#F59E0B,stroke:#000000
+    style K fill:#10B981,stroke:#000000
+    style N fill:#10B981,stroke:#000000
+    style O fill:#F59E0B,stroke:#000000
+    style P fill:#DC2626,stroke:#000000
+    style Z fill:#10B981,stroke:#000000
+    style AA fill:#EC4899,stroke:#000000
+    style BB fill:#EC4899,stroke:#000000
+    style NN fill:#10B981,stroke:#000000
+    style PP fill:#DC2626,stroke:#000000
+    style RR fill:#F59E0B,stroke:#000000
+    style TT fill:#EC4899,stroke:#000000 

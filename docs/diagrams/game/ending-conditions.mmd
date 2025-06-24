@@ -1,0 +1,9 @@
+﻿flowchart TD
+  Start((Start)) --> Play["Play"]
+  Play --> Win{Win?}
+  Win -- Yes --> GoodEnd["Good Ending"]
+  Win -- No --> BadEnd["Bad Ending"]
+  GoodEnd --> End((End))
+  BadEnd --> End
+  Trust -- Yes --> GoodEnding
+  Trust -- No --> BadEnding 

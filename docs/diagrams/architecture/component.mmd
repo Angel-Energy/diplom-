@@ -1,0 +1,13 @@
+﻿flowchart TD
+  subgraph "Android App"
+    UI["Chat UI"] --> ViewModel
+    ViewModel --> Repository
+    Repository --> DB["Room"]
+    Repository --> API["Ktor Client"]
+  end
+  subgraph "Ktor Server"
+    Controller --> Service
+    Service --> DB_Access["Exposed ORM"]
+    DB_Access --> MySQL
+  end
+  API --> Controller 

@@ -1,0 +1,44 @@
+﻿graph TD
+    subgraph "Authentication Endpoints"
+        A[POST /auth/anonymous] --> B[Generate ANON_<UUID>]
+        B --> C[Return JWT Token]
+    end
+    
+    subgraph "Game Data Endpoints"
+        D[GET /dialog/{id}] --> E[Return Dialog Data]
+        F[POST /choice] --> G[Save Player Choice]
+        H[GET /game-state/{userId}] --> I[Return Game State]
+        J[POST /game-state] --> K[Update Game State]
+    end
+    
+    subgraph "MiniGame Endpoints"
+        L[POST /minigame/validate] --> M[Validate Python Code]
+        N[GET /minigame/{type}] --> O[Get MiniGame Data]
+        P[POST /minigame/result] --> Q[Save Game Result]
+    end
+    
+    subgraph "Sync Endpoints"
+        R[POST /sync/upload] --> S[Upload Local Data]
+        T[GET /sync/download] --> U[Download Remote Data]
+        V[POST /sync/resolve] --> W[Resolve Conflicts]
+    end
+    
+    subgraph "Security Endpoints"
+        X[GET /certificate] --> Y[Get Server Certificate]
+        Z[POST /verify] --> AA[Verify Data Integrity]
+    end
+    
+    style A fill:#2563EB,stroke:#000000
+    style D fill:#2563EB,stroke:#000000
+    style F fill:#2563EB,stroke:#000000
+    style H fill:#2563EB,stroke:#000000
+    style J fill:#2563EB,stroke:#000000
+    style L fill:#2563EB,stroke:#000000
+    style N fill:#2563EB,stroke:#000000
+    style P fill:#2563EB,stroke:#000000
+    style R fill:#2563EB,stroke:#000000
+    style T fill:#2563EB,stroke:#000000
+    style V fill:#2563EB,stroke:#000000
+    style X fill:#059669,stroke:#000000
+    style Z fill:#059669,stroke:#000000
+

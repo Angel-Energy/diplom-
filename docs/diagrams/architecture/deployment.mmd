@@ -1,0 +1,18 @@
+﻿flowchart TD
+  subgraph "РРіСЂРѕРєРё (Android-СѓСЃС‚СЂРѕР№СЃС‚РІР°)"
+    A1["Android Phone 1\n192.168.1.101"]
+    A2["Android Phone 2\n192.168.1.102"]
+    A3["Android Phone 3\n192.168.1.103"]
+  end
+  subgraph "Р›РѕРєР°Р»СЊРЅС‹Р№ СЃРµСЂРІРµСЂ (РќРѕСѓС‚Р±СѓРє)"
+    B["Ktor Server\n192.168.1.100:8080\nKotlin Application"]
+    C["MySQL Database\nlocalhost:3306\nXAMPP"]
+    D["phpMyAdmin\nlocalhost/phpmyadmin\nWeb Interface"]
+    E["Wi-Fi AP\nMessage404-Dev\nWPA2 Security"]
+  end
+  A1 -->|"Wi-Fi"| E
+  A2 -->|"Wi-Fi"| E
+  A3 -->|"Wi-Fi"| E
+  E --> B
+  B --> C
+  D --> C 

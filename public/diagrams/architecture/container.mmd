@@ -1,0 +1,75 @@
+﻿graph TD
+    subgraph "Android App Container"
+        A[MainActivity] --> B[ChatScreen]
+        B --> C[GameScreen]
+        C --> D[SettingsScreen]
+        D --> E[HelpScreen]
+    end
+    
+    subgraph "ViewModel Container"
+        F[ChatViewModel] --> G[GameViewModel]
+        G --> H[SettingsViewModel]
+        H --> I[MainViewModel]
+    end
+    
+    subgraph "Repository Container"
+        J[DialogRepository] --> K[GameRepository]
+        K --> L[SettingsRepository]
+        L --> M[UserRepository]
+    end
+    
+    subgraph "Data Container"
+        N[Room Database] --> O[SharedPreferences]
+        O --> P[Local Files]
+        P --> Q[Encrypted Storage]
+    end
+    
+    subgraph "External Container"
+        R[Chaquopy Python] --> S[Ktor Client]
+        S --> T[Network Layer]
+        T --> U[Security Layer]
+    end
+    
+    %% Container connections
+    A --> F
+    B --> F
+    C --> G
+    D --> H
+    E --> I
+    
+    F --> J
+    G --> K
+    H --> L
+    I --> M
+    
+    J --> N
+    K --> N
+    L --> O
+    M --> P
+    
+    G --> R
+    J --> S
+    S --> T
+    T --> U
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#1E3A8A,stroke:#000000
+    style C fill:#1E3A8A,stroke:#000000
+    style D fill:#1E3A8A,stroke:#000000
+    style E fill:#1E3A8A,stroke:#000000
+    style F fill:#7C3AED,stroke:#000000
+    style G fill:#7C3AED,stroke:#000000
+    style H fill:#7C3AED,stroke:#000000
+    style I fill:#7C3AED,stroke:#000000
+    style J fill:#9333EA,stroke:#000000
+    style K fill:#9333EA,stroke:#000000
+    style L fill:#9333EA,stroke:#000000
+    style M fill:#9333EA,stroke:#000000
+    style N fill:#059669,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#F59E0B,stroke:#000000
+    style Q fill:#DC2626,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style S fill:#2563EB,stroke:#000000
+    style T fill:#2563EB,stroke:#000000
+    style U fill:#DC2626,stroke:#000000 

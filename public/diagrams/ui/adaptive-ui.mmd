@@ -1,0 +1,57 @@
+graph TD
+    A[Adaptive UI System] --> B{Screen Size}
+    
+    B -->|Phone (320-480dp)| C[Mobile Layout]
+    B -->|Tablet (480-840dp)| D[Tablet Layout]
+    B -->|Desktop (840+dp)| E[Desktop Layout]
+    
+    C --> F[Mobile Components]
+    F --> G[Single Column Layout]
+    G --> H[Compact Navigation]
+    H --> I[Touch-Optimized Buttons]
+    
+    D --> J[Tablet Components]
+    J --> K[Two Column Layout]
+    K --> L[Side Navigation]
+    L --> M[Medium Touch Targets]
+    
+    E --> N[Desktop Components]
+    N --> O[Multi Column Layout]
+    O --> P[Top Navigation]
+    P --> Q[Mouse-Optimized UI]
+    
+    subgraph "Responsive Features"
+        R[Flexible Grid System] --> S[Scalable Typography]
+        S --> T[Adaptive Spacing]
+        T --> U[Dynamic Margins]
+    end
+    
+    subgraph "Orientation Support"
+        V[Portrait Mode] --> W[Landscape Mode]
+        W --> X[Auto Rotation]
+    end
+    
+    subgraph "Accessibility"
+        Y[Large Text Support] --> Z[High Contrast Mode]
+        Z --> AA[Screen Reader Support]
+    end
+    
+    I --> R
+    M --> R
+    Q --> R
+    
+    G --> V
+    K --> V
+    O --> V
+    
+    H --> Y
+    L --> Y
+    P --> Y
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style D fill:#2563EB,stroke:#000000
+    style E fill:#059669,stroke:#000000
+    style R fill:#F59E0B,stroke:#000000
+    style V fill:#DC2626,stroke:#000000
+    style Y fill:#10B981,stroke:#000000 

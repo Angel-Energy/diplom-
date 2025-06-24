@@ -1,0 +1,23 @@
+name: Validate Mermaid Diagrams
+
+on:
+  push:
+    paths:
+      - 'public/diagrams/**/*.mmd'
+      - 'scripts/validate-mermaid.js'
+  pull_request:
+    paths:
+      - 'public/diagrams/**/*.mmd'
+      - 'scripts/validate-mermaid.js'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Install mermaid-cli
+        run: npm install -g @mermaid-js/mermaid-cli
+      - name: Validate diagrams
+        run: npm run test:diagrams 

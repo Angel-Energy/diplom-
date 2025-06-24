@@ -1,0 +1,62 @@
+graph TD
+    subgraph "Kotlin SDK"
+        A[Core SDK] --> B[Network Module]
+        B --> C[Database Module]
+        C --> D[Security Module]
+        D --> E[UI Components]
+    end
+    
+    subgraph "Python SDK"
+        F[Python Core] --> G[MiniGame Engine]
+        G --> H[Validation Engine]
+        H --> I[Encryption Engine]
+    end
+    
+    subgraph "Integration Layer"
+        J[Chaquopy Bridge] --> K[Kotlin-Python Interface]
+        K --> L[Data Serialization]
+        L --> M[Error Handling]
+    end
+    
+    subgraph "Developer Tools"
+        N[Documentation] --> O[Code Examples]
+        O --> P[Testing Framework]
+        P --> Q[Debug Tools]
+    end
+    
+    subgraph "Deployment"
+        R[Gradle Plugin] --> S[Maven Repository]
+        S --> T[Version Management]
+        T --> U[Compatibility Matrix]
+    end
+    
+    A --> J
+    F --> J
+    
+    A --> N
+    F --> N
+    
+    A --> R
+    F --> R
+    
+    style A fill:#7C3AED,stroke:#000000
+    style B fill:#7C3AED,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style D fill:#7C3AED,stroke:#000000
+    style E fill:#7C3AED,stroke:#000000
+    style F fill:#DC2626,stroke:#000000
+    style G fill:#DC2626,stroke:#000000
+    style H fill:#DC2626,stroke:#000000
+    style I fill:#DC2626,stroke:#000000
+    style J fill:#2563EB,stroke:#000000
+    style K fill:#2563EB,stroke:#000000
+    style L fill:#2563EB,stroke:#000000
+    style M fill:#2563EB,stroke:#000000
+    style N fill:#059669,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#059669,stroke:#000000
+    style R fill:#F59E0B,stroke:#000000
+    style S fill:#F59E0B,stroke:#000000
+    style T fill:#F59E0B,stroke:#000000
+    style U fill:#F59E0B,stroke:#000000 

@@ -1,159 +1,202 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
+import { Suspense } from 'react';
 
-export default function DiagramsPage() {
-  const diagramCategories = [
+import { HeaderSkeleton } from '@/components/loading';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from 'next/link';
+
+function DiagramsHeader() {
+  return (
+    <div className='space-y-4'>
+      <h1 className='text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent'>
+        Диаграммы системы
+      </h1>
+      <p className='text-xl text-slate-300'>
+        Полный набор диаграмм (58 штук) для проекта «Сообщение 404» — текстового квеста для Android
+      </p>
+      <DiagramsBadges />
+    </div>
+  );
+}
+
+function DiagramsBadges() {
+  return (
+    <div className='flex flex-wrap gap-2'>
+      <Badge variant='outline' className='bg-cyan-500/10 text-cyan-400 border-cyan-500/20'>
+        58 диаграмм
+      </Badge>
+      <Badge variant='outline' className='bg-purple-500/10 text-purple-400 border-purple-500/20'>
+        Mermaid.js
+      </Badge>
+      <Badge variant='outline' className='bg-green-500/10 text-green-400 border-green-500/20'>
+        MVVM
+      </Badge>
+      <Badge variant='outline' className='bg-blue-500/10 text-blue-400 border-blue-500/20'>
+        Kotlin
+      </Badge>
+      <Badge variant='outline' className='bg-orange-500/10 text-orange-400 border-orange-500/20'>
+        Android
+      </Badge>
+    </div>
+  );
+}
+
+function DiagramsCategories() {
+  const categories = [
     {
-      title: "Архитектура",
-      short_description: "C4 модель, системный контекст, контейнеры, компоненты, слои",
+      title: 'Архитектурные диаграммы',
+      description: 'MVVM компоненты, слои, зависимости и модули',
+      href: '/docs/diagrams/architecture',
+      count: 10,
+      color: 'from-blue-400 to-purple-400',
+      icon: '🏗️'
+    },
+    {
+      title: 'Диаграммы данных',
+      description: 'ER диаграммы, потоки данных, JSON структуры',
+      href: '/docs/diagrams/data',
       count: 5,
-      href: "/docs/diagrams/architecture",
-      badgeColor: "bg-red-500/10 text-red-400 border-red-500/20"
+      color: 'from-green-400 to-blue-400',
+      icon: '📊'
     },
     {
-      title: "Данные",
-      short_description: "Концептуальная модель, ERD, потоки данных, миграция, репликация",
+      title: 'Игровые диаграммы',
+      description: 'Ветвление сюжета, мини-игры, концовки',
+      href: '/docs/diagrams/game',
       count: 5,
-      href: "/docs/diagrams/data",
-      badgeColor: "bg-orange-500/10 text-orange-400 border-orange-500/20"
+      color: 'from-purple-400 to-pink-400',
+      icon: '🎮'
     },
     {
-      title: "API",
-      short_description: "Ktor эндпоинты, форматы запросов, состояния API, документация",
-      count: 4,
-      href: "/docs/diagrams/api",
-      badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/20"
-    },
-    {
-      title: "Динамические",
-      short_description: "Игровой процесс, состояния, мини-игры, синхронизация",
-      count: 4,
-      href: "/docs/diagrams/dynamic",
-      badgeColor: "bg-lime-500/10 text-lime-400 border-lime-500/20"
-    },
-    {
-      title: "Игровые механики",
-      short_description: "Game Loop, диалоги, мини-игры, прогрессия, концовки",
+      title: 'Диаграммы поведения',
+      description: 'Sequence, Activity, State Machine диаграммы',
+      href: '/docs/diagrams/behavior',
       count: 6,
-      href: "/docs/diagrams/game",
-      badgeColor: "bg-green-500/10 text-green-400 border-green-500/20"
+      color: 'from-orange-400 to-red-400',
+      icon: '🔄'
     },
     {
-      title: "UI/UX",
-      short_description: "User Flow, мессенджер-интерфейс, состояния UI, адаптивность",
-      count: 4,
-      href: "/docs/diagrams/ui",
-      badgeColor: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
+      title: 'Диаграммы безопасности',
+      description: 'Шифрование, TLS, защита данных',
+      href: '/docs/diagrams/security',
+      count: 6,
+      color: 'from-red-400 to-orange-400',
+      icon: '🔒'
     },
     {
-      title: "Инфраструктура",
-      short_description: "Локальная сеть, безопасность, мониторинг, резервное копирование",
+      title: 'API диаграммы',
+      description: 'Эндпоинты, авторизация, обработка ошибок',
+      href: '/docs/diagrams/api',
+      count: 5,
+      color: 'from-cyan-400 to-blue-400',
+      icon: '🔌'
+    },
+    {
+      title: 'UI/UX диаграммы',
+      description: 'Пользовательские потоки, компоненты, анимации',
+      href: '/docs/diagrams/ui',
+      count: 9,
+      color: 'from-pink-400 to-purple-400',
+      icon: '🎨'
+    },
+    {
+      title: 'Инфраструктурные диаграммы',
+      description: 'Развертывание, сеть, мониторинг, безопасность',
+      href: '/docs/diagrams/infrastructure',
+      count: 9,
+      color: 'from-green-400 to-blue-400',
+      icon: '🏢'
+    },
+    {
+      title: 'Диаграммы тестирования',
+      description: 'Unit, Integration, Security, Performance тесты',
+      href: '/docs/diagrams/test',
+      count: 5,
+      color: 'from-yellow-400 to-orange-400',
+      icon: '🧪'
+    },
+    {
+      title: 'Диаграммы жизненного цикла',
+      description: 'Проект, игровые сессии, сохранение/загрузка',
+      href: '/docs/diagrams/lifecycle',
       count: 4,
-      href: "/docs/diagrams/infrastructure",
-      badgeColor: "bg-purple-500/10 text-purple-400 border-purple-500/20"
+      color: 'from-indigo-400 to-purple-400',
+      icon: '⏳'
+    },
+    {
+      title: 'Диаграммы управления',
+      description: 'Roadmap, команда, Git workflow, соответствие стандартам',
+      href: '/docs/diagrams/management',
+      count: 6,
+      color: 'from-teal-400 to-cyan-400',
+      icon: '📋'
     }
-  ]
-
-  const totalDiagrams = diagramCategories.reduce((sum, category) => sum + category.count, 0)
-  
-  const architecturalDiagrams = diagramCategories
-    .filter(cat => ['Архитектура', 'Данные', 'Инфраструктура'].includes(cat.title))
-    .reduce((sum, cat) => sum + cat.count, 0)
-  
-  const functionalDiagrams = diagramCategories
-    .filter(cat => ['Игровые механики', 'API', 'UI/UX', 'Динамические'].includes(cat.title))
-    .reduce((sum, cat) => sum + cat.count, 0)
+  ];
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-4">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-          Диаграммы проекта
-        </h1>
-        <p className="text-xl text-slate-300">
-          Все {totalDiagrams} диаграмм проекта «Сообщение 404» в текстовом формате с описаниями и выводами
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {diagramCategories.map((category, index) => (
-            <Badge key={index} variant="outline" className={category.badgeColor}>
-              {category.title}: {category.count}
-            </Badge>
-          ))}
+    <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+      {categories.map((category, index) => (
+        <Link key={index} href={category.href}>
+          <Card className='bg-slate-800/50 border-slate-700 hover:bg-slate-800/70 transition-all duration-300 hover:scale-105 cursor-pointer group'>
+            <CardHeader>
+              <div className='flex items-center justify-between'>
+                <span className='text-2xl'>{category.icon}</span>
+                <Badge variant='outline' className='bg-slate-700/50 text-slate-300 border-slate-600'>
+                  {category.count}
+                </Badge>
+              </div>
+              <CardTitle className={`text-lg bg-gradient-to-r ${category.color} bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300`}>
+                {category.title}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className='text-sm text-slate-400 group-hover:text-slate-300 transition-colors duration-300'>
+                {category.description}
+              </p>
+            </CardContent>
+          </Card>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+function DiagramsOverview() {
+  return (
+    <div className='bg-slate-800/30 rounded-lg p-6 border border-slate-700/50'>
+      <h2 className='text-2xl font-bold text-slate-200 mb-4'>Обзор диаграмм</h2>
+      <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
+        <div className='text-center'>
+          <div className='text-3xl font-bold text-cyan-400'>58</div>
+          <div className='text-sm text-slate-400'>Всего диаграмм</div>
+        </div>
+        <div className='text-center'>
+          <div className='text-3xl font-bold text-purple-400'>11</div>
+          <div className='text-sm text-slate-400'>Категорий</div>
+        </div>
+        <div className='text-center'>
+          <div className='text-3xl font-bold text-green-400'>MVVM</div>
+          <div className='text-sm text-slate-400'>Архитектура</div>
+        </div>
+        <div className='text-center'>
+          <div className='text-3xl font-bold text-orange-400'>Mermaid</div>
+          <div className='text-sm text-slate-400'>Формат</div>
         </div>
       </div>
-
-      <Card className="bg-slate-800/50 border-slate-700/50">
-        <CardHeader>
-          <CardTitle className="text-white">Общая статистика</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid md:grid-cols-4 gap-6 text-center">
-            <div>
-              <div className="text-3xl font-bold text-cyan-400 mb-2">{totalDiagrams}</div>
-              <div className="text-sm text-slate-400">Всего диаграмм</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-400 mb-2">{diagramCategories.length}</div>
-              <div className="text-sm text-slate-400">Категорий</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-cyan-400 mb-2">{architecturalDiagrams}</div>
-              <div className="text-sm text-slate-400">Архитектурных</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-purple-400 mb-2">{functionalDiagrams}</div>
-              <div className="text-sm text-slate-400">Функциональных</div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-      
-      <div className="p-6 bg-slate-800/50 rounded-lg border border-slate-700/50">
-        <h3 className="text-lg font-semibold text-white mb-3">О диаграммах проекта «Сообщение 404»</h3>
-        <p className="text-slate-300 text-sm space-y-2">
-          <span>• Все диаграммы созданы специально для мобильной игры-детектива с мессенджер-интерфейсом</span><br/>
-          <span>• Учтена специфика проекта: 10 игровых дней, 60 мини-игр, 5 концовок, офлайн-режим</span><br/>
-          <span>• Технический стек: Kotlin, Jetpack Compose, MVVM, Ktor, MySQL, XAMPP, Wi-Fi точка доступа</span><br/>
-          <span>• Соответствие российскому законодательству: 152-ФЗ, ГОСТ Р 34.12-2015, анонимная авторизация</span><br/>
-          <span>• Локальная инфраструктура: автономность, приватность, синхронизация через Wi-Fi</span><br/>
-          <span>• Каждая диаграмма содержит практический вывод для разработчиков, QA и геймдизайнеров</span>
-        </p>
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {diagramCategories.map((category, index) => {
-          const percentage = totalDiagrams > 0 ? Math.round((category.count / totalDiagrams) * 100) : 0
-          return (
-            <Link key={index} href={category.href} className="block group">
-              <Card className="bg-slate-800/50 border-slate-700/50 h-full group-hover:border-cyan-400 transition-colors flex flex-col">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-white group-hover:text-cyan-400">{category.title}</CardTitle>
-                    <Badge className={category.badgeColor}>{category.count}</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex-grow flex flex-col justify-between">
-                  <p className="text-slate-400 text-sm mb-4">{category.short_description}</p>
-                  <div className="space-y-2 mt-auto">
-                    <div className="w-full bg-slate-700 rounded-full h-2">
-                      <div
-                        className="bg-gradient-to-r from-cyan-500 to-purple-500 h-2 rounded-full"
-                        style={{ width: `${percentage}%` }}
-                      ></div>
-                    </div>
-                    <div className="text-xs text-slate-400 text-center">
-                      {percentage}% от общего количества
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          )
-        })}
-      </div>
     </div>
-  )
+  );
+}
+
+export default function DiagramsPage() {
+  return (
+    <div className='space-y-8'>
+      <Suspense fallback={<HeaderSkeleton />}>
+        <DiagramsHeader />
+      </Suspense>
+      <DiagramsOverview />
+      <DiagramsCategories />
+    </div>
+  );
 }

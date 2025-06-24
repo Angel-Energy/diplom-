@@ -1,0 +1,69 @@
+﻿graph TD
+    A[Scalability Strategy] --> B{Scaling Dimensions}
+    
+    B -->|Horizontal Scaling| C[Load Balancing]
+    B -->|Vertical Scaling| D[Resource Enhancement]
+    B -->|Database Scaling| E[Database Optimization]
+    B -->|Caching| F[Caching Strategy]
+    
+    C --> G[Multiple Ktor Instances]
+    G --> H[Load Balancer]
+    H --> I[Auto Scaling Groups]
+    I --> J[Health Checks]
+    
+    D --> K[CPU Enhancement]
+    K --> L[Memory Increase]
+    L --> M[Storage Expansion]
+    M --> N[Network Bandwidth]
+    
+    E --> O[Database Sharding]
+    O --> P[Read Replicas]
+    P --> Q[Connection Pooling]
+    Q --> R[Query Optimization]
+    
+    F --> S[Application Cache]
+    S --> T[Database Cache]
+    T --> U[CDN Caching]
+    U --> V[Session Storage]
+    
+    subgraph "Performance Metrics"
+        W[Response Time < 200ms] --> X[Throughput > 1000 req/s]
+        X --> Y[Uptime > 99.9%]
+        Y --> Z[Error Rate < 0.1%]
+    end
+    
+    subgraph "Scaling Triggers"
+        AA[CPU > 70%] --> BB[Memory > 80%]
+        BB --> CC[Response Time > 500ms]
+        CC --> DD[Error Rate > 1%]
+    end
+    
+    J --> W
+    N --> W
+    R --> W
+    V --> W
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#2563EB,stroke:#000000
+    style D fill:#F59E0B,stroke:#000000
+    style E fill:#059669,stroke:#000000
+    style F fill:#7C3AED,stroke:#000000
+    style G fill:#2563EB,stroke:#000000
+    style H fill:#F59E0B,stroke:#000000
+    style I fill:#F59E0B,stroke:#000000
+    style J fill:#10B981,stroke:#000000
+    style K fill:#F59E0B,stroke:#000000
+    style L fill:#F59E0B,stroke:#000000
+    style M fill:#F59E0B,stroke:#000000
+    style N fill:#2563EB,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#059669,stroke:#000000
+    style R fill:#059669,stroke:#000000
+    style S fill:#7C3AED,stroke:#000000
+    style T fill:#7C3AED,stroke:#000000
+    style U fill:#7C3AED,stroke:#000000
+    style V fill:#7C3AED,stroke:#000000
+    style W fill:#10B981,stroke:#000000
+    style AA fill:#DC2626,stroke:#000000 

@@ -1,0 +1,53 @@
+graph TD
+    A[Пользовательское действие] --> B{Тип анимации}
+    
+    B -->|Печатающий текст| C[Typewriter Effect]
+    B -->|3D карточки| D[3D Card Animation]
+    B -->|Переходы| E[Transition Animation]
+    B -->|Загрузка| F[Loading Animation]
+    
+    C --> G[AnimatedText Component]
+    G --> H[Character by Character]
+    H --> I[Typing Speed Control]
+    I --> J[Complete Text Display]
+    
+    D --> K[Card3D Component]
+    K --> L[Rotation Animation]
+    L --> M[Shadow Effects]
+    M --> N[Depth Perception]
+    
+    E --> O[AnimatedVisibility]
+    O --> P[Fade In/Out]
+    P --> Q[Slide Transitions]
+    Q --> R[Smooth Navigation]
+    
+    F --> S[CircularProgressIndicator]
+    S --> T[Pulse Animation]
+    T --> U[Color Transitions]
+    U --> V[Loading Complete]
+    
+    J --> W[Update UI State]
+    N --> W
+    R --> W
+    V --> W
+    
+    W --> X[Next Interaction]
+    
+    subgraph "Animation Parameters"
+        Y[Duration: 300ms] --> Z[Easing: EaseInOut]
+        Z --> AA[Interpolation: Linear]
+        AA --> BB[Repeat: None]
+    end
+    
+    G --> Y
+    K --> Y
+    O --> Y
+    S --> Y
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style C fill:#DC2626,stroke:#000000
+    style D fill:#DC2626,stroke:#000000
+    style E fill:#DC2626,stroke:#000000
+    style F fill:#DC2626,stroke:#000000
+    style W fill:#7C3AED,stroke:#000000
+    style X fill:#1E3A8A,stroke:#000000 

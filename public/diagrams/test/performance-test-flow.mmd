@@ -1,0 +1,53 @@
+graph TD
+    A[Performance Testing] --> B{Тип теста}
+    
+    B -->|FPS тест| C[Frame Rate Analysis]
+    B -->|Memory тест| D[Memory Usage Monitoring]
+    B -->|Network тест| E[Network Performance]
+    B -->|Python тест| F[Python Execution Speed]
+    
+    C --> G[60 FPS Target]
+    G --> H{Достигнуто 60 FPS?}
+    H -->|Да| I[FPS: PASS]
+    H -->|Нет| J[FPS: FAIL]
+    
+    D --> K[Memory Limit: 512MB]
+    K --> L{Память < 512MB?}
+    L -->|Да| M[Memory: PASS]
+    L -->|Нет| N[Memory: FAIL]
+    
+    E --> O[Network Latency < 100ms]
+    O --> P{Латентность < 100ms?}
+    P -->|Да| Q[Network: PASS]
+    P -->|Нет| R[Network: FAIL]
+    
+    F --> S[Python Execution < 2s]
+    S --> T{Выполнение < 2s?}
+    T -->|Да| U[Python: PASS]
+    T -->|Нет| V[Python: FAIL]
+    
+    I --> W[Performance Report]
+    M --> W
+    Q --> W
+    U --> W
+    
+    J --> X[Optimization Required]
+    N --> X
+    R --> X
+    V --> X
+    
+    W --> Y[Deploy to Production]
+    X --> Z[Performance Optimization]
+    Z --> A
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style I fill:#10B981,stroke:#000000
+    style M fill:#10B981,stroke:#000000
+    style Q fill:#10B981,stroke:#000000
+    style U fill:#10B981,stroke:#000000
+    style J fill:#DC2626,stroke:#000000
+    style N fill:#DC2626,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style V fill:#DC2626,stroke:#000000
+    style Y fill:#059669,stroke:#000000
+    style Z fill:#F59E0B,stroke:#000000 

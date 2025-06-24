@@ -1,0 +1,53 @@
+graph TD
+    A[Save/Load System] --> B{Operation Type}
+    
+    B -->|Auto Save| C[Automatic Save]
+    B -->|Manual Save| D[Manual Save]
+    B -->|Load Game| E[Load Game]
+    
+    C --> F[Save Trigger Events]
+    F --> G[Choice Made]
+    F --> H[Scene Completed]
+    F --> I[App Paused]
+    
+    D --> J[User Requests Save]
+    E --> K[User Selects Save Slot]
+    
+    G --> L[Save Process]
+    H --> L
+    I --> L
+    J --> L
+    K --> M[Load Process]
+    
+    L --> N[Collect Game State]
+    N --> O[Encrypt Data]
+    O --> P[Save to Local Storage]
+    P --> Q[Queue for Cloud Sync]
+    
+    M --> R[Read Save File]
+    R --> S[Decrypt Data]
+    S --> T[Validate Data]
+    T --> U[Restore Game State]
+    
+    Q --> V{Network Available?}
+    V -->|Yes| W[Upload to Cloud]
+    V -->|No| X[Store Locally]
+    
+    W --> Y[Cloud Save Complete]
+    X --> Z[Local Save Complete]
+    
+    U --> AA[Game Loaded]
+    Y --> BB[Sync Complete]
+    Z --> BB
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style C fill:#10B981,stroke:#000000
+    style D fill:#F59E0B,stroke:#000000
+    style E fill:#2563EB,stroke:#000000
+    style L fill:#059669,stroke:#000000
+    style M fill:#2563EB,stroke:#000000
+    style O fill:#DC2626,stroke:#000000
+    style S fill:#DC2626,stroke:#000000
+    style W fill:#2563EB,stroke:#000000
+    style AA fill:#10B981,stroke:#000000
+    style BB fill:#059669,stroke:#000000 

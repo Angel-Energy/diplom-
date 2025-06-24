@@ -1,0 +1,7 @@
+﻿flowchart TD
+  Client1 --> WiFi
+  WiFi --> Server
+  Client2["Android Device 2"] --> WiFi
+  Server --> DB["MySQL"]
+  WiFi --> E["phpMyAdmin\nlocalhost/phpmyadmin\nWeb Interface"]
+  DB --> E 

@@ -1,0 +1,48 @@
+﻿graph TD
+    A[JSON Scene Structure] --> B{Scene Components}
+    
+    B -->|Scene Metadata| C[Scene Information]
+    B -->|Dialog Content| D[Dialog Data]
+    B -->|Choices| E[Choice Options]
+    B -->|Flags| F[Game Flags]
+    B -->|MiniGame| G[MiniGame Data]
+    
+    C --> H[sceneId: String]
+    C --> I[sceneTitle: String]
+    C --> J[sceneType: Enum]
+    C --> K[requiredFlags: Array]
+    
+    D --> L[text: String]
+    D --> M[speaker: String]
+    D --> N[emotion: String]
+    D --> O[animation: String]
+    
+    E --> P[choices: Array]
+    P --> Q[choiceId: String]
+    P --> R[choiceText: String]
+    P --> S[nextSceneId: String]
+    P --> T[flagChanges: Object]
+    
+    F --> U[flags: Object]
+    U --> V[trust: Number]
+    U --> W[threat: Number]
+    U --> X[suspicion: Number]
+    U --> Y[romance: Object]
+    
+    G --> Z[minigameType: String]
+    G --> AA[pythonScript: String]
+    G --> BB[parameters: Object]
+    G --> CC[difficulty: Number]
+    
+    subgraph "Example Structure"
+        DD["{<br/>  'sceneId': 'office_morning',<br/>  'text': 'Доброе утро!',<br/>  'choices': [<br/>    {<br/>      'choiceId': 'greet_colleague',<br/>      'choiceText': 'Поздороваться',<br/>      'flagChanges': {'trust': 1}<br/>    }<br/>  ]<br/>}"] --> EE[Valid JSON]
+    end
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style C fill:#7C3AED,stroke:#000000
+    style D fill:#7C3AED,stroke:#000000
+    style E fill:#7C3AED,stroke:#000000
+    style F fill:#7C3AED,stroke:#000000
+    style G fill:#7C3AED,stroke:#000000
+    style DD fill:#F59E0B,stroke:#000000
+    style EE fill:#10B981,stroke:#000000 

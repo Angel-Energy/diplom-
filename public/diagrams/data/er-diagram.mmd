@@ -1,0 +1,58 @@
+﻿erDiagram
+    USERS {
+        string anon_id PK "ANON_<UUID>"
+        string device_id
+        timestamp created_at
+        timestamp last_login
+        boolean is_active
+    }
+    
+    GAME_STATES {
+        string id PK
+        string user_id FK
+        string scene_id
+        json flags "trust, threat, suspicion"
+        timestamp saved_at
+        boolean is_completed
+    }
+    
+    DIALOGS {
+        string id PK
+        string scene_id
+        string text
+        json choices
+        string next_scene_id
+        boolean is_minigame
+    }
+    
+    CHOICES {
+        string id PK
+        string dialog_id FK
+        string text
+        json flag_changes
+        string next_scene_id
+        boolean is_romance
+    }
+    
+    MINIGAMES {
+        string id PK
+        string name
+        string python_script
+        json parameters
+        int difficulty
+    }
+    
+    GAME_RESULTS {
+        string id PK
+        string user_id FK
+        string minigame_id FK
+        int score
+        boolean success
+        timestamp completed_at
+    }
+    
+    USERS ||--o{ GAME_STATES : "has"
+    USERS ||--o{ GAME_RESULTS : "achieves"
+    DIALOGS ||--o{ CHOICES : "contains"
+    MINIGAMES ||--o{ GAME_RESULTS : "produces"
+

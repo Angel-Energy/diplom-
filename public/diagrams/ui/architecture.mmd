@@ -1,0 +1,66 @@
+﻿graph TD
+    subgraph "Jetpack Compose UI"
+        A[MainActivity] --> B[ChatScreen]
+        B --> C[GameScreen]
+        C --> D[SettingsScreen]
+        D --> E[HelpScreen]
+    end
+    
+    subgraph "UI Components"
+        F[ChatBubble] --> G[ChoiceButton]
+        G --> H[ProgressBar]
+        H --> I[MiniGameView]
+        I --> J[NavigationBar]
+    end
+    
+    subgraph "UI State Management"
+        K[UIState] --> L[ViewModel State]
+        L --> M[Repository State]
+    end
+    
+    subgraph "Accessibility"
+        N[TalkBack Support] --> O[Content Descriptions]
+        O --> P[Focus Management]
+        P --> Q[Color Contrast]
+    end
+    
+    subgraph "Animations"
+        R[Typewriter Effect] --> S[3D Card Animation]
+        S --> T[Transition Animations]
+        T --> U[Loading Animations]
+    end
+    
+    B --> F
+    C --> I
+    D --> J
+    
+    F --> K
+    I --> K
+    
+    B --> N
+    C --> N
+    
+    B --> R
+    C --> S
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#1E3A8A,stroke:#000000
+    style C fill:#1E3A8A,stroke:#000000
+    style D fill:#1E3A8A,stroke:#000000
+    style E fill:#1E3A8A,stroke:#000000
+    style F fill:#7C3AED,stroke:#000000
+    style G fill:#7C3AED,stroke:#000000
+    style H fill:#7C3AED,stroke:#000000
+    style I fill:#7C3AED,stroke:#000000
+    style J fill:#7C3AED,stroke:#000000
+    style K fill:#9333EA,stroke:#000000
+    style L fill:#9333EA,stroke:#000000
+    style M fill:#9333EA,stroke:#000000
+    style N fill:#059669,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#059669,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style S fill:#DC2626,stroke:#000000
+    style T fill:#DC2626,stroke:#000000
+    style U fill:#DC2626,stroke:#000000 

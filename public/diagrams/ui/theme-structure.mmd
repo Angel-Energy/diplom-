@@ -1,0 +1,61 @@
+﻿graph TD
+    A[Theme System] --> B{Theme Type}
+    
+    B -->|Dark Theme| C[Dark Theme Colors]
+    B -->|Light Theme| D[Light Theme Colors]
+    B -->|High Contrast| E[High Contrast Colors]
+    
+    C --> F[Dark Color Palette]
+    F --> G[Background: #0F0F0F]
+    F --> H[Surface: #1A1A1A]
+    F --> I[Primary: #3B82F6]
+    F --> J[Secondary: #8B5CF6]
+    F --> K[Text: #FFFFFF]
+    F --> L[Text Secondary: #A1A1AA]
+    
+    D --> M[Light Color Palette]
+    M --> N[Background: #FFFFFF]
+    M --> O[Surface: #F8FAFC]
+    M --> P[Primary: #2563EB]
+    M --> Q[Secondary: #7C3AED]
+    M --> R[Text: #0F172A]
+    M --> S[Text Secondary: #64748B]
+    
+    E --> T[High Contrast Palette]
+    T --> U[Background: #000000]
+    T --> V[Surface: #FFFFFF]
+    T --> W[Primary: #FFFF00]
+    T --> X[Secondary: #00FFFF]
+    T --> Y[Text: #FFFFFF]
+    T --> Z[Text Secondary: #000000]
+    
+    subgraph "Typography"
+        AA[Font Family: Noto Sans] --> BB[Headings: 24-48px]
+        BB --> CC[Body: 16px]
+        CC --> DD[Caption: 14px]
+        DD --> EE[Button: 16px]
+    end
+    
+    subgraph "Spacing"
+        FF[Small: 8px] --> GG[Medium: 16px]
+        GG --> HH[Large: 24px]
+        HH --> II[XLarge: 32px]
+    end
+    
+    subgraph "Shapes"
+        JJ[Corner Radius: 8px] --> KK[Button Radius: 4px]
+        KK --> LL[Card Radius: 12px]
+    end
+    
+    G --> AA
+    N --> AA
+    U --> AA
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style C fill:#6B7280,stroke:#000000
+    style D fill:#F3F4F6,stroke:#000000
+    style E fill:#000000,stroke:#FFFFFF
+    style F fill:#1F2937,stroke:#000000
+    style M fill:#F9FAFB,stroke:#000000
+    style T fill:#000000,stroke:#FFFFFF
+    style AA fill:#7C3AED,stroke:#000000 

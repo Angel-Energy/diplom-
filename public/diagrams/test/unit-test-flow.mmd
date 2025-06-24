@@ -1,0 +1,65 @@
+graph TD
+    A[Unit Testing] --> B{Test Target}
+    
+    B -->|ViewModel| C[ViewModel Tests]
+    B -->|Repository| D[Repository Tests]
+    B -->|UseCase| E[UseCase Tests]
+    B -->|Utils| F[Utility Tests]
+    
+    C --> G[Test ViewModel Logic]
+    G --> H[State Management]
+    H --> I[Event Handling]
+    I --> J{ViewModel Works?}
+    J -->|Yes| K[ViewModel: PASS]
+    J -->|No| L[ViewModel: FAIL]
+    
+    D --> M[Test Repository Methods]
+    M --> N[Data Operations]
+    N --> O[Error Handling]
+    O --> P{Repository Works?}
+    P -->|Yes| Q[Repository: PASS]
+    P -->|No| R[Repository: FAIL]
+    
+    E --> S[Test UseCase Logic]
+    S --> T[Business Rules]
+    T --> U[Data Validation]
+    U --> V{UseCase Works?}
+    V -->|Yes| W[UseCase: PASS]
+    V -->|No| X[UseCase: FAIL]
+    
+    F --> Y[Test Utility Functions]
+    Y --> Z[Helper Methods]
+    Z --> AA[Data Processing]
+    AA --> BB{Utils Work?}
+    BB -->|Yes| CC[Utils: PASS]
+    BB -->|No| DD[Utils: FAIL]
+    
+    K --> EE[Unit Test Report]
+    Q --> EE
+    W --> EE
+    CC --> EE
+    
+    L --> FF[Fix ViewModel]
+    R --> GG[Fix Repository]
+    X --> HH[Fix UseCase]
+    DD --> II[Fix Utils]
+    
+    FF --> JJ[Re-run Unit Tests]
+    GG --> JJ
+    HH --> JJ
+    II --> JJ
+    
+    EE --> KK[Unit Testing Complete]
+    JJ --> A
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style K fill:#10B981,stroke:#000000
+    style Q fill:#10B981,stroke:#000000
+    style W fill:#10B981,stroke:#000000
+    style CC fill:#10B981,stroke:#000000
+    style L fill:#DC2626,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style X fill:#DC2626,stroke:#000000
+    style DD fill:#DC2626,stroke:#000000
+    style KK fill:#059669,stroke:#000000 

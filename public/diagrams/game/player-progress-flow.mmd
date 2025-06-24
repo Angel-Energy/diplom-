@@ -1,0 +1,59 @@
+graph TD
+    A[Player Starts Game] --> B[Initialize Progress]
+    B --> C[Load Saved State]
+    C --> D{Previous Save?}
+    
+    D -->|Yes| E[Restore Progress]
+    D -->|No| F[Start New Game]
+    
+    E --> G[Continue from Scene]
+    F --> H[Begin Tutorial]
+    
+    G --> I[Game Session]
+    H --> I
+    
+    I --> J[Player Actions]
+    J --> K[Update Progress]
+    
+    K --> L[Save Progress]
+    L --> M{Scene Complete?}
+    
+    M -->|No| I
+    M -->|Yes| N[Check Game Completion]
+    
+    N --> O{All Scenes Complete?}
+    O -->|No| P[Load Next Scene]
+    O -->|Yes| Q[Calculate Ending]
+    
+    P --> I
+    Q --> R[Determine Ending]
+    
+    R --> S{Ending Type}
+    S -->|Romance| T[Romance Ending]
+    S -->|Friendship| U[Friendship Ending]
+    S -->|Career| V[Career Ending]
+    S -->|Tragedy| W[Tragedy Ending]
+    S -->|Mystery| X[Mystery Ending]
+    S -->|Neutral| Y[Neutral Ending]
+    
+    T --> Z[Save Final State]
+    U --> Z
+    V --> Z
+    W --> Z
+    X --> Z
+    Y --> Z
+    
+    Z --> AA[Show Credits]
+    AA --> BB[Return to Main Menu]
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#7C3AED,stroke:#000000
+    style I fill:#2563EB,stroke:#000000
+    style L fill:#059669,stroke:#000000
+    style T fill:#EC4899,stroke:#000000
+    style U fill:#10B981,stroke:#000000
+    style V fill:#F59E0B,stroke:#000000
+    style W fill:#DC2626,stroke:#000000
+    style X fill:#7C3AED,stroke:#000000
+    style Y fill:#6B7280,stroke:#000000
+    style Z fill:#9333EA,stroke:#000000 

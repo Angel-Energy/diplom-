@@ -1,0 +1,75 @@
+﻿graph TD
+    subgraph "Presentation Layer"
+        A[Jetpack Compose UI] --> B[ViewModels]
+        B --> C[Navigation]
+        C --> D[UI Components]
+    end
+    
+    subgraph "Domain Layer"
+        E[Use Cases] --> F[Models]
+        F --> G[Interfaces]
+        G --> H[Business Logic]
+    end
+    
+    subgraph "Data Layer"
+        I[Repositories] --> J[Data Sources]
+        J --> K[Local Storage]
+        J --> L[Remote API]
+        J --> M[External Services]
+    end
+    
+    subgraph "Infrastructure Layer"
+        N[Network] --> O[Security]
+        O --> P[Database]
+        P --> Q[File System]
+    end
+    
+    subgraph "External Dependencies"
+        R[Chaquopy Python] --> S[Ktor Server]
+        S --> T[MySQL Database]
+        T --> U[Cloud Services]
+    end
+    
+    %% Layer connections
+    A --> E
+    B --> E
+    C --> E
+    D --> E
+    
+    E --> I
+    F --> I
+    G --> I
+    H --> I
+    
+    I --> N
+    J --> N
+    K --> P
+    L --> N
+    M --> N
+    
+    N --> R
+    O --> R
+    P --> T
+    Q --> U
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#1E3A8A,stroke:#000000
+    style C fill:#1E3A8A,stroke:#000000
+    style D fill:#1E3A8A,stroke:#000000
+    style E fill:#7C3AED,stroke:#000000
+    style F fill:#7C3AED,stroke:#000000
+    style G fill:#7C3AED,stroke:#000000
+    style H fill:#7C3AED,stroke:#000000
+    style I fill:#9333EA,stroke:#000000
+    style J fill:#9333EA,stroke:#000000
+    style K fill:#9333EA,stroke:#000000
+    style L fill:#9333EA,stroke:#000000
+    style M fill:#9333EA,stroke:#000000
+    style N fill:#2563EB,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#F59E0B,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style S fill:#2563EB,stroke:#000000
+    style T fill:#059669,stroke:#000000
+    style U fill:#7C3AED,stroke:#000000 

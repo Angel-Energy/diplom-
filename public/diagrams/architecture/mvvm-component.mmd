@@ -1,0 +1,67 @@
+﻿graph TD
+    subgraph "View Layer (Jetpack Compose)"
+        A[ChatScreen] --> B[GameScreen]
+        B --> C[SettingsScreen]
+        C --> D[MainActivity]
+    end
+    
+    subgraph "ViewModel Layer"
+        E[ChatViewModel] --> F[GameViewModel]
+        F --> G[SettingsViewModel]
+        G --> H[MainViewModel]
+    end
+    
+    subgraph "Model Layer"
+        I[DialogRepository] --> J[GameRepository]
+        J --> K[SettingsRepository]
+        K --> L[UserRepository]
+        
+        subgraph "Data Sources"
+            M[Room Database] --> N[Ktor Server]
+            N --> O[Local Storage]
+            O --> P[SharedPreferences]
+        end
+    end
+    
+    subgraph "External Dependencies"
+        Q[Chaquopy Python] --> R[MiniGames]
+        S[Encryption] --> T[AES-256]
+        U[Network] --> V[TLS 1.2+]
+    end
+    
+    %% Connections
+    A --> E
+    B --> F
+    C --> G
+    D --> H
+    
+    E --> I
+    F --> J
+    G --> K
+    H --> L
+    
+    I --> M
+    J --> N
+    K --> O
+    L --> P
+    
+    F --> Q
+    I --> S
+    N --> U
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#1E3A8A,stroke:#000000
+    style C fill:#1E3A8A,stroke:#000000
+    style D fill:#1E3A8A,stroke:#000000
+    style E fill:#7C3AED,stroke:#000000
+    style F fill:#7C3AED,stroke:#000000
+    style G fill:#7C3AED,stroke:#000000
+    style H fill:#7C3AED,stroke:#000000
+    style I fill:#9333EA,stroke:#000000
+    style J fill:#9333EA,stroke:#000000
+    style K fill:#9333EA,stroke:#000000
+    style L fill:#9333EA,stroke:#000000
+    style M fill:#1E3A8A,stroke:#000000
+    style N fill:#2563EB,stroke:#000000
+    style O fill:#1E3A8A,stroke:#000000
+    style P fill:#1E3A8A,stroke:#000000 

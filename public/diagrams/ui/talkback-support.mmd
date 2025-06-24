@@ -1,0 +1,63 @@
+graph TD
+    A[TalkBack Support] --> B{Accessibility Features}
+    
+    B -->|Content Descriptions| C[Screen Reader Text]
+    B -->|Focus Management| D[Keyboard Navigation]
+    B -->|Semantic Labels| E[UI Element Labels]
+    B -->|Live Regions| F[Dynamic Content]
+    
+    C --> G[Text-to-Speech]
+    G --> H[Natural Language]
+    H --> I[Context-Aware Descriptions]
+    
+    D --> J[Tab Order]
+    J --> K[Focus Indicators]
+    K --> L[Skip Links]
+    
+    E --> M[Button Labels]
+    M --> N[Image Descriptions]
+    N --> O[Form Field Labels]
+    
+    F --> P[Status Updates]
+    P --> Q[Progress Announcements]
+    Q --> R[Error Messages]
+    
+    subgraph "Implementation"
+        S[AccessibilityNodeInfo] --> T[ContentDescription]
+        T --> U[isClickable]
+        U --> V[isFocusable]
+    end
+    
+    subgraph "Testing"
+        W[Manual Testing] --> X[Automated Testing]
+        X --> Y[Screen Reader Testing]
+    end
+    
+    subgraph "Compliance"
+        Z[WCAG 2.1 AA] --> AA[Android Accessibility]
+        AA --> BB[Google Play Guidelines]
+    end
+    
+    I --> S
+    L --> S
+    O --> S
+    R --> S
+    
+    G --> W
+    J --> W
+    M --> W
+    P --> W
+    
+    T --> Z
+    U --> Z
+    V --> Z
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#10B981,stroke:#000000
+    style D fill:#10B981,stroke:#000000
+    style E fill:#10B981,stroke:#000000
+    style F fill:#10B981,stroke:#000000
+    style S fill:#7C3AED,stroke:#000000
+    style W fill:#2563EB,stroke:#000000
+    style Z fill:#059669,stroke:#000000 

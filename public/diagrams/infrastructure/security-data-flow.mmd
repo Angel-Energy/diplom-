@@ -1,0 +1,59 @@
+graph TD
+    A[Security Data Flow] --> B{Data Processing Stage}
+    
+    B -->|Input Validation| C[Input Sanitization]
+    B -->|Local Storage| D[Local Encryption]
+    B -->|Network Transfer| E[Network Security]
+    B -->|Server Storage| F[Server Security]
+    
+    C --> G[Data Validation]
+    G --> H[SQL Injection Prevention]
+    H --> I[XSS Prevention]
+    I --> J[Input Length Limits]
+    
+    D --> K[AES-256 Encryption]
+    K --> L[Key Management]
+    L --> M[Secure Key Storage]
+    M --> N[Encrypted Database]
+    
+    E --> O[TLS 1.2+ Protocol]
+    O --> P[Certificate Pinning]
+    P --> Q[HTTPS Only]
+    Q --> R[Encrypted Payload]
+    
+    F --> S[Server-side Encryption]
+    S --> T[Database Encryption]
+    T --> U[Backup Encryption]
+    U --> V[Access Control]
+    
+    subgraph "Security Layers"
+        W[Application Layer] --> X[Transport Layer]
+        X --> Y[Storage Layer]
+        Y --> Z[Infrastructure Layer]
+    end
+    
+    subgraph "Threat Protection"
+        AA[Data Tampering] --> BB[Man-in-the-Middle]
+        BB --> CC[Data Breach]
+        CC --> DD[Unauthorized Access]
+    end
+    
+    J --> W
+    N --> Y
+    R --> X
+    V --> Z
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#F59E0B,stroke:#000000
+    style C fill:#DC2626,stroke:#000000
+    style D fill:#059669,stroke:#000000
+    style E fill:#2563EB,stroke:#000000
+    style F fill:#059669,stroke:#000000
+    style G fill:#10B981,stroke:#000000
+    style K fill:#059669,stroke:#000000
+    style O fill:#2563EB,stroke:#000000
+    style S fill:#059669,stroke:#000000
+    style W fill:#7C3AED,stroke:#000000
+    style X fill:#2563EB,stroke:#000000
+    style Y fill:#059669,stroke:#000000
+    style Z fill:#F59E0B,stroke:#000000 

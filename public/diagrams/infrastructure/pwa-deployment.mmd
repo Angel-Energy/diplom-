@@ -1,0 +1,58 @@
+graph TD
+    A[PWA Development] --> B[Progressive Web App]
+    B --> C[Service Worker]
+    C --> D[Offline Support]
+    D --> E[Push Notifications]
+    
+    subgraph "Web Technologies"
+        F[HTML5] --> G[CSS3]
+        G --> H[JavaScript ES6+]
+        H --> I[Web APIs]
+    end
+    
+    subgraph "PWA Features"
+        J[Manifest.json] --> K[App Icons]
+        K --> L[Splash Screen]
+        L --> M[Install Prompt]
+    end
+    
+    subgraph "Backend Integration"
+        N[Ktor Web Server] --> O[API Endpoints]
+        O --> P[Database Connection]
+        P --> Q[File Storage]
+    end
+    
+    subgraph "Deployment"
+        R[Build Process] --> S[Static Assets]
+        S --> T[CDN Distribution]
+        T --> U[HTTPS Certificate]
+        U --> V[Domain Configuration]
+    end
+    
+    B --> F
+    B --> J
+    B --> N
+    B --> R
+    
+    style A fill:#1E3A8A,stroke:#000000
+    style B fill:#2563EB,stroke:#000000
+    style C fill:#2563EB,stroke:#000000
+    style D fill:#2563EB,stroke:#000000
+    style E fill:#2563EB,stroke:#000000
+    style F fill:#F59E0B,stroke:#000000
+    style G fill:#F59E0B,stroke:#000000
+    style H fill:#F59E0B,stroke:#000000
+    style I fill:#F59E0B,stroke:#000000
+    style J fill:#7C3AED,stroke:#000000
+    style K fill:#7C3AED,stroke:#000000
+    style L fill:#7C3AED,stroke:#000000
+    style M fill:#7C3AED,stroke:#000000
+    style N fill:#059669,stroke:#000000
+    style O fill:#059669,stroke:#000000
+    style P fill:#059669,stroke:#000000
+    style Q fill:#059669,stroke:#000000
+    style R fill:#DC2626,stroke:#000000
+    style S fill:#DC2626,stroke:#000000
+    style T fill:#DC2626,stroke:#000000
+    style U fill:#DC2626,stroke:#000000
+    style V fill:#DC2626,stroke:#000000 

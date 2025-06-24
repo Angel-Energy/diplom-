@@ -1,0 +1,61 @@
+graph TD
+    subgraph "Unit Testing"
+        A[ViewModel Tests] --> B[Repository Tests]
+        B --> C[UseCase Tests]
+        C --> D[Utility Tests]
+    end
+    
+    subgraph "Integration Testing"
+        E[Room Database Tests] --> F[Ktor API Tests]
+        F --> G[Chaquopy Tests]
+        G --> H[Encryption Tests]
+    end
+    
+    subgraph "UI Testing"
+        I[Compose UI Tests] --> J[Navigation Tests]
+        J --> K[Accessibility Tests]
+        K --> L[Animation Tests]
+    end
+    
+    subgraph "Security Testing"
+        M[Encryption Tests] --> N[TLS Tests]
+        N --> O[Certificate Pinning Tests]
+        O --> P[Data Privacy Tests]
+    end
+    
+    subgraph "Performance Testing"
+        Q[Memory Usage Tests] --> R[FPS Tests]
+        R --> S[Network Performance Tests]
+        S --> T[Python Execution Tests]
+    end
+    
+    subgraph "End-to-End Testing"
+        U[Full Game Flow Tests] --> V[Cross-Device Tests]
+        V --> W[Offline Mode Tests]
+        W --> X[Sync Tests]
+    end
+    
+    style A fill:#059669,stroke:#000000
+    style B fill:#059669,stroke:#000000
+    style C fill:#059669,stroke:#000000
+    style D fill:#059669,stroke:#000000
+    style E fill:#2563EB,stroke:#000000
+    style F fill:#2563EB,stroke:#000000
+    style G fill:#2563EB,stroke:#000000
+    style H fill:#2563EB,stroke:#000000
+    style I fill:#7C3AED,stroke:#000000
+    style J fill:#7C3AED,stroke:#000000
+    style K fill:#7C3AED,stroke:#000000
+    style L fill:#7C3AED,stroke:#000000
+    style M fill:#DC2626,stroke:#000000
+    style N fill:#DC2626,stroke:#000000
+    style O fill:#DC2626,stroke:#000000
+    style P fill:#DC2626,stroke:#000000
+    style Q fill:#F59E0B,stroke:#000000
+    style R fill:#F59E0B,stroke:#000000
+    style S fill:#F59E0B,stroke:#000000
+    style T fill:#F59E0B,stroke:#000000
+    style U fill:#9333EA,stroke:#000000
+    style V fill:#9333EA,stroke:#000000
+    style W fill:#9333EA,stroke:#000000
+    style X fill:#9333EA,stroke:#000000 

@@ -1,0 +1,8 @@
+﻿flowchart TD
+  Start --> MiniGame
+  MiniGame --> Result
+  Result --> End((End))
+  Result -- Yes --> Success["Success"]
+  Result -- No --> Fail["Fail"]
+  Success --> End
+  Fail --> End 
